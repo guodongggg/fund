@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jelly</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='table.css')}}">
+	<style>
+		a {
+			display: block;
+			color: #000;
+			padding: 8px 16px;
+			text-decoration: none;
+            width:50px;
+		}
+		 
+		/* 鼠标移动到选项上修改背景颜色 */
+		a:hover {
+			background-color: #555;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<a href="/hao">薅羊毛</a>
+<table>
+	<caption style="margin:10px">Stock Board</caption>
+	<thead>
+		<tr>
+			<th>名称</th>
+			<th>实时点数</th>
+			<th>实时涨幅</th>
+			<th>百分比</th>
+			<th>更新时间</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for i in board %}
+		<tr>
+		{% if i.code == 'sh000001' or i.code == 'sz399300' %}
+			<td>{{i.name}}</td>
+			<td>{{i.price}}</td>
+			<td>{{i.priceChange}}</td>
+    		{% if i.changePercent|float > 0 %}
+				<td style='color:red'>{{i.changePercent}}%</td>
+			{% else %}
+				<td style='color:green'>{{i.changePercent}}%</td>
+			{% endif %}
+			<td>{{i.date}}</td>
+		{% endif %}
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+<table>
+	<caption>Fund Look</caption>
+	<thead>
+		<tr>
+			<th>名称</th>
+			<th>代码</th>
+			<th>实时涨幅</th>
+			<th>周涨幅</th>
+			<th>最近一月涨幅</th>
+			<th>最近三月涨幅</th>
+			<th>更新时间</th>
+		</tr>
+	</thead>
+	{% for i in detail %}
+		<tr>
+			<td>{{i.name}}</td>
+			<td>{{i.code}}</td>
+			{% if i.expectGrowth|float > 0 %}
+				<td style='color:red'>{{i.expectGrowth}}%</td>
+			{% else %}
+				<td style='color:green'>{{i.expectGrowth}}%</td>
+			{% endif %}
+			{% if i.lastWeekGrowth|float > 0 %}
+				<td style='color:red'>{{i.lastWeekGrowth|float|round(2)}}%</td>
+			{% else %}
+				<td style='color:green'>{{i.lastWeekGrowth|float|round(2)}}%</td>
+			{% endif %}	
+			{% if i.lastMonthGrowth|float > 0 %}
+				<td style='color:red'>{{i.lastMonthGrowth}}%</td>
+			{% else %}
+				<td style='color:green'>{{i.lastMonthGrowth}}%</td>
+			{% endif %}		
+			{% if i.lastThreeMonthsGrowth|float > 0 %}
+				<td style='color:red'>{{i.lastThreeMonthsGrowth}}%</td>
+			{% else %}
+				<td style='color:green'>{{i.lastThreeMonthsGrowth}}%</td>
+			{% endif %}		
+			<td>{{i.expectWorthDate}}</td>
+		</tr>
+	{% endfor %}
+</table>
+</body>
+</html>
+

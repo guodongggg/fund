@@ -1,0 +1,5 @@
+start virtualenv
+source venv/bin/activate
+
+stop virtualenv
+deactivate
