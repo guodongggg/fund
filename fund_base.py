@@ -22,9 +22,9 @@ def stock_board():
     return XiongAPI(url)['data']
 
 if __name__ == '__main__':
-    code_list = ['005827','163417','004997','002939','000977','519694','001218','519772','005918','161725','002984']
-    fundDetail = BaseInfo(code_list)
+#    code_list = ['005827','163417','004997','002939','000977','519694','001218','519772','005918','161725','002984']
+#    fundDetail = BaseInfo(code_list)
     board = stock_board()
     print(board)
     print('---')
-    print(fundDetail)
+#    print(fundDetail)
