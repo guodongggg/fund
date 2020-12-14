@@ -27,3 +27,11 @@ li a.active {
     color: white;
     background-color: #4CAF50;
 }
+
+#time {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}

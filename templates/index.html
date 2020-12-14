@@ -5,6 +5,7 @@
     <title>Jelly</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='table.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='banner.css')}}">
+	<script src="{{url_for('static',filename='time.js')}}"></script>
     <script type="text/javascript">
         function disp_alert()
         {
@@ -21,9 +22,10 @@
   <li><a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAA2cRL3fsPvne6NJZq7W-UeYK1Hkgx7Ar9JtmX7UrGrI-HdcGd_Omxnk7rduhDOS94/" target='_blank'>赚不完</a></li>
   <li><a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAAJvmsqH2zTvKzjTFv_xp_Wj38S6gPDBSenHR8HxtMaFE/" target='_blank'>一哥</a></li>
   <li><a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAAPO6FCp8uw8vqMs-AB59SF5qtdtR2zM2VBatBA1fxOrs/" target='_blank'> 大V指数</a></li>
+  <li style="float:right" id="time"></li>
 </ul>
 <table>
-	<caption style="margin:10px">Stock Board</caption>
+	<caption style="margin:10px">大盘</caption>
 	<thead>
 		<tr>
 			<th>名称</th>
@@ -53,7 +55,7 @@
 </table>
 
 <table>
-	<caption>Fund Look</caption>
+	<caption>基金</caption>
 	<thead>
 		<tr>
 			<th>名称</th>
