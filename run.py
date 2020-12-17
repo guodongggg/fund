@@ -22,7 +22,7 @@ def haoym_detail(postID):
 
 @app.route('/')
 def fund():
-    code_list = ['005827','163417','004997','002939','000977','519694','001218','519772','163406']
+    code_list = ['005827','163417','519694','001218','519772','163406','001714','162605','001102']
     detail = fund_base.BaseInfo(code_list)
     board = fund_base.stock_board()
     return render_template('index.html', board=board, detail=detail)
