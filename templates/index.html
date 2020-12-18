@@ -38,7 +38,6 @@
 	<tbody>
 	{% for i in board %}
 		<tr>
-		{% if i.code == 'sh000001' or i.code == 'sz399300' %}
 			<td>{{i.name}}</td>
 			<td>{{i.price}}</td>
 			<td>{{i.priceChange}}</td>
@@ -48,7 +47,6 @@
 				<td style='color:green'>{{i.changePercent}}%</td>
 			{% endif %}
 			<td>{{i.date}}</td>
-		{% endif %}
 		</tr>
 	{% endfor %}
 	</tbody>

@@ -44,6 +44,23 @@ class Fund:
         growth.update(expectGrowth)
         return growth
 
+class Stock():
+    def __init__(self):
+        pass
+
+    def stock(self):
+        url = "https://data.howbuy.com/cgi/fund/indexmarketdata.json?q=s_sh000001,s_sz399001,s_sh000300,s_sz399006"
+        response = requests.get(url)
+        r = response.text
+        # print(r.split())
+        data = []
+        for i in r.split():
+            tmp = {}
+            info = i.split('~')
+            tmp['name'], tmp['code'], tmp['price'], tmp['priceChange'], tmp['changePercent'] = info[1:6]
+            data.append(tmp)
+        return data
+
 
 if __name__ == '__main__':
     code_list = ['005827', '163417', '519694', '001218', '519772', '163406', '001714', '162605', '001102']
