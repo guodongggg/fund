@@ -25,6 +25,13 @@ def fund():
     code_list = ['005827','163417','519694','001218','519772','163406','001714','162605','001102']
     detail = fund_base.BaseInfo(code_list)
     board = fund_base.stock_board()
+    if not detail:
+        from fund_howbuy import Fund
+        for code in code_list:
+            f = Fund(code)
+            data = f.output()
+            detail.append(data)
+                
     return render_template('index.html', board=board, detail=detail)
 
 @app.route('/jessie')
