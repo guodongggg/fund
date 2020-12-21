@@ -6,7 +6,7 @@ def XiongAPI(url, code=None):
         'code':code
     }
     try:
-        response = requests.get(url,params = params, timeout=1)
+        response = requests.get(url,params = params, timeout=3)
     except Exception as e:
         print("error:", e)
         return {}

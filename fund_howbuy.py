@@ -63,7 +63,9 @@ class Stock():
 
 
 if __name__ == '__main__':
-    code_list = ['005827', '163417', '519694', '001218', '519772', '163406', '001714', '162605', '001102']
+    code_list = ['005827', '163417']
     for i in code_list:
         f = Fund(i)
         print(f.output())
+    s = Stock()
+    print(s.stock())
