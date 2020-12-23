@@ -6,7 +6,7 @@ def XiongAPI(url, code=None):
         'code':code
     }
     try:
-        response = requests.get(url,params = params, timeout=3)
+        response = requests.get(url,params = params, timeout=5)
     except Exception as e:
         print("error:", e)
         return {}
@@ -26,7 +26,7 @@ def stock_board():
     return XiongAPI(url).get('data', [])
 
 if __name__ == '__main__':
-    code_list = ['005827','163417']
+    code_list = ['005827','163417','519694','001218']
     fundDetail = BaseInfo(code_list)
     board = stock_board()
     print(board)
