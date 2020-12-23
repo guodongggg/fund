@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import fund_base
 from api import API
+import fund_howbuy
 
 app = Flask(__name__)
 
@@ -24,20 +25,17 @@ def haoym_detail(postID):
 def fund():
     code_list = ['005827','163417','519694','001218','519772','163406','001714','162605','001102']
     detail = fund_base.BaseInfo(code_list)
+    board = fund_base.stock_board()
     if not detail:
-        app.logger.warning("启动备用howbuy接口")
-        import fund_howbuy
-        for code in code_list:
-            f = fund_howbuy.Fund(code)
-            data = f.output()
-            detail.append(data)
-        s  = fund_howbuy.Stock()
-        board = s.stock()
-    else:
-        app.logger.info("主接口XiongAPI")
-        board = fund_base.stock_board() 
-    app.logger.info('--board--: ', board)
-    app.logger.info('--detail--: ', detail)
+        app.logger.warning("howbuy接口取基金详情")
+        detail = fund_howbuy.asyncio_(code_list)
+    if not board:
+        app.logger.warning("howbuy接口取大盘详情")
+        board = fund_howbuy.stock()
+    app.logger.info('--board--: ')
+    app.logger.info(board)
+    app.logger.info('--detail--: ')
+    app.logger.info(detail)
     return render_template('index.html', board=board, detail=detail)
 
 @app.route('/jessie')
