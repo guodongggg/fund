@@ -7,7 +7,7 @@ def nasdaq():
     response = r.text
     if r.status_code == 200:
         data = response.split('=')[1].split(',')
-        nasdaq_data = {'name': data[0].strip('"'), 'code': 'nasdaq100', 'price': data[1], 'priceChange': data[4], 'expectGrowth': data[2], 'lastWeekGrowth': '-', 'lastMonthGrowth': '-', 'lastThreeMonthsGrowth': '-', 'date': ''}
+        nasdaq_data = {'name': data[0].strip('"'), 'code': 'nasdaq100', 'price': data[1], 'priceChange': data[4], 'expectGrowth': data[2], 'dayGrowth': data[2], 'lastWeekGrowth': '-', 'lastMonthGrowth': '-', 'lastThreeMonthsGrowth': '-', 'date': ''}
         return nasdaq_data
     else:
         print(f'nasdaq return error: \n {response}')
