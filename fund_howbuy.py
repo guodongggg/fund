@@ -73,7 +73,9 @@ def asyncio_(code_list):
 if __name__ == '__main__':
     import time
     s_time = time.time()
-    code_list = ['005827', '163417']
+    with open('code_list.json','r') as f:
+        json_data = json.load(f)
+        code_list = json_data['test']   
     data = asyncio_(code_list)
     for i in data:
         print(i)

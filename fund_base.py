@@ -26,7 +26,9 @@ def stock_board():
     return XiongAPI(url).get('data', [])
 
 if __name__ == '__main__':
-    code_list = ['005827','163417','519694','001218']
+    with open('code_list.json','r') as f:
+        json_data = json.load(f)
+        code_list = json_data['test']    
     fundDetail = BaseInfo(code_list)
     board = stock_board()
     print(board)

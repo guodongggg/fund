@@ -5,6 +5,7 @@
     <title>Jelly</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='table.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='banner.css')}}">
+	<link rel="icon" href="{{url_for('static', filename='title.ico')}}">
 	<script src="{{url_for('static',filename='time.js')}}"></script>
     <script type="text/javascript">
         function disp_alert()
@@ -38,17 +39,30 @@
 	<tbody>
 	{% for i in board %}
 		<tr>
-			<td>{{i.name}}</td>
-			<td>{{i.price}}</td>
-			<td>{{i.priceChange}}</td>
-    		{% if i.changePercent|float > 0 %}
-				<td style='color:red'>{{i.changePercent}}%</td>
-			{% else %}
-				<td style='color:green'>{{i.changePercent}}%</td>
+			{% if i.name=='沪深300' or i.name=='上证指数' %}
+				<td>{{i.name}}</td>
+				<td>{{i.price}}</td>
+				<td>{{i.priceChange}}</td>
+				{% if i.changePercent|float > 0 %}
+					<td style='color:red'>{{i.changePercent}}%</td>
+				{% else %}
+					<td style='color:green'>{{i.changePercent}}%</td>
+				{% endif %}
+				<td>{{i.date}}</td>
 			{% endif %}
-			<td>{{i.date}}</td>
 		</tr>
 	{% endfor %}
+		<tr>
+			<td>总持仓涨幅</td>
+			<td>-</td>
+			<td>-</td>
+			{% if average|float > 0 %}
+				<td style='color:red'>{{average}}%</td>
+			{% else %}
+				<td style='color:green'>{{average}}%</td>
+			{% endif %}	
+			<td>-</td>
+		</tr>
 	</tbody>
 </table>
 

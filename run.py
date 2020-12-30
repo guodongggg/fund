@@ -2,6 +2,8 @@ from flask import Flask, render_template
 import fund_base
 from api import API
 import fund_howbuy
+import average_growth
+import json
 
 app = Flask(__name__)
 
@@ -23,12 +25,17 @@ def haoym_detail(postID):
 
 @app.route('/')
 def fund():
-    code_list = ['005827','163417','001218','001714','162605','001102','003494','161725','002984','004070']
+    with open('code_list.json','r') as f:
+        json_data = json.load(f)
+        code_list = json_data['prodect']
     detail = fund_base.BaseInfo(code_list)
     board = fund_base.stock_board()
     if not detail:
         app.logger.warning("howbuy接口取基金详情")
         detail = fund_howbuy.asyncio_(code_list)
+    average = average_growth.average_growth(detail) # 注意：此处调用将nasdaq的自定义数据加入到了detail列表中
+    app.logger.info('--average--: ')
+    app.logger.info(average)
     if not board:
         app.logger.warning("howbuy接口取大盘详情")
         board = fund_howbuy.stock()
@@ -36,7 +43,7 @@ def fund():
     app.logger.info(board)
     app.logger.info('--detail--: ')
     app.logger.info(detail)
-    return render_template('index.html', board=board, detail=detail)
+    return render_template('index.html', board=board, detail=detail, average=average)
 
 @app.route('/jessie')
 def jessie_fund():
