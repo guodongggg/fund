@@ -1,7 +1,7 @@
 from lxml import etree
 import asyncio
 import aiohttp
-
+import json
 
 async def ratio(code):
     conn = aiohttp.TCPConnector(ssl=False)  # 防止ssl报错
@@ -24,6 +24,7 @@ async def ratio(code):
             html = etree.HTML(r)
             name = html.xpath('/html/body/div[2]/div[3]/div/div[2]/div/div[1]/div/div[1]/h1/text()')[0]
             value_list = html.xpath('//*[@id="nTab9_0"]/table/tr[2]/td[@class="to-right"]/span/text()')
+            day_growth = html.xpath('//*[@class="shouyi-b shouyi-l b3"]/div/em/text()')[0].replace('%', '')
             last_week_growth, last_month_growth, last_three_months_growth = [i.replace('%', '') for i in value_list][1:4]
             growth_data = {
                 'code': code,
@@ -31,6 +32,7 @@ async def ratio(code):
                 'lastWeekGrowth': last_week_growth,
                 'lastMonthGrowth': last_month_growth,
                 'lastThreeMonthsGrowth': last_three_months_growth,
+                'dayGrowth': day_growth
             }
             # print(growth_data)
     # 合并数据
