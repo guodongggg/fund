@@ -9,7 +9,7 @@ from pathlib import Path
 def over_time(code_list):
     date_now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
     date_today = datetime.datetime.now().strftime("%Y-%m-%d")
-    end_time = f"{date_today} 15:00"
+    end_time = f"{date_today} 22:00"
     # end_time = f"2020-12-31 12:00"
     end_time_stamp = time.mktime(time.strptime(end_time, '%Y-%m-%d %H:%M'))
     now_time_stamp = time.mktime(time.strptime(date_now, '%Y-%m-%d %H:%M'))

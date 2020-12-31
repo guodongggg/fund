@@ -41,7 +41,7 @@ if __name__ == '__main__':
     if not board:
         board = fund_howbuy.stock()
     for i in detail:
-        print(f"{i['name']} 实时估值：{i['expectGrowth']}%")
+        print(f"{i['name']} {i['code']} 实时估值：{i['expectGrowth']}%")
     print('---------------')
     for i in board:
         if i['name'] == '上证指数' or i['name'] == '沪深300':
