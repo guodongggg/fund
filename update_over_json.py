@@ -30,9 +30,10 @@ def over_time(code_list):
     file.touch(exist_ok=True)
 
     if int(now_time_stamp) > int(end_time_stamp):
+        print(f"{date_now} 当前更新的为*真实数据*")
         avg = average_growth.average_growth(detail)
     else:
-        print(f"{date_now} 当前未更新净值，更新的仅为估值数据")
+        print(f"{date_now} 当前未更新净值，更新的仅为估值数据！")
         avg = average_growth.average_growth(detail, real=True)
 
     with open("bj.json", 'r+') as f:
