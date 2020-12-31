@@ -4,10 +4,10 @@ import json
 
 def XiongAPI(url, code=None):
     params = {
-        'code':code
+        'code': code
     }
     try:
-        response = requests.get(url,params = params, timeout=3)
+        response = requests.get(url, params=params, timeout=3)
     except Exception as e:
         print("error:", e)
         return {}
@@ -21,7 +21,7 @@ def XiongAPI(url, code=None):
 def BaseInfo(code):
     code = ','.join(code)
     url = 'https://api.doctorxiong.club/v1/fund'
-    return XiongAPI(url,code).get('data',[])
+    return XiongAPI(url, code).get('data', [])
 
 
 def stock_board():  
@@ -30,7 +30,7 @@ def stock_board():
 
 
 if __name__ == '__main__':
-    with open('code_list.json','r') as f:
+    with open('code_list.json', 'r') as f:
         json_data = json.load(f)
         code_list = json_data['test']    
     fundDetail = BaseInfo(code_list)
