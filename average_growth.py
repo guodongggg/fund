@@ -4,7 +4,7 @@ import fund_howbuy
 import nasdaq
 
 
-def average_growth(fund_data_list):
+def average_growth(fund_data_list, real=False):
     nasdaq_data = nasdaq.nasdaq()
     # print('nasdaq_data: ',nasdaq_data)
     fund_data_list.append(nasdaq_data)
@@ -21,7 +21,10 @@ def average_growth(fund_data_list):
         '002984': 0.02,
         '004070': 0.07,
         'nasdaq100': 0.23}
-    list_ = [float(x['expectGrowth'])*fund_precentage[x['code']] for x in fund_data_list]
+    if not real:
+        list_ = [float(x['expectGrowth'])*fund_precentage[x['code']] for x in fund_data_list]
+    else:
+        list_ = [float(x['dayGrowth']) * fund_precentage[x['code']] for x in fund_data_list]
     # or list_ = list(map(lambda x: float(x['expectGrowth'])*fund_precentage[x['code']], fund_data_list))
     # print(list_)
     total = round(sum(list_), 2)
@@ -34,11 +37,11 @@ if __name__ == '__main__':
     board = fund_base.stock_board()
     if not detail:
         detail = fund_howbuy.asyncio_(code_list)
-    average = average_growth(detail)  # 注意：此处调用会将nasdaq字典的自定义数据加入到了detail列表中
+    average = average_growth(detail, real=False)  # 注意：此处调用会将nasdaq字典的自定义数据加入到了detail列表中
     if not board:
         board = fund_howbuy.stock()
     for i in detail:
-        print(f"{i['name']} {i['expectGrowth']}%")
+        print(f"{i['name']} {i['expectGrowth']}% {i['dayGrowth']}%")
     print('---------------')
     for i in board:
         if i['name'] == '上证指数' or i['name'] == '沪深300':
