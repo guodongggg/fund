@@ -15,8 +15,12 @@ def over_time(code_list):
     now_time_stamp = time.mktime(time.strptime(date_now, '%Y-%m-%d %H:%M'))
 
     # 获取数据
-    board = fund_base.stock_board()
-    detail = fund_base.BaseInfo(code_list)
+    try:
+        board = fund_base.stock_board()
+        detail = fund_base.BaseInfo(code_list)
+    except:
+        print('API接口异常')
+        return
     hs300 = ''
     for i in board:
         if i['code'] == 'sz399300':
@@ -30,7 +34,7 @@ def over_time(code_list):
     if int(now_time_stamp) > int(end_time_stamp):
         avg = average_growth.average_growth(detail)
     else:
-        print(f"{date_now} 当前未休市，更新的仅为估值数据")
+        print(f"{date_now} 当前未更新净值，更新的仅为估值数据")
         avg = average_growth.average_growth(detail, real=True)
 
     with open("bj.json", 'r+') as f:
