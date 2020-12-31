@@ -15,12 +15,10 @@ def over_time(code_list):
     now_time_stamp = time.mktime(time.strptime(date_now, '%Y-%m-%d %H:%M'))
 
     # 获取数据
-    try:
-        board = fund_base.stock_board()
-        detail = fund_base.BaseInfo(code_list)
-    except:
-        print('API接口异常')
-        return
+    board = fund_base.stock_board()
+    detail = fund_base.BaseInfo(code_list)
+    if not board or not detail:
+        return print('API接口返回为空,请重试')
     hs300 = ''
     for i in board:
         if i['code'] == 'sz399300':
