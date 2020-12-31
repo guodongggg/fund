@@ -6,11 +6,12 @@ def XiongAPI(url, code=None):
     params = {
         'code': code
     }
-    try:
-        response = requests.get(url, params=params, timeout=3)
-    except Exception as e:
-        print("error:", e)
-        return {}
+    # try:
+    response = requests.get(url, params=params, timeout=3)
+    #     response = requests.get(url, params=params, timeout=3)
+    # except Exception as e:
+    #     print("XiongAPI error:", e)
+    #     return {}
     result = response.json()
     if result['code'] != 200:
         raise Exception("API接口数据异常：" + response.text)
@@ -21,12 +22,22 @@ def XiongAPI(url, code=None):
 def BaseInfo(code):
     code = ','.join(code)
     url = 'https://api.doctorxiong.club/v1/fund'
-    return XiongAPI(url, code).get('data', [])
+    try:
+        return XiongAPI(url, code).get('data')
+    except Exception as e:
+        print('api异常，返回空字典')
+        return []
+    # return XiongAPI(url, code).get('data', [])
 
 
 def stock_board():  
     url = 'https://api.doctorxiong.club/v1/stock/board'
-    return XiongAPI(url).get('data', [])
+    try:
+        return XiongAPI(url).get('data')
+    except Exception as e:
+        print('api异常，返回空字典')
+        return []
+    # return XiongAPI(url).get('data', [])
 
 
 if __name__ == '__main__':
