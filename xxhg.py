@@ -8,11 +8,28 @@ import numpy as np
 import base64
 from io import BytesIO
 
+
 # 线性回归方程
 class FundGrapper:
+    def threeMonth(self):
+        import time
+        import datetime
+        now = int(time.time())
+        timeStruct = time.localtime(now)
+        todayTime = time.strftime("%Y-%m-%d", timeStruct)
+
+        t = (datetime.datetime.now() - datetime.timedelta(days=90))
+        threeMonthAgo = t.strftime("%Y-%m-%d")
+        data = {"todayTime": todayTime, "threeMonthAgo": threeMonthAgo}
+        print(data)
+        return data
+
     def grabHistoryData(self, code):
-        startDate = "2020-10-1"
-        endDate = "2020-12-30"
+        # startDate = "2020-10-1"
+        # endDate = "2020-12-30"
+        date = self.threeMonth()
+        startDate = date['threeMonthAgo']
+        endDate = date['todayTime']
         r = requests.get("https://api.doctorxiong.club/v1/fund/detail?code=" + code + "&startDate=" + startDate + "&endDate=" + endDate)
         value = json.loads(r.text)
         return value['data']['netWorthData']
@@ -31,6 +48,7 @@ class FundGrapper:
         netWorthArray = np.array(netWorthData)
         #print(runtimeData)
         #print(netWorthArray)
+        plt.rcParams['font.family'] = ['Arial Unicode MS']
         plt.figure(figsize=(10, 7))
         plt.title("Fund Code: " + runtimeData['code'])
         plt.xlabel("date")
@@ -66,8 +84,7 @@ class FundGrapper:
         plt.plot(x[0:partVal], regressFunc(x[0:partVal]))
 
         #图例
-        chinese = font_manager.FontProperties(fname='static/msyh.ttf')
-        plt.legend(labels=['净值', '最小值', '最小值回归', '平均值回归'], prop=chinese)
+        plt.legend(labels=['净值', '最小值', '最小值回归', '平均值回归'])
 
         plt.grid = True
         # 显性展示
