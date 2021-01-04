@@ -30,7 +30,7 @@ def haoym_detail(post_id):
 def fund():
     with open('code_list.json', 'r') as f:
         json_data = json.load(f)
-        code_list = json_data['prodect']
+        code_list = json_data['product']
     detail = fund_base.BaseInfo(code_list)
     board = fund_base.stock_board()
     if not detail:
