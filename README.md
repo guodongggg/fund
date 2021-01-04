@@ -1,7 +1,7 @@
 ## 基于python flask开发的基金简单查询工具
 
 ### 1) 启动方法
->修改code_list.json文件的prodect为你自己的基金代码
+>修改code_list.json文件的prodect为你自己的基金代码，修改percent为每支基金的百分比
 
 >执行python run.py
 
