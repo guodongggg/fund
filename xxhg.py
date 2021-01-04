@@ -4,7 +4,7 @@ import json
 
 # 线性回归方程
 class FundGrapper:
-    def threeMonth(self, days=90):
+    def threeMonth(self, days=120):
         import time
         import datetime
         now = int(time.time())
@@ -18,8 +18,8 @@ class FundGrapper:
         return data
 
     def grabHistoryData(self, code):
-        # startDate = "2020-10-1"
-        # endDate = "2020-12-30"
+        # startDate = "2020-9-1"
+        # endDate = "2020-12-2"
         date = self.threeMonth()
         startDate = date['threeMonthAgo']
         endDate = date['todayTime']
@@ -50,7 +50,7 @@ class FundGrapper:
         #print(runtimeData)
         #print(netWorthArray)
 
-        plt.figure(figsize=(10, 7))
+        plt.figure(figsize=(12, 7))
         plt.title("Fund Code: " + runtimeData['code'], fontproperties=font)
         plt.xlabel("日期", fontproperties=font)
         plt.ylabel("净值", fontproperties=font)
@@ -104,4 +104,4 @@ class FundGrapper:
 
 if __name__ == '__main__':
     fundGrapper = FundGrapper()
-    data = fundGrapper.run('004070', gui=True)
+    data = fundGrapper.run('005827', gui=True)
