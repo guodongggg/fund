@@ -1,24 +1,17 @@
-import matplotlib
-matplotlib.use('Agg')
 import requests
 import json
-from matplotlib import pyplot as plt
-from matplotlib import font_manager
-import numpy as np
-import base64
-from io import BytesIO
 
 
 # 线性回归方程
 class FundGrapper:
-    def threeMonth(self):
+    def threeMonth(self, days=90):
         import time
         import datetime
         now = int(time.time())
         timeStruct = time.localtime(now)
         todayTime = time.strftime("%Y-%m-%d", timeStruct)
 
-        t = (datetime.datetime.now() - datetime.timedelta(days=90))
+        t = (datetime.datetime.now() - datetime.timedelta(days))
         threeMonthAgo = t.strftime("%Y-%m-%d")
         data = {"todayTime": todayTime, "threeMonthAgo": threeMonthAgo}
         print(data)
@@ -39,7 +32,15 @@ class FundGrapper:
         value = json.loads(r.text)
         return value['data'][0]
 
-    def run(self, code):
+    def run(self, code, gui):
+        if gui is False:
+            import matplotlib
+            matplotlib.use('Agg')
+        from matplotlib import pyplot as plt
+        from matplotlib import font_manager
+        import numpy as np
+
+        font = font_manager.FontProperties(fname="static/msyh.ttf")
         #fundGrapper = FundGrapper()
 
         #code = "004070"
@@ -48,11 +49,11 @@ class FundGrapper:
         netWorthArray = np.array(netWorthData)
         #print(runtimeData)
         #print(netWorthArray)
-        plt.rcParams['font.family'] = ['Arial Unicode MS']
+
         plt.figure(figsize=(10, 7))
-        plt.title("Fund Code: " + runtimeData['code'])
-        plt.xlabel("date")
-        plt.ylabel("netWorth")
+        plt.title("Fund Code: " + runtimeData['code'], fontproperties=font)
+        plt.xlabel("日期", fontproperties=font)
+        plt.ylabel("净值", fontproperties=font)
 
         # 绘制净值线
         x = np.arange(0, len(netWorthData))
@@ -83,20 +84,24 @@ class FundGrapper:
         regressFunc = lambda x: x*r[0] + r[1]
         plt.plot(x[0:partVal], regressFunc(x[0:partVal]))
 
-        #图例
-        plt.legend(labels=['净值', '最小值', '最小值回归', '平均值回归'])
-
+        # 图例
+        plt.legend(labels=['净值', '最小值', '最小值回归', '平均值回归'], prop=font)
         plt.grid = True
-        # 显性展示
-        #plt.show()
-        sio = BytesIO()
-        plt.savefig(sio, format='png')
-        data = base64.encodebytes(sio.getvalue()).decode()
-        plt.close()
-        return data
+        if gui is True:
+            # 显性展示
+            plt.show()
+            return print('显示图片')
+        else:
+            import base64
+            from io import BytesIO
+            # 将图片转换为base64格式
+            sio = BytesIO()
+            plt.savefig(sio, format='png')
+            base64_data = base64.encodebytes(sio.getvalue()).decode()
+            plt.close()
+            return base64_data
 
 
 if __name__ == '__main__':
     fundGrapper = FundGrapper()
-    data = fundGrapper.run('004070')
-    print(data)
+    data = fundGrapper.run('004070', gui=True)

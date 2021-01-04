@@ -67,7 +67,7 @@ def test(code):
     import xxhg
     fundGrapper = xxhg.FundGrapper()
     #data = fundGrapper.run('004070')
-    data = fundGrapper.run(code)
+    data = fundGrapper.run(code, gui=False)
     return render_template('xxhg_pic.html', data=data, code=code)
 
 
