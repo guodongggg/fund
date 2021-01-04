@@ -76,6 +76,7 @@
 			<th>周涨幅</th>
 			<th>最近一月涨幅</th>
 			<th>最近三月涨幅</th>
+			<th>线性回归</th>
 			<th>天天基金</th>
 		</tr>
 	</thead>
@@ -102,8 +103,13 @@
 				<td style='color:red'>{{i.lastThreeMonthsGrowth}}%</td>
 			{% else %}
 				<td style='color:green'>{{i.lastThreeMonthsGrowth}}%</td>
-			{% endif %}		
-			<td><a href='http://fund.eastmoney.com/{{i.code}}.html' style='color: #666;text-decoration: none;' target='_blank'>链接</a></td>
+			{% endif %}
+			<td>
+				<a href="/{{i.code}}/xxhg" style='color: #666;text-decoration: none;' target="_blank">线性回归</a>
+			</td>
+			<td>
+				<a href='http://fund.eastmoney.com/{{i.code}}.html' style='color: #666;text-decoration: none;' target='_blank'>链接</a>
+			</td>
 		</tr>
 	{% endfor %}
 </table>

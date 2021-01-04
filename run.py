@@ -62,5 +62,16 @@ def jessie_fund():
     return render_template('index.html', board=board, detail=detail)
 
 
+@app.route('/<code>/xxhg')
+def test(code):
+    import xxhg
+    fundGrapper = xxhg.FundGrapper()
+    #data = fundGrapper.run('004070')
+    data = fundGrapper.run(code)
+    while True:
+        if data:
+            return render_template('xxhg_pic.html', data=data, code=code)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='80')
