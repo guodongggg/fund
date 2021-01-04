@@ -68,9 +68,7 @@ def test(code):
     fundGrapper = xxhg.FundGrapper()
     #data = fundGrapper.run('004070')
     data = fundGrapper.run(code)
-    while True:
-        if data:
-            return render_template('xxhg_pic.html', data=data, code=code)
+    return render_template('xxhg_pic.html', data=data, code=code)
 
 
 if __name__ == '__main__':
