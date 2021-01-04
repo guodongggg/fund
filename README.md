@@ -22,3 +22,4 @@
 
 ### 4) 展示:
 ![image](https://github.com/guodongggg/flask/blob/main/static/web.png)
+![image](https://github.com/guodongggg/flask/blob/main/static/xxhg.png)
