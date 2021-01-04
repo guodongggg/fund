@@ -23,14 +23,23 @@ class FundGrapper:
         date = self.threeMonth()
         startDate = date['threeMonthAgo']
         endDate = date['todayTime']
-        r = requests.get("https://api.doctorxiong.club/v1/fund/detail?code=" + code + "&startDate=" + startDate + "&endDate=" + endDate)
-        value = json.loads(r.text)
-        return value['data']['netWorthData']
+        try:
+            r = requests.get("https://api.doctorxiong.club/v1/fund/detail?code=" + code + "&startDate=" + startDate + "&endDate=" + endDate)
+            value = json.loads(r.text)
+            return value['data']['netWorthData']
+        except Exception as e:
+            print(f'获取历史净值数据失败：{e}')
+            return ''
+
 
     def grabRuntimeData(self, code):
-        r = requests.get("https://api.doctorxiong.club/v1/fund?code=" + code)
-        value = json.loads(r.text)
-        return value['data'][0]
+        try:
+            r = requests.get("https://api.doctorxiong.club/v1/fund?code=" + code)
+            value = json.loads(r.text)
+            return value['data'][0]
+        except Exception as e:
+            print(f'获取历史日期数据失败：{e}')
+            return ''
 
     def run(self, code, gui):
         if gui is False:
@@ -46,6 +55,7 @@ class FundGrapper:
         #code = "004070"
         netWorthData = self.grabHistoryData(code)
         runtimeData = self.grabRuntimeData(code)
+        assert netWorthData and runtimeData
         netWorthArray = np.array(netWorthData)
         #print(runtimeData)
         #print(netWorthArray)
