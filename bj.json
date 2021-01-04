@@ -3,5 +3,10 @@
         "HS300": "1.91",
         "my_position": "1.35",
         "over_take": false
+    },
+    "2021-01-04": {
+        "HS300": "1.08",
+        "my_position": "1.33",
+        "over_take": true
     }
 }

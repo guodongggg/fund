@@ -57,5 +57,7 @@ def over_time(code_list):
 
 
 if __name__ == '__main__':
-    code_list = ['005827', '163417', '001218', '001714', '162605', '001102', '161725', '002984', '004070']
+    with open('code_list.json', 'r') as f:
+        json_data = json.load(f)
+        code_list = json_data['product']
     over_time(code_list)
