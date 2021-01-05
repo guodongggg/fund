@@ -83,8 +83,6 @@ def xalpha_all():
     path = 'code.csv'
     read = xa.record(path)
     sysopen = xa.mul(status=read.status)
-    all_info = sysopen.summary()
-    html = all_info.to_html(index=False, justify='center')
     annualized_rate = sysopen.xirrrate()  # 整体年化
     annualized_rate = round(annualized_rate*100, 2)
     v_position = sysopen.v_positions()  # 仓位饼状图（小类）
@@ -96,11 +94,29 @@ def xalpha_all():
         'v_position': v_position,
         'v_position_all': v_position_all,
         'v_position_history': v_position_history,
-        'all_trade': all_trade,
-        'html': html
+        'all_trade': all_trade
     }
     return render_template('xalpha_all.html', **context)
 
+
+@app.route('/xalpha_all_td')
+def xalpha_all_td():
+    import xalpha as xa
+    # import pandas as pd
+    xa.set_display("notebook")
+    path = 'code.csv'
+    read = xa.record(path)
+    sysopen = xa.mul(status=read.status)
+    all_info = sysopen.summary()
+    html_data = all_info.to_html(index=False, justify='center')
+    html = '''
+    <html>
+        <body>
+            <div>{}</div>
+        </body>
+    <html>
+    '''
+    return html.format(html_data)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='80')
