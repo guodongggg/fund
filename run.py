@@ -59,7 +59,7 @@ def jessie_fund():
     code_list = ['260108', '163406']
     detail = fund_base.BaseInfo(code_list)
     board = fund_base.stock_board()
-    return render_template('index.html', board=board, detail=detail)
+    return render_template('xalpha.html', board=board, detail=detail)
 
 
 @app.route('/<code>/xxhg')
@@ -69,6 +69,23 @@ def test(code):
     #data = fundGrapper.run('004070')
     data = fundGrapper.run(code, gui=False)
     return render_template('xxhg_pic.html', data=data, code=code)
+
+
+@app.route('/xalpha')
+def index():
+    import xalpha as xa
+    import pandas as pd
+    xa.set_display("notebook")
+    path = 'code.csv'
+    read = xa.record(path)
+    #sys = xa.mul(status=read.status)
+    # sysfix = xa.mulfix(status=read.status, totmoney=20000)
+    # sysfix.bcmkset(xa.indexinfo("SH000300"), start="2020-01-01")
+    # data = sysfix.v_netvalue()
+    f = xa.fundinfo('163417')
+    f_t = xa.trade(f, read.status)
+    data = f_t.v_tradecost()
+    return render_template('xalpha.html', data=data)
 
 
 if __name__ == '__main__':
