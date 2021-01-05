@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>xalpha</title>
+    <title>持仓成本</title>
     <script src="{{url_for('static',filename='jquery.min.js')}}"></script>
     <script src="{{url_for('static',filename='moment.min.js')}}"></script>
     <script src="{{url_for('static',filename='require.js')}}"></script>
 </head>
 <body>
-{{data}}
+<h3>基金代码：{{code}}</h3>
+<div>{{data}}</div>
 </body>
 </html>

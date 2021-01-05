@@ -76,6 +76,7 @@
 			<th>周涨幅</th>
 			<th>最近一月涨幅</th>
 			<th>最近三月涨幅</th>
+			<th>持仓成本</th>
 			<th>线性回归</th>
 			<th>天天基金</th>
 		</tr>
@@ -104,6 +105,9 @@
 			{% else %}
 				<td style='color:green'>{{i.lastThreeMonthsGrowth}}%</td>
 			{% endif %}
+			<td>
+				<a href="/{{i.code}}/cccb" style='color: #666;text-decoration: none;' target="_blank">图例</a>
+			</td>
 			<td>
 				<a href="/{{i.code}}/xxhg" style='color: #666;text-decoration: none;' target="_blank">图例</a>
 			</td>
