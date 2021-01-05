@@ -6,6 +6,12 @@ import json
 
 
 def average_growth(fund_data_list, real=False):
+    """
+    统计持仓比例下的预期总收益百分比
+    :param fund_data_list: list 通过接口标准返回值
+    :param real: boolean 判断是否为真实涨幅
+    :return: str 当天总收益百分比，不含百分号
+    """
     nasdaq_data = nasdaq.nasdaq()
     # print('nasdaq_data: ',nasdaq_data)
     fund_data_list.append(nasdaq_data)

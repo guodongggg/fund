@@ -5,6 +5,11 @@ import json
 # 线性回归方程
 class FundGrapper:
     def threeMonth(self, days=120):
+        """
+        返回当前日期和三个月前日期的字典
+        :param days: 距今天指定天数前的日期
+        :return: dict 今天和指定日期前日期的字典
+        """
         import time
         import datetime
         now = int(time.time())
@@ -113,4 +118,4 @@ class FundGrapper:
 
 if __name__ == '__main__':
     fundGrapper = FundGrapper()
-    data = fundGrapper.run('005827', gui=True)
+    data = fundGrapper.run('001102', gui=True)

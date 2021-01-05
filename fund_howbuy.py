@@ -5,6 +5,11 @@ import json
 
 
 async def ratio(code):
+    """
+    并发爬取单支基金的信息
+    :param code: 基金代码
+    :return: dict 单支标准返回格式
+    """
     conn = aiohttp.TCPConnector(ssl=False)  # 防止ssl报错
     # 实时的估值涨幅
     url_ratio = f'http://www.howbuy.com/fund/ajax/gmfund/valuation/valuationnav.htm?jjdm={code}'
@@ -42,6 +47,10 @@ async def ratio(code):
 
 
 def stock():
+    """
+    爬取大盘
+    :return: 标准返回值
+    """
     import requests
     url = "https://data.howbuy.com/cgi/fund/indexmarketdata.json?q=s_sh000001,s_sz399001,s_sh000300,s_sz399006"
     response = requests.get(url)
@@ -58,6 +67,11 @@ def stock():
 
 
 def asyncio_(code_list):
+    """
+    并发执行爬虫
+    :param code_list: list 基金代码列表
+    :return: 多基金标准返回值
+    """
     return_data = []
     tasks = []
     loop = asyncio.new_event_loop()

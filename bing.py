@@ -3,6 +3,10 @@ import requests
 
 
 def bingPic():
+    """
+    获取bing的背景图片地址
+    :return: url地址
+    """
     bing_url = 'http://cn.bing.com'
     r = requests.get(bing_url)
     res = r.text

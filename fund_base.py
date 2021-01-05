@@ -3,6 +3,12 @@ import json
 
 
 def XiongAPI(url, code=None):
+    """
+    request模块调用
+    :param url: API地址
+    :param code: 基金代码
+    :return: dict
+    """
     params = {
         'code': code
     }
@@ -19,12 +25,21 @@ def XiongAPI(url, code=None):
 
 
 def BaseInfo(code):
+    """
+    基金基础信息
+    :param code: 基金代码，用，隔开
+    :return: dict
+    """
     code = ','.join(code)
     url = 'https://api.doctorxiong.club/v1/fund'
     return XiongAPI(url, code).get('data', [])
 
 
-def stock_board():  
+def stock_board():
+    """
+    大盘基础信息
+    :return: dict
+    """
     url = 'https://api.doctorxiong.club/v1/stock/board'
     return XiongAPI(url).get('data', [])
 

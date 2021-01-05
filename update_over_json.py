@@ -7,13 +7,24 @@ from pathlib import Path
 
 
 def over_time(code_list):
-    # date_now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    # date_today = datetime.datetime.now().strftime("%Y-%m-%d")
-    # end_time = f"{date_today} 22:00"
-    # # end_time = f"2020-12-31 12:00"
-    # end_time_stamp = time.mktime(time.strptime(end_time, '%Y-%m-%d %H:%M'))
-    # now_time_stamp = time.mktime(time.strptime(date_now, '%Y-%m-%d %H:%M'))
-
+    """
+    判断当日持仓的所有基金的合计涨幅是否超过沪深300
+    :param code_list: list 基金代码列表
+    :return: json文件，格式如下，HS300涨幅、持仓合计涨幅、持仓涨幅是否超过沪深300
+        {
+            "2020-12-31": {
+                "HS300": "1.91",
+                "my_position": "1.35",
+                "over_take": false
+            },
+            "2021-01-04": {
+                "HS300": "1.08",
+                "my_position": "1.33",
+                "over_take": true
+            }
+        }
+        ......
+    """
     # 获取数据
     board = fund_base.stock_board()
     detail = fund_base.BaseInfo(code_list)
@@ -31,14 +42,10 @@ def over_time(code_list):
     file = Path(json_file_name)
     file.touch(exist_ok=True)
 
-    # if int(now_time_stamp) > int(end_time_stamp):
-    #     print(f"{date_now} 当前更新的为*真实数据*")
-    #     avg = average_growth.average_growth(detail)
-    # else:
-    #     print(f"{date_now} 当前未更新净值，更新的仅为估值数据！")
-    #     avg = average_growth.average_growth(detail, real=True)
+    # 此时更新的准确净值涨幅的平均值
     avg = average_growth.average_growth(detail, real=True)
 
+    # 写入文件
     with open("bj.json", 'r+') as f:
         try:
             data = json.load(f)

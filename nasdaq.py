@@ -2,6 +2,10 @@ import requests
 
 
 def nasdaq():
+    """
+    爬取sina财经nasdaq基础数据
+    :return: 构建的标准返回格式，只包含当日的数据，无历史数据
+    """
     url = "http://hq.sinajs.cn/?rn=1609213839262&list=gb_$ndx"
     r = requests.get(url)
     response = r.text
