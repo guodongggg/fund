@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有持仓</title>
+    <script src="{{url_for('static',filename='jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='moment.min.js')}}"></script>
+    <script src="{{url_for('static',filename='require.js')}}"></script>
+</head>
+<body>
+<div><h3>整体年化：{{annualized_rate}}%</h3></div>
+{{html}}
+<div>{{v_position}}</div>
+<div>{{v_position_all}}</div>
+<div>{{v_position_history}}</div>
+<div>{{all_trade}}</div>
+</body>
+</html>

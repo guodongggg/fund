@@ -63,8 +63,8 @@ def test(code):
     return render_template('xxhg_pic.html', data=data, code=code)
 
 
-@app.route('/<code>/cccb')
-def index(code):
+@app.route('/<code>/xalpha_cccb')
+def xalpha_cccb(code):
     import xalpha as xa
     xa.set_display("notebook")
     path = 'code.csv'
@@ -73,6 +73,33 @@ def index(code):
     f_t = xa.trade(f, read.status)
     data = f_t.v_tradecost()
     return render_template('xalpha_cccb.html', data=data, code=code)
+
+
+@app.route('/xalpha_all')
+def xalpha_all():
+    import xalpha as xa
+    import pandas as pd
+    xa.set_display("notebook")
+    path = 'code.csv'
+    read = xa.record(path)
+    sysopen = xa.mul(status=read.status)
+    all_info = sysopen.summary()
+    html = all_info.to_html(index=False, justify='center')
+    annualized_rate = sysopen.xirrrate()  # 整体年化
+    annualized_rate = round(annualized_rate*100, 2)
+    v_position = sysopen.v_positions()  # 仓位饼状图（小类）
+    v_position_all = sysopen.v_category_positions()  # 仓位饼状图（大类）
+    v_position_history = sysopen.v_positions_history()  # 仓位水流图
+    all_trade = sysopen.v_tradevolume(freq='W')  # 整体交易坐标图
+    context = {
+        'annualized_rate': annualized_rate,
+        'v_position': v_position,
+        'v_position_all': v_position_all,
+        'v_position_history': v_position_history,
+        'all_trade': all_trade,
+        'html': html
+    }
+    return render_template('xalpha_all.html', **context)
 
 
 if __name__ == '__main__':
