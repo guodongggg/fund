@@ -4,6 +4,7 @@ import fund_howbuy
 import nasdaq
 import json
 
+
 def average_growth(fund_data_list, real=False):
     nasdaq_data = nasdaq.nasdaq()
     # print('nasdaq_data: ',nasdaq_data)

@@ -13,5 +13,6 @@ def bingPic():
     img_url = f'{bing_url}/{url}&rf=LaDigue_1920x1080.jpg&pid=hp'
     return img_url
 
+
 if __name__ == '__main__':
     print(bingPic())

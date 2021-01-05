@@ -1,7 +1,6 @@
 # encoding: utf-8
-
-
 import re
+
 
 # 自定义获取文本电子邮件的函数
 def get_findAll_emails(text):
@@ -11,7 +10,6 @@ def get_findAll_emails(text):
     """
     emails = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", text)
     return emails
-
 
 
 # 自定义获取文本手机号函数
@@ -25,7 +23,6 @@ def get_findAll_mobiles(text):
 
 
 # 自定义获取文本url函数
-
 def get_findAll_urls(text):
     """
     :param text: 文本
@@ -37,9 +34,7 @@ def get_findAll_urls(text):
     return urls
 
 
-
 # 自定义获取获取ip地址函数
-
 def get_findAll_ips(text):
     """
     :param text: 文本
@@ -50,9 +45,7 @@ def get_findAll_ips(text):
     return ips
 
 
-
 if __name__ == '__main__':
-
     content = "Please 42.121.252.58:443 contact 127.0.0.1  15988455173 us 18720071239 https://blog.csdn.net/u013421629/ at https://www.yiibai.com/ contact@qq.com for further information 1973536419@qq.com You can  also give feedbacl at feedback@yiibai.com"
     emails=get_findAll_emails(text=content)
     print(emails)

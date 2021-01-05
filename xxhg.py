@@ -31,7 +31,6 @@ class FundGrapper:
             print(f'获取历史净值数据失败：{e}')
             return ''
 
-
     def grabRuntimeData(self, code):
         try:
             r = requests.get("https://api.doctorxiong.club/v1/fund?code=" + code)

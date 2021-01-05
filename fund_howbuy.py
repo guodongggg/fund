@@ -3,6 +3,7 @@ import asyncio
 import aiohttp
 import json
 
+
 async def ratio(code):
     conn = aiohttp.TCPConnector(ssl=False)  # 防止ssl报错
     # 实时的估值涨幅
@@ -38,7 +39,6 @@ async def ratio(code):
     # 合并数据
     growth_data.update(ratio_data)
     return growth_data
-
 
 
 def stock():
