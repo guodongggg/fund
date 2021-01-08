@@ -45,7 +45,7 @@ def stock_board():
 
 
 if __name__ == '__main__':
-    with open('code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
         code_list = json_data['test']    
     fundDetail = BaseInfo(code_list)

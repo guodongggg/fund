@@ -38,7 +38,7 @@ def over_time(code_list):
             hs300 = i['changePercent']
 
     # 判断文件是否存在，不存在则创建
-    json_file_name = 'bj.json'
+    json_file_name = 'file/bj.json'
     file = Path(json_file_name)
     file.touch(exist_ok=True)
 
@@ -46,7 +46,7 @@ def over_time(code_list):
     avg = average_growth.average_growth(detail, real=True)
 
     # 写入文件
-    with open("bj.json", 'r+') as f:
+    with open("file/bj.json", 'r+') as f:
         try:
             data = json.load(f)
             f.seek(0, 0)
@@ -67,7 +67,7 @@ def over_time(code_list):
 
 
 if __name__ == '__main__':
-    with open('code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
         code_list = json_data['product']
     over_time(code_list)

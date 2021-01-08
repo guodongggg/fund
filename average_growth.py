@@ -27,7 +27,7 @@ def average_growth(fund_data_list, real=False):
     #     '003494': 0.05,  # 南方全指证券联接C
     #     'nasdaq100': 0.27  # 纳斯达克100
     #     }
-    with open('code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
         fund_percent = json_data['percent']
     if not real:
@@ -41,7 +41,7 @@ def average_growth(fund_data_list, real=False):
 
 
 if __name__ == '__main__':
-    with open('code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
         code_list = json_data['product']
     detail = fund_base.BaseInfo(code_list)

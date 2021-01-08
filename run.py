@@ -28,7 +28,7 @@ def haoym_detail(post_id):
 
 @app.route('/')
 def fund():
-    with open('code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
         code_list = json_data['product']
     detail = fund_base.BaseInfo(code_list)
@@ -67,7 +67,7 @@ def test(code):
 def xalpha_cccb(code):
     import xalpha as xa
     xa.set_display("notebook")
-    path = 'code.csv'
+    path = 'file/code.csv'
     read = xa.record(path)
     f = xa.fundinfo(code)
     f_t = xa.trade(f, read.status)
@@ -80,7 +80,7 @@ def xalpha_all():
     import xalpha as xa
     import pandas as pd
     xa.set_display("notebook")
-    path = 'code.csv'
+    path = 'file/code.csv'
     read = xa.record(path)
     sysopen = xa.mul(status=read.status)
     annualized_rate = sysopen.xirrrate()  # 整体年化
@@ -104,7 +104,7 @@ def xalpha_all_td():
     import xalpha as xa
     # import pandas as pd
     xa.set_display("notebook")
-    path = 'code.csv'
+    path = 'file/code.csv'
     read = xa.record(path)
     sysopen = xa.mul(status=read.status)
     get_stock_holdings = sysopen.get_stock_holdings()
