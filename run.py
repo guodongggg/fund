@@ -109,16 +109,18 @@ def xalpha_all_td():
     sysopen = xa.mul(status=read.status)
     get_stock_holdings = sysopen.get_stock_holdings()
     all_info = sysopen.summary()
+    stock_data = get_stock_holdings.to_html(index=False, justify='center')
     html_data = all_info.to_html(index=False, justify='center')
     html = '''
     <html>
         <body>
             <div>{html_data}</div><br />
-            <div>{get_stock_holdings}</div>
+            <div>{stock_data}</div>
         </body>
     <html>
     '''
-    return html.format(html_data, get_stock_holdings)
+    return html.format(html_data=html_data, stock_data=stock_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='80')
