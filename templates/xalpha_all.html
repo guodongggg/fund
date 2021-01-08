@@ -9,10 +9,14 @@
 </head>
 <body>
 <div><h3>整体年化：{{annualized_rate}}%</h3></div>
-{{html}}
+<div><h4>历史最大回测：{{max_drawdown[0]}}~{{max_drawdown[1]}}: {{max_drawdown[2]|float|round(2)}}%</h4></div>
+<div>alpha:{{alpha|float|round(3)}}</div>
+<div>beta:{{beta|float|round(3)}}</div>
+<div>sharpe:{{sharpe|float|round(3)}}</div>
 <div>{{v_position}}</div>
 <div>{{v_position_all}}</div>
 <div>{{v_position_history}}</div>
 <div>{{all_trade}}</div>
+<div>{{close_netvalue}}</div>
 </body>
 </html>
