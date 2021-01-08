@@ -1,4 +1,3 @@
-import nasdaq
 import fund_base
 import fund_howbuy
 import nasdaq
