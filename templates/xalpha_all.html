@@ -8,15 +8,15 @@
     <script src="{{url_for('static',filename='require.js')}}"></script>
 </head>
 <body>
+<div style="width:70%;margin:0 auto;">
 <div><h3>整体年化：{{annualized_rate}}%</h3></div>
 <div><h4>历史最大回测：{{max_drawdown[0]}}~{{max_drawdown[1]}}: {{max_drawdown[2]|float|round(2)}}%</h4></div>
-<div>alpha:{{alpha|float|round(3)}}</div>
-<div>beta:{{beta|float|round(3)}}</div>
-<div>sharpe:{{sharpe|float|round(3)}}</div>
+<div>alpha:{{alpha|float|round(3)}}  beta:{{beta|float|round(3)}}  sharpe:{{sharpe|float|round(3)}}</div>
 <div>{{v_position}}</div>
 <div>{{v_position_all}}</div>
 <div>{{v_position_history}}</div>
 <div>{{all_trade}}</div>
 <div>{{close_netvalue}}</div>
+</div>
 </body>
 </html>

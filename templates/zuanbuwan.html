@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>赚不完</title>
+</head>
+<body>
+<div style="width:70%;margin:0 auto;">
+{% for i in weibo_data %}
+    <h4>---{{ i.created_at }}---</h4>
+    <p>{{ i.text }}</p>
+{% endfor %}
+</div>
+</body>
+</html>

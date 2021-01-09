@@ -55,7 +55,7 @@ def fund():
 
 
 @app.route('/<code>/xxhg')
-def test(code):
+def test(code):  # 线性回归
     import xxhg
     fundGrapper = xxhg.FundGrapper()
     # data = fundGrapper.run('004070')
@@ -64,10 +64,10 @@ def test(code):
 
 
 @app.route('/<code>/xalpha_cccb')
-def xalpha_cccb(code):
+def xalpha_cccb(code):  # 持仓成本
     import xalpha as xa
     xa.set_display("notebook")
-    path = 'file/code.csv'
+    path = 'file/new.csv'
     read = xa.record(path)
     f = xa.fundinfo(code)
     f_t = xa.trade(f, read.status)
@@ -80,7 +80,7 @@ def xalpha_all():
     import xalpha as xa
     import pandas as pd
     xa.set_display("notebook")
-    path = 'file/code.csv'
+    path = 'file/new.csv'
     read = xa.record(path)
     sysopen = xa.mul(status=read.status)
     annualized_rate = sysopen.xirrrate()  # 整体年化
@@ -112,11 +112,11 @@ def xalpha_all():
 
 
 @app.route('/xalpha_all_td')
-def xalpha_all_td():
+def xalpha_all_td():  # 持仓股票份额
     import xalpha as xa
     # import pandas as pd
     xa.set_display("notebook")
-    path = 'file/code.csv'
+    path = 'file/new.csv'
     read = xa.record(path)
     sysopen = xa.mul(status=read.status)
     get_stock_holdings = sysopen.get_stock_holdings()
@@ -132,6 +132,23 @@ def xalpha_all_td():
     <html>
     '''
     return html.format(html_data=html_data, stock_data=stock_data)
+
+
+@app.route('/zuanbuwan')
+def zuanbuwan(showall=False):
+    from weibo import weibo
+    print('---开始爬取数据---')
+    weibo.main()
+    print('---爬取完毕---')
+    json_path = 'weibo\\weibo\\赚不完亏得完Ryu\\6367430139.json'
+    with open(json_path, 'r', encoding='UTF-8') as f:
+        data = json.load(f)
+        weibo_data = data['weibo']
+    #print(f'json data:{weibo_data}')
+    if not showall:
+        weibo_data = weibo_data[:10]
+    return render_template('zuanbuwan.html', weibo_data=weibo_data)
+
 
 
 if __name__ == '__main__':

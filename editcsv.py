@@ -11,7 +11,7 @@ def net(code, date, fene):
 
 
 def run():
-    path = 'file/test.csv'
+    path = 'file/new.csv'
     df = pd.read_csv(path)
     print(df)
     code_list = df.columns
@@ -22,7 +22,7 @@ def run():
             if row[1]:
                 if row[1] < 0:
                     suhui = net(code, str(row[0]), row[1])
-                    print(f'code:{code} {row[0]} {row[1]} netvalue:{suhui}')
+                    print(f'code:{code} {row[0]} money:{row[1]} fene:{suhui}')
                     df.loc[i, code] = suhui
     print(df)
     df.to_csv('file/out.csv', index=False)
