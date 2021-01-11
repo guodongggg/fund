@@ -135,8 +135,10 @@ def xalpha_all_td():  # 持仓股票份额
 
 
 @app.route('/zuanbuwan')
-def zuanbuwan(showall=False):
+def zuanbuwan(showall=False, day=-3):
     from weibo import weibo
+    import datetime
+    date_list = [(datetime.datetime.now()+datetime.timedelta(days=i)).strftime("%Y-%m-%d") for i in range(0, day, -1)]
     print('---开始爬取数据---')
     weibo.main()
     print('---爬取完毕---')
@@ -144,11 +146,11 @@ def zuanbuwan(showall=False):
     with open(json_path, 'r', encoding='UTF-8') as f:
         data = json.load(f)
         weibo_data = data['weibo']
-    #print(f'json data:{weibo_data}')
+    sort_list = sorted(weibo_data, key=lambda x: x['created_at'], reverse=True)  # 根据创建日期排序
+    # print(f'json data:{sort_list}')
     if not showall:
-        weibo_data = weibo_data[:10]
-    return render_template('zuanbuwan.html', weibo_data=weibo_data)
-
+        sort_list = sort_list[:10]
+    return render_template('zuanbuwan.html', weibo_data=sort_list)
 
 
 if __name__ == '__main__':
