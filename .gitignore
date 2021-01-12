@@ -4,6 +4,5 @@ __pycache__/*
 .idea/*
 log
 file/bj.json
-all.log
-error.log
-weibo/weibo/users.csv
+*log*
+weibo/weibo/*.log*
