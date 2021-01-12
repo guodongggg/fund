@@ -4,6 +4,7 @@ from api import API
 import fund_howbuy
 import average_growth
 import json
+import btc
 
 app = Flask(__name__)
 
@@ -28,6 +29,11 @@ def haoym_detail(post_id):
 
 @app.route('/')
 def fund():
+    try:
+        btc_value = btc.btc()
+    except Exception as e:
+        print(e)
+        btc_value = None
     with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
         code_list = json_data['product']
@@ -49,7 +55,8 @@ def fund():
     context = {
         'board': board,
         'detail': detail,
-        'average': average
+        'average': average,
+        'btc_value': btc_value
     }
     return render_template('index.html', **context)
 
@@ -135,14 +142,13 @@ def xalpha_all_td():  # 持仓股票份额
 
 
 @app.route('/zuanbuwan')
-def zuanbuwan(showall=False, day=-3):
+def zuanbuwan(showall=False):
     from weibo import weibo
-    import datetime
-    date_list = [(datetime.datetime.now()+datetime.timedelta(days=i)).strftime("%Y-%m-%d") for i in range(0, day, -1)]
+    import os
     print('---开始爬取数据---')
     weibo.main()
     print('---爬取完毕---')
-    json_path = 'weibo\\weibo\\赚不完亏得完Ryu\\6367430139.json'
+    json_path = os.path.join('weibo', 'weibo', '赚不完亏得完Ryu', '6367430139.json')
     with open(json_path, 'r', encoding='UTF-8') as f:
         data = json.load(f)
         weibo_data = data['weibo']
