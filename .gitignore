@@ -5,4 +5,4 @@ __pycache__/*
 log
 file/bj.json
 *log*
-weibo/weibo/*.log*
+weibo/weibo/*
