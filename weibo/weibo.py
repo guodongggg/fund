@@ -233,7 +233,7 @@ class Weibo(object):
 
     def user_to_database(self):
         """将用户信息写入文件/数据库"""
-        self.user_to_csv()
+        # self.user_to_csv() # 不需要用户信息
         if 'mysql' in self.write_mode:
             self.user_to_mysql()
         if 'mongo' in self.write_mode:
