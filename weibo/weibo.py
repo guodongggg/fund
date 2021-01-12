@@ -597,7 +597,7 @@ class Weibo(object):
         """打印一条微博"""
         try:
             logger.info(u'微博id：%d', weibo['id'])
-            # logger.info(u'微博正文：%s', weibo['text'])
+            logger.info(u'微博正文：%s', weibo['text'])
             # logger.info(u'原始图片url：%s', weibo['pics'])
             # logger.info(u'微博位置：%s', weibo['location'])
             logger.info(u'发布时间：%s', weibo['created_at'])
@@ -1059,7 +1059,7 @@ class Weibo(object):
         """获取全部微博"""
         try:
             self.get_user_info()
-            self.print_user_info()
+            #self.print_user_info()
             since_date = datetime.strptime(self.user_config['since_date'],
                                            '%Y-%m-%d')
             today = datetime.strptime(str(date.today()), '%Y-%m-%d')
