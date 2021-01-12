@@ -1,6 +1,6 @@
-__pycache__
-__pycache__/*
-.idea
-.idea/*
+__pycache__/
+*.pyc
+.idea/
 file/bj.json
-*log*
+*.log
+weibo/weibo/
