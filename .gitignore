@@ -2,7 +2,5 @@ __pycache__
 __pycache__/*
 .idea
 .idea/*
-log
 file/bj.json
 *log*
-weibo/weibo/*
