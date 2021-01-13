@@ -11,9 +11,11 @@ def average_growth(fund_data_list, real=False):
     :param real: boolean 判断是否为真实涨幅
     :return: str 当天总收益百分比，不含百分号
     """
-    nasdaq_data = nasdaq.nasdaq()
+    # 1/13卖出nasdaq基金
+    # nasdaq_data = nasdaq.nasdaq()
     # print('nasdaq_data: ',nasdaq_data)
-    fund_data_list.append(nasdaq_data)
+    # fund_data_list.append(nasdaq_data)
+
     # for i in fund_data_list:
     #     print(i['name'], i['expectGrowth'])
     # fund_precentage = {
