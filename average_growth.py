@@ -34,9 +34,9 @@ def average_growth(fund_data_list, real=False):
         json_data = json.load(f)
         fund_percent = json_data['percent']
     if not real:
-        list_ = [float(x['expectGrowth'])*fund_percent[x['code']] for x in fund_data_list]
+        list_ = [float(x['expectGrowth'])*fund_percent[x['code']] for x in fund_data_list if x['code'] in list(fund_percent.keys())]
     else:
-        list_ = [float(x['dayGrowth']) * fund_percent[x['code']] for x in fund_data_list]
+        list_ = [float(x['dayGrowth']) * fund_percent[x['code']] for x in fund_data_list if x['code'] in list(fund_percent.keys())]
     # or list_ = list(map(lambda x: float(x['expectGrowth'])*fund_precentage[x['code']], fund_data_list))
     # print(list_)
     total = round(sum(list_), 2)
