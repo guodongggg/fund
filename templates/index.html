@@ -8,11 +8,10 @@
 	<link rel="icon" href="{{url_for('static', filename='title.ico')}}">
 	<script src="{{url_for('static',filename='time.js')}}"></script>
     <script type="text/javascript">
-        function disp_alert()
-        {
-        alert("Email: guodongggg@gmail.com")
+        function disp_alert(){
+        	alert("Email: guodongggg@gmail.com");
         }
-    </script>
+	</script>
 </head>
 <body>
 <ul>
@@ -43,12 +42,8 @@
 			{% if i.name=='沪深300' or i.name=='上证指数' %}
 				<td>{{i.name}}</td>
 				<td>{{i.price}}</td>
-				<td>{{i.priceChange}}</td>
-				{% if i.changePercent|float > 0 %}
-					<td style='color:red'>{{i.changePercent}}%</td>
-				{% else %}
-					<td style='color:green'>{{i.changePercent}}%</td>
-				{% endif %}
+				<td >{{i.priceChange}}</td>
+				<td class="num">{{i.changePercent}}%</td>
 				<td>{{i.date}}</td>
 			{% endif %}
 		</tr>
@@ -59,11 +54,7 @@
 			<td>
 				<a href="/xalpha_all_td"  style='color: #666;text-decoration: none;' target="_blank">整体持仓表格</a>
 			</td>
-			{% if average|float > 0 %}
-				<td style='color:red'>{{average}}%</td>
-			{% else %}
-				<td style='color:green'>{{average}}%</td>
-			{% endif %}	
+			<td class="num">{{average}}%</td>
 			<td>
 				<a href="/xalpha_all"  style='color: #666;text-decoration: none;' target="_blank">整体持仓概览</a>
 			</td>
@@ -90,26 +81,10 @@
 		<tr>
 			<td>{{i.name}}</td>
 			<td>{{i.code}}</td>
-			{% if i.expectGrowth|float > 0 %}
-				<td style='color:red'>{{i.expectGrowth}}%</td>
-			{% else %}
-				<td style='color:green'>{{i.expectGrowth}}%</td>
-			{% endif %}
-			{% if i.lastWeekGrowth|float > 0 %}
-				<td style='color:red'>{{i.lastWeekGrowth|float|round(2)}}%</td>
-			{% else %}
-				<td style='color:green'>{{i.lastWeekGrowth|float|round(2)}}%</td>
-			{% endif %}	
-			{% if i.lastMonthGrowth|float > 0 %}
-				<td style='color:red'>{{i.lastMonthGrowth}}%</td>
-			{% else %}
-				<td style='color:green'>{{i.lastMonthGrowth}}%</td>
-			{% endif %}		
-			{% if i.lastThreeMonthsGrowth|float > 0 %}
-				<td style='color:red'>{{i.lastThreeMonthsGrowth}}%</td>
-			{% else %}
-				<td style='color:green'>{{i.lastThreeMonthsGrowth}}%</td>
-			{% endif %}
+			<td class="num">{{i.expectGrowth}}%</td>
+			<td class="num">{{i.lastWeekGrowth|float|round(2)}}%</td>
+			<td class="num">{{i.lastMonthGrowth}}%</td>
+			<td class="num">{{i.lastThreeMonthsGrowth}}%</td>
 			<td>
 				<a href="/{{i.code}}/xalpha_cccb" style='color: #666;text-decoration: none;' target="_blank">图例</a>
 			</td>
@@ -122,6 +97,7 @@
 		</tr>
 	{% endfor %}
 </table>
+<script src="{{url_for('static',filename='redorgreen.js')}}"></script>
 </body>
 </html>
 
