@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='table.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='banner.css')}}">
 	<link rel="icon" href="{{url_for('static', filename='title.ico')}}">
-	<script src="{{url_for('static',filename='time.js')}}"></script>
+	<script src="{{url_for('static',filename='jquery.min.js')}}"></script>
 </head>
 <body>
 <ul>
@@ -93,10 +93,11 @@
 		</tr>
 	{% endfor %}
 </table>
-<script src="https://www.usd-cny.com/btc/b.js"></script>
-<script src="{{url_for('static',filename='redorgreen.js')}}"></script>
-<script src="{{url_for('static',filename='btc.js')}}"></script>
-<script src="{{url_for('static',filename='mail.js')}}"></script>
+	<script src="https://www.usd-cny.com/btc/b.js"></script>
+	<script src="{{url_for('static',filename='time.js')}}"></script>
+	<script src="{{url_for('static',filename='redorgreen.js')}}"></script>
+	<script src="{{url_for('static',filename='mail.js')}}"></script>
+	<script src="{{url_for('static',filename='btc.js')}}"></script>
 </body>
 </html>
 
