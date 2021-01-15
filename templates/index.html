@@ -7,11 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='banner.css')}}">
 	<link rel="icon" href="{{url_for('static', filename='title.ico')}}">
 	<script src="{{url_for('static',filename='time.js')}}"></script>
-    <script type="text/javascript">
-        function disp_alert(){
-        	alert("Email: guodongggg@gmail.com");
-        }
-	</script>
 </head>
 <body>
 <ul>
@@ -22,7 +17,8 @@
   	<li><a href="/zuanbuwan" target='_blank'>赚不完</a></li>
   	<li><a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAAJvmsqH2zTvKzjTFv_xp_Wj38S6gPDBSenHR8HxtMaFE/" target='_blank'>一哥</a></li>
   	<li><a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAAPO6FCp8uw8vqMs-AB59SF5qtdtR2zM2VBatBA1fxOrs/" target='_blank'> 大V指数</a></li>
-	<li><a href="https://price.btcfans.com/price/bitcoin" target="_blank">BTC:{{btc_value}}</a></li>
+<!--	<li><a href="https://price.btcfans.com/price/bitcoin" target="_blank">BTC:{{btc_value}}</a></li>-->
+	<li ><a id="btc" href="https://price.btcfans.com/price/bitcoin" target="_blank"></a></li>
   	<li style="float:right" id="time"></li>
 </ul>
 <table>
@@ -49,7 +45,7 @@
 		</tr>
 	{% endfor %}
 		<tr>
-			<td>总持仓涨幅</td>
+			<td>总持仓</td>
 			<td>-</td>
 			<td>
 				<a href="/xalpha_all_td"  style='color: #666;text-decoration: none;' target="_blank">整体持仓表格</a>
@@ -97,7 +93,10 @@
 		</tr>
 	{% endfor %}
 </table>
+<script src="https://www.usd-cny.com/btc/b.js"></script>
 <script src="{{url_for('static',filename='redorgreen.js')}}"></script>
+<script src="{{url_for('static',filename='btc.js')}}"></script>
+<script src="{{url_for('static',filename='mail.js')}}"></script>
 </body>
 </html>
 

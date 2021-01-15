@@ -29,11 +29,12 @@ def haoym_detail(post_id):
 
 @app.route('/')
 def fund():
-    try:
-        btc_value = btc.btc()
-    except Exception as e:
-        print(e)
-        btc_value = None
+    # 直接通过JavaScript获取btc的值
+    # try:
+    #     btc_value = btc.btc()
+    # except Exception as e:
+    #     print(e)
+    #     btc_value = None
     with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
         code_list = json_data['product']
@@ -56,7 +57,7 @@ def fund():
         'board': board,
         'detail': detail,
         'average': average,
-        'btc_value': btc_value
+        # 'btc_value': btc_value
     }
     return render_template('index.html', **context)
 
