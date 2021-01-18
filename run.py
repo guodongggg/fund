@@ -97,7 +97,7 @@ def xalpha_all():
     v_position_all = sysopen.v_category_positions()  # 仓位饼状图（大类）
     v_position_history = sysopen.v_positions_history()  # 仓位水流图
     all_trade = sysopen.v_tradevolume(freq='W')  # 整体交易坐标图
-    sysclose = xa.mulfix(*sysopen.fundtradeobj, totmoney=50000)
+    sysclose = xa.mulfix(*sysopen.fundtradeobj, totmoney=70000)
     sysclose.bcmkset(xa.indexinfo('1399300'))  # 设置比较基准，开始对此封闭的基金投资系统进行量化评估 首位0
     close_netvalue = sysclose.v_netvalue()  # 基金组合与基准比较收益图
     max_drawdown = sysclose.max_drawdown()  # 最大回撤
