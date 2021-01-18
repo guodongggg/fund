@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-
+# https://github.com/dataabc/weibo-crawler
 import codecs
 import copy
 import csv
@@ -40,6 +40,7 @@ class Weibo(object):
             since_date = date.today() - timedelta(since_date)
         since_date = str(since_date)
         self.since_date = since_date  # 起始时间，即爬取发布日期从该值到现在的微博，形式为yyyy-mm-dd
+        self.start_page = config.get('start_page', 1)  # 开始爬的页，如果中途被限制而结束可以用此定义开始页码
         self.write_mode = config[
             'write_mode']  # 结果信息保存类型，为list形式，可包含csv、mongo和mysql三种类型
         self.original_pic_download = config[
@@ -57,7 +58,7 @@ class Weibo(object):
         self.headers = {'User_Agent': user_agent, 'Cookie': cookie}
         self.mysql_config = config.get('mysql_config')  # MySQL数据库连接配置，可以不填
         user_id_list = config['user_id_list']
-        query_list = config.get('query_list') or [];
+        query_list = config.get('query_list') or []
         if isinstance(query_list, str):
             query_list = query_list.split(',')
         self.query_list = query_list
@@ -155,11 +156,12 @@ class Weibo(object):
     def get_weibo_json(self, page):
         """获取网页中微博json数据"""
         params = {
-                'container_ext': 'profile_uid:' + str(self.user_config['user_id']),
-                'containerid': '100103type=401&q=' + self.query,
-                'page_type': 'searchall'
-                } if self.query else {
-                        'containerid': '107603' + str(self.user_config['user_id'])}
+            'container_ext': 'profile_uid:' + str(self.user_config['user_id']),
+            'containerid': '100103type=401&q=' + self.query,
+            'page_type': 'searchall'
+        } if self.query else {
+            'containerid': '107603' + str(self.user_config['user_id'])
+        }
         params['page'] = page
         js = self.get_json(params)
         return js
@@ -233,7 +235,7 @@ class Weibo(object):
 
     def user_to_database(self):
         """将用户信息写入文件/数据库"""
-        # self.user_to_csv() # 不需要用户信息
+        self.user_to_csv()
         if 'mysql' in self.write_mode:
             self.user_to_mysql()
         if 'mongo' in self.write_mode:
@@ -359,12 +361,14 @@ class Weibo(object):
                 s = requests.Session()
                 s.mount(url, HTTPAdapter(max_retries=5))
                 flag = True
-                while flag:
+                try_count = 0
+                while flag and try_count < 5:
                     flag = False
                     downloaded = s.get(url,
                                        headers=self.headers,
                                        timeout=(5, 10),
                                        verify=False)
+                    try_count += 1
                     if (url.endswith(('jpg', 'jpeg'))
                             and not downloaded.content.endswith(b'\xff\xd9')
                         ) or (url.endswith('png') and
@@ -526,9 +530,10 @@ class Weibo(object):
         elif u'昨天' in created_at:
             day = timedelta(days=1)
             created_at = (datetime.now() - day).strftime('%Y-%m-%d')
-        elif created_at.count('-') == 1:
-            year = datetime.now().strftime('%Y')
-            created_at = year + '-' + created_at
+        else:
+            created_at = created_at.replace('+0800 ', '')
+            temp = datetime.strptime(created_at, '%c')
+            created_at = datetime.strftime(temp, '%Y-%m-%d')
         return created_at
 
     def standardize_info(self, weibo):
@@ -576,21 +581,21 @@ class Weibo(object):
         logger.info(u'用户信息')
         logger.info(u'用户id：%s', self.user['id'])
         logger.info(u'用户昵称：%s', self.user['screen_name'])
-        gender = u'女' if self.user['gender'] == 'f' else u'男'
-        logger.info(u'性别：%s', gender)
-        logger.info(u'生日：%s', self.user['birthday'])
-        logger.info(u'所在地：%s', self.user['location'])
-        logger.info(u'教育经历：%s', self.user['education'])
-        logger.info(u'公司：%s', self.user['company'])
-        logger.info(u'阳光信用：%s', self.user['sunshine'])
-        logger.info(u'注册时间：%s', self.user['registration_time'])
-        logger.info(u'微博数：%d', self.user['statuses_count'])
-        logger.info(u'粉丝数：%d', self.user['followers_count'])
-        logger.info(u'关注数：%d', self.user['follow_count'])
-        logger.info(u'url：https://m.weibo.cn/profile/%s', self.user['id'])
-        if self.user.get('verified_reason'):
-            logger.info(self.user['verified_reason'])
-        logger.info(self.user['description'])
+        # gender = u'女' if self.user['gender'] == 'f' else u'男'
+        # logger.info(u'性别：%s', gender)
+        # logger.info(u'生日：%s', self.user['birthday'])
+        # logger.info(u'所在地：%s', self.user['location'])
+        # logger.info(u'教育经历：%s', self.user['education'])
+        # logger.info(u'公司：%s', self.user['company'])
+        # logger.info(u'阳光信用：%s', self.user['sunshine'])
+        # logger.info(u'注册时间：%s', self.user['registration_time'])
+        # logger.info(u'微博数：%d', self.user['statuses_count'])
+        # logger.info(u'粉丝数：%d', self.user['followers_count'])
+        # logger.info(u'关注数：%d', self.user['follow_count'])
+        # logger.info(u'url：https://m.weibo.cn/profile/%s', self.user['id'])
+        # if self.user.get('verified_reason'):
+        #     logger.info(self.user['verified_reason'])
+        # logger.info(self.user['description'])
         logger.info('+' * 100)
 
     def print_one_weibo(self, weibo):
@@ -607,7 +612,7 @@ class Weibo(object):
             # logger.info(u'转发数：%d', weibo['reposts_count'])
             # logger.info(u'话题：%s', weibo['topics'])
             # logger.info(u'@用户：%s', weibo['at_users'])
-            # logger.info(u'url：https://m.weibo.cn/detail/%d', weibo['id'])
+            logger.info(u'url：https://m.weibo.cn/detail/%d', weibo['id'])
         except OSError:
             pass
 
@@ -692,9 +697,13 @@ class Weibo(object):
                                 if self.is_pinned_weibo(w):
                                     continue
                                 else:
-                                    logger.info(u'{}已获取{}({})的第{}页{}微博{}'.format(
-                                        '-' * 30, self.user['screen_name'],
-                                        self.user['id'], page, '包含"' + self.query + '"的' if self.query else '', '-' * 30))
+                                    logger.info(
+                                        u'{}已获取{}({})的第{}页{}微博{}'.format(
+                                            '-' * 30, self.user['screen_name'],
+                                            self.user['id'], page,
+                                            '包含"' + self.query +
+                                            '"的' if self.query else '',
+                                            '-' * 30))
                                     return True
                             if (not self.filter) or (
                                     'retweet' not in wb.keys()):
@@ -1059,7 +1068,7 @@ class Weibo(object):
         """获取全部微博"""
         try:
             self.get_user_info()
-            #self.print_user_info()
+            self.print_user_info()
             since_date = datetime.strptime(self.user_config['since_date'],
                                            '%Y-%m-%d')
             today = datetime.strptime(str(date.today()), '%Y-%m-%d')
@@ -1069,7 +1078,8 @@ class Weibo(object):
                 page1 = 0
                 random_pages = random.randint(1, 5)
                 self.start_date = datetime.now().strftime('%Y-%m-%d')
-                for page in tqdm(range(1, page_count + 1), desc='Progress'):
+                pages = range(self.start_page, page_count + 1)
+                for page in tqdm(pages, desc='Progress'):
                     is_end = self.get_one_page(page)
                     if is_end:
                         break
