@@ -22,12 +22,14 @@ class FundGrapper:
         print(data)
         return data
 
-    def grabHistoryData(self, code):
-        # startDate = "2020-9-1"
-        # endDate = "2020-12-2"
-        date = self.threeMonth()
-        startDate = date['threeMonthAgo']
-        endDate = date['todayTime']
+    def grabHistoryData(self, code, gui):
+        if gui:
+            startDate = "2020-9-10"
+            endDate = "2020-12-25"
+        else:
+            date = self.threeMonth()
+            startDate = date['threeMonthAgo']
+            endDate = date['todayTime']
         try:
             r = requests.get("https://api.doctorxiong.club/v1/fund/detail?code=" + code + "&startDate=" + startDate + "&endDate=" + endDate)
             value = json.loads(r.text)
@@ -46,7 +48,7 @@ class FundGrapper:
             return ''
 
     def run(self, code, gui):
-        if gui is False:
+        if not gui:
             import matplotlib
             matplotlib.use('Agg')
         from matplotlib import pyplot as plt
@@ -57,7 +59,7 @@ class FundGrapper:
         #fundGrapper = FundGrapper()
 
         #code = "004070"
-        netWorthData = self.grabHistoryData(code)
+        netWorthData = self.grabHistoryData(code, gui)
         runtimeData = self.grabRuntimeData(code)
         assert netWorthData and runtimeData
         netWorthArray = np.array(netWorthData)
@@ -101,7 +103,7 @@ class FundGrapper:
         # 图例
         plt.legend(labels=['净值', '最小值', '最小值回归', '平均值回归'], prop=font)
         plt.grid = True
-        if gui is True:
+        if gui:
             # 显性展示
             plt.show()
             return print('显示图片')
@@ -118,4 +120,4 @@ class FundGrapper:
 
 if __name__ == '__main__':
     fundGrapper = FundGrapper()
-    data = fundGrapper.run('001102', gui=True)
+    data = fundGrapper.run('005827', gui=True)
