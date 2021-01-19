@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import fund_base
 from api import API
 import fund_howbuy
@@ -158,6 +158,15 @@ def zuanbuwan(showall=False):
     if not showall:
         sort_list = sort_list[:10]
     return render_template('zuanbuwan.html', weibo_data=sort_list)
+
+
+# @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
+# def test_post():
+#     # print('method'+request.values['method']+'text:'+request.values['text'])
+#     d1 = request.args.get('method')
+#     d2 = request.args.get('text')
+#     d = d1+"AND"+d2
+#     return "success!:"+d
 
 
 if __name__ == '__main__':

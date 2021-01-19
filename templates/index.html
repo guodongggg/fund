@@ -93,11 +93,29 @@
 		</tr>
 	{% endfor %}
 </table>
+<!--<p id="ttt">12345</p>-->
+<button type="button" onclick="test()">click</button>
 	<script src="https://www.usd-cny.com/btc/b.js"></script>
 	<script src="{{url_for('static',filename='time.js')}}"></script>
 	<script src="{{url_for('static',filename='redorgreen.js')}}"></script>
 	<script src="{{url_for('static',filename='mail.js')}}"></script>
 	<script src="{{url_for('static',filename='btc.js')}}"></script>
+ 	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<!--    <script>-->
+<!--	function test(){-->
+<!--		var word = $('#ttt')-->
+<!--		console.log(word)-->
+<!--		$.get('/test_post/',{-->
+<!--			'method': 'GET',-->
+<!--			'text': word.text()-->
+<!--		},-->
+<!--		function(data){-->
+<!--			console.log(data)-->
+<!--			alert(data)-->
+<!--			word.text(data)-->
+<!--		})-->
+<!--	}-->
+<!--    </script>-->
 </body>
 </html>
 
