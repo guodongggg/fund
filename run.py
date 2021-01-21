@@ -48,6 +48,10 @@ def fund():
     if not board:
         app.logger.warning("howbuy接口取大盘详情")
         board = fund_howbuy.stock()
+
+    mogen_fund = fund_howbuy.asyncio_(['968061']) # 手动添加摩根太平洋科技
+    detail.insert(0, mogen_fund[0])
+
     app.logger.info('--board--: ')
     app.logger.info(board)
     app.logger.info('--detail--: ')
