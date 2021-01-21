@@ -4,7 +4,6 @@ from api import API
 import fund_howbuy
 import average_growth
 import json
-import btc
 
 app = Flask(__name__)
 
@@ -65,9 +64,8 @@ def fund():
 @app.route('/<code>/xxhg')
 def test(code):  # 线性回归
     import xxhg
-    fundGrapper = xxhg.FundGrapper()
-    # data = fundGrapper.run('004070')
-    data = fundGrapper.run(code, gui=False)
+    fund_grapper = xxhg.FundGrapper()
+    data = fund_grapper.run(code, gui=False)
     return render_template('xxhg_pic.html', data=data, code=code)
 
 
@@ -86,7 +84,6 @@ def xalpha_cccb(code):  # 持仓成本
 @app.route('/xalpha_all')
 def xalpha_all():
     import xalpha as xa
-    import pandas as pd
     xa.set_display("notebook")
     path = 'file/new.csv'
     read = xa.record(path)
