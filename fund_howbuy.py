@@ -91,7 +91,7 @@ if __name__ == '__main__':
     s_time = time.time()
     with open('file/code_list.json', 'r') as f:
         json_data = json.load(f)
-        code_list = json_data['test']   
+        code_list = list(json_data['test'].keys())
     data = asyncio_(code_list)
     for i in data:
         print(i)

@@ -30,13 +30,13 @@ def average_growth(fund_data_list, real=False):
     #     '004070': 0.05,  # 南方全指证券联接C
     #     'nasdaq100': 0.27  # 纳斯达克100
     #     }
-    with open('file/code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
-        fund_percent = json_data['percent']
+        prod_data = json_data['product']
     if not real:
-        list_ = [float(x['expectGrowth'])*fund_percent[x['code']] for x in fund_data_list if x['code'] in list(fund_percent.keys())]
+        list_ = [float(x['expectGrowth'])*prod_data[x['code']]['percent'] for x in fund_data_list if x['code'] in list(prod_data.keys())]
     else:
-        list_ = [float(x['dayGrowth']) * fund_percent[x['code']] for x in fund_data_list if x['code'] in list(fund_percent.keys())]
+        list_ = [float(x['dayGrowth']) * prod_data[x['code']]['percent'] for x in fund_data_list if x['code'] in list(prod_data.keys())]
     # or list_ = list(map(lambda x: float(x['expectGrowth'])*fund_precentage[x['code']], fund_data_list))
     # print(list_)
     total = round(sum(list_), 2)
@@ -44,9 +44,9 @@ def average_growth(fund_data_list, real=False):
 
 
 if __name__ == '__main__':
-    with open('file/code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
-        code_list = json_data['product']
+        code_list = list(json_data['test'].keys())
     detail = fund_base.BaseInfo(code_list)
     board = fund_base.stock_board()
     if not detail:
