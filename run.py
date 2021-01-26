@@ -42,16 +42,16 @@ def fund():
     if not detail:
         app.logger.warning("howbuy接口取基金详情")
         detail = fund_howbuy.asyncio_(code_list)
-    average = average_growth.average_growth(detail)  # 注意：此处调用将nasdaq的自定义数据加入到了detail列表中
+
+    mogen_fund = fund_howbuy.asyncio_(['968061'])  # 手动添加摩根太平洋科技
+    detail.insert(0, mogen_fund[0])
+
+    average = average_growth.average_growth(detail)
     app.logger.info('--average--: ')
     app.logger.info(average)
     if not board:
         app.logger.warning("howbuy接口取大盘详情")
         board = fund_howbuy.stock()
-
-    mogen_fund = fund_howbuy.asyncio_(['968061'])  # 手动添加摩根太平洋科技
-    detail.insert(0, mogen_fund[0])
-
     app.logger.info('--board--: ')
     app.logger.info(board)
     app.logger.info('--detail--: ')
