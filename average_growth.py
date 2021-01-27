@@ -1,6 +1,5 @@
 import fund_base
 import fund_howbuy
-import nasdaq
 import json
 
 
@@ -33,7 +32,7 @@ if __name__ == '__main__':
     board = fund_base.stock_board()
     if not detail:
         detail = fund_howbuy.asyncio_(code_list)
-    average = average_growth(detail)  # 注意：此处调用会将nasdaq字典的自定义数据加入到了detail列表中
+    average = average_growth(detail)
     if not board:
         board = fund_howbuy.stock()
     for i in detail:
