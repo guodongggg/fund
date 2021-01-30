@@ -17,7 +17,11 @@ async def ratio(code):
         async with session.request("GET", url=url_ratio) as resp:
             r = await resp.text()
             html = etree.HTML(r)
-            expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
+            try:
+                expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
+            except AttributeError as e:
+                print(f'当前值无估值:{e}')
+                expect_growth = '0.00'
             # print(expect_growth)
             ratio_data = {'expectGrowth': expect_growth.replace('%', '')}
             # print(ratio_data)

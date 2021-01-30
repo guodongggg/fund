@@ -6,12 +6,16 @@ function redorgreen(){
             if (value > 0){
                 this.style.color = 'red';
             }
-            else {
+            else if (value < 0){
                 this.style.color = 'green';
+            }
+            else{
+                this.textContent = '无估值';
+                this.style.color = '#666';
             }
         }
         else{
-            this.innerText = '无估值';
+            this.textContent = '无估值';
             this.style.color = '#666';
         }
     })
