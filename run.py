@@ -36,15 +36,19 @@ def fund():
     #     btc_value = None
     with open('file/code_list.json', 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
-        code_list = list(json_data['product'].keys())
-    detail = fund_base.BaseInfo(code_list)
-    board = fund_base.stock_board()
-    if not detail:
-        app.logger.warning("howbuy接口取基金详情")
+        code_list = list(json_data['product'].keys()) + list(json_data['others'].keys())
+    board = ''
+    try:
+        detail = fund_base.BaseInfo(code_list)
+        board = fund_base.stock_board()
+        if not detail:
+            app.logger.warning("howbuy接口取基金详情")
+            detail = fund_howbuy.asyncio_(code_list)
+        # 手动添加摩根太平洋科技
+        mogen_fund = fund_howbuy.asyncio_(['968061'])
+        detail.insert(0, mogen_fund[0])
+    except:
         detail = fund_howbuy.asyncio_(code_list)
-
-    mogen_fund = fund_howbuy.asyncio_(['968061'])  # 手动添加摩根太平洋科技
-    detail.insert(0, mogen_fund[0])
 
     average = average_growth.average_growth(detail)
     app.logger.info('--average--: ')
@@ -66,7 +70,7 @@ def fund():
 
 
 @app.route('/<code>/xxhg')
-def test(code):  # 线性回归
+def xxhg(code):  # 线性回归
     import xxhg
     fund_grapper = xxhg.FundGrapper()
     data = fund_grapper.run(code, gui=False)

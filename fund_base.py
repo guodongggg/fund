@@ -18,10 +18,14 @@ def XiongAPI(url, code=None):
         print("XiongAPI error:", e)
         return {}
     result = response.json()
-    if result['code'] != 200:
-        raise Exception("API接口数据异常：" + response.text)
-    else:
-        return result
+    try:
+        if result['code'] != 200:
+            raise Exception("API接口数据异常：" + response.text)
+        else:
+            print('result:', result)
+            return result
+    except Exception:
+        raise Exception("API接口异常")
 
 
 def BaseInfo(code):
@@ -32,7 +36,10 @@ def BaseInfo(code):
     """
     code = ','.join(code)
     url = 'https://api.doctorxiong.club/v1/fund'
-    return XiongAPI(url, code).get('data', [])
+    try:
+        return XiongAPI(url, code).get('data', [])
+    except Exception:
+        raise Exception("API接口异常,无法调用基金基础信息")
 
 
 def stock_board():
@@ -41,11 +48,14 @@ def stock_board():
     :return: dict
     """
     url = 'https://api.doctorxiong.club/v1/stock/board'
-    return XiongAPI(url).get('data', [])
+    try:
+        return XiongAPI(url).get('data', [])
+    except Exception:
+        raise Exception("API接口异常，无法调用大盘基础信息")
 
 
 if __name__ == '__main__':
-    with open('file/code_list.json', 'r') as f:
+    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
         code_list = list(json_data['test'].keys())
     fundDetail = BaseInfo(code_list)
