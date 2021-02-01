@@ -32,6 +32,8 @@ if __name__ == '__main__':
     board = fund_base.stock_board()
     if not detail:
         detail = fund_howbuy.asyncio_(code_list)
+    mogen_fund = fund_howbuy.asyncio_(['968061'])  # 手动添加摩根太平洋科技
+    detail.insert(0, mogen_fund[0])
     average = average_growth(detail)
     if not board:
         board = fund_howbuy.stock()
