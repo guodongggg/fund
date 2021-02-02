@@ -18,7 +18,7 @@ def average_growth(fund_data_list, real=False):
     else:
         list_ = [float(x['dayGrowth']) * prod_data[x['code']]['percent'] for x in fund_data_list if x['code'] in list(prod_data.keys())]
     # or list_ = list(map(lambda x: float(x['expectGrowth'])*fund_precentage[x['code']], fund_data_list))
-    print(list_)
+    # print(list_)
     total = round(sum(list_), 2)
     return total
 
@@ -28,20 +28,25 @@ if __name__ == '__main__':
         json_data = json.load(f)
         code_list = list(json_data['product'].keys())
     detail = fund_base.BaseInfo(code_list)
-
     board = fund_base.stock_board()
     if not detail:
         detail = fund_howbuy.asyncio_(code_list)
-    mogen_fund = fund_howbuy.asyncio_(['968061'])  # 手动添加摩根太平洋科技
+    # 手动添加摩根太平洋科技
+    import mogen
+    mogen_pro = mogen.get_mogent()
+    mogen_fund = fund_howbuy.asyncio_(['968061'])
+    mogen_fund[0]['dayGrowth'] = mogen_pro['dayGrowth']
+    mogen_fund[0]['expectGrowth'] = mogen_pro['expectGrowth']
     detail.insert(0, mogen_fund[0])
+
     average = average_growth(detail)
     if not board:
         board = fund_howbuy.stock()
     for i in detail:
         print(f"{i['name']} {i['code']} 实时估值：{i['expectGrowth']}%")
     print('---------------')
-    # for i in board:
-    #     if i['name'] == '上证指数' or i['name'] == '沪深300':
-    #         print(f"{i['name']}: {i['changePercent']}%")
-    # print('---------------')
+    for i in board:
+        if i['name'] == '上证指数' or i['name'] == '沪深300':
+            print(f"{i['name']}: {i['changePercent']}%")
+    print('---------------')
     print('平均涨幅', average, '%')

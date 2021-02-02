@@ -22,7 +22,7 @@ def XiongAPI(url, code=None):
         if result['code'] != 200:
             raise Exception("API接口数据异常：" + response.text)
         else:
-            print('result:', result)
+            # print('result:', result)
             return result
     except Exception:
         raise Exception("API接口异常")
