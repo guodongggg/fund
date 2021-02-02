@@ -44,22 +44,24 @@ def fund():
         if not detail:
             app.logger.warning("howbuy接口取基金详情")
             detail = fund_howbuy.asyncio_(code_list)
-        # 手动添加摩根太平洋科技
-        mogen_fund = fund_howbuy.asyncio_(['968061'])
-        detail.insert(0, mogen_fund[0])
     except:
         detail = fund_howbuy.asyncio_(code_list)
 
+    # 手动添加摩根太平洋科技
+    import mogen
+    mogen_pro = mogen.get_mogent()
+    mogen_fund = fund_howbuy.asyncio_(['968061'])
+    mogen_fund[0]['dayGrowth'] = mogen_pro['dayGrowth']
+    mogen_fund[0]['expectGrowth'] = mogen_pro['expectGrowth']
+    detail.insert(0, mogen_fund[0])
+
     average = average_growth.average_growth(detail)
-    app.logger.info('--average--: ')
-    app.logger.info(average)
+    app.logger.info(f'--average--:{average}')
     if not board:
         app.logger.warning("howbuy接口取大盘详情")
         board = fund_howbuy.stock()
-    app.logger.info('--board--: ')
-    app.logger.info(board)
-    app.logger.info('--detail--: ')
-    app.logger.info(detail)
+    app.logger.info(f'--board--:{board}')
+    app.logger.info(f'--detail--:{detail}')
     context = {
         'board': board,
         'detail': detail,
