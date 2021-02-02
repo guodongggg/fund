@@ -710,7 +710,7 @@ class Weibo(object):
                                 self.weibo.append(wb)
                                 self.weibo_id_list.append(wb['id'])
                                 self.got_count += 1
-                                self.print_weibo(wb)
+                                #self.print_weibo(wb)
                             else:
                                 logger.info(u'正在过滤转发微博')
             else:
@@ -1068,7 +1068,7 @@ class Weibo(object):
         """获取全部微博"""
         try:
             self.get_user_info()
-            self.print_user_info()
+            #self.print_user_info()
             since_date = datetime.strptime(self.user_config['since_date'],
                                            '%Y-%m-%d')
             today = datetime.strptime(str(date.today()), '%Y-%m-%d')
