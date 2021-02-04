@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from api import API
 import average_growth
-from get_codelist import get_codelist
+from common import get_codelist
 import choose_api
 
 app = Flask(__name__)

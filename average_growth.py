@@ -1,6 +1,6 @@
 import json
 import choose_api
-from get_codelist import get_codelist
+from common import get_codelist
 
 def average_growth(fund_data_list, real=False):
     """

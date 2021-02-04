@@ -1,6 +1,6 @@
 import fund_base
 import fund_howbuy
-from get_codelist import get_codelist
+from common import get_codelist
 
 
 def choose_api(code_list):

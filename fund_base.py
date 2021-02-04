@@ -1,5 +1,5 @@
 import requests
-from get_codelist import get_codelist
+from common import get_codelist
 
 
 def XiongAPI(url, code=None):

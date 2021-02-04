@@ -1,7 +1,7 @@
 from lxml import etree
 import asyncio
 import aiohttp
-from get_codelist import get_codelist
+from common import get_codelist
 
 
 async def ratio(code):
