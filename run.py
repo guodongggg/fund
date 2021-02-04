@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from api import API
 import average_growth
-import json
+from get_codelist import get_codelist
 import choose_api
 
 app = Flask(__name__)
@@ -27,16 +27,14 @@ def haoym_detail(post_id):
 
 @app.route('/')
 def fund():
-    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
-        json_data = json.load(f)
-        code_list = list(json_data['product'].keys()) + list(json_data['others'].keys())
+    code_list = get_codelist('product')
     data = choose_api.choose_api(code_list)
     detail = data['detail']
     board = data['board']
     average = average_growth.average_growth(detail)
-    app.logger.info(f'--board--:{board}')
-    app.logger.info(f'--detail--:{detail}')
-    app.logger.info(f'--average--:{average}')
+    app.logger.debug(f'--board--:{board}')
+    app.logger.debug(f'--detail--:{detail}')
+    app.logger.debug(f'--average--:{average}')
     context = {
         'board': board,
         'detail': detail,

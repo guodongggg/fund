@@ -1,5 +1,5 @@
 import requests
-import json
+from get_codelist import get_codelist
 
 
 def XiongAPI(url, code=None):
@@ -55,9 +55,7 @@ def stock_board():
 
 
 if __name__ == '__main__':
-    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
-        json_data = json.load(f)
-        code_list = list(json_data['test'].keys())
+    code_list = get_codelist('test')
     fundDetail = BaseInfo(code_list)
     board = stock_board()
     for i in board:

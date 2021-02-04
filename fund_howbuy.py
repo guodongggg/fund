@@ -1,7 +1,7 @@
 from lxml import etree
 import asyncio
 import aiohttp
-import json
+from get_codelist import get_codelist
 
 
 async def ratio(code):
@@ -105,9 +105,7 @@ def asyncio_(code_list):
 if __name__ == '__main__':
     import time
     s_time = time.time()
-    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
-        json_data = json.load(f)
-        code_list = list(json_data['test'].keys())
+    code_list = get_codelist('test')
     data = asyncio_(code_list)
     for i in data:
         print(i)

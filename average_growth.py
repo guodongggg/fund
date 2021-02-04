@@ -1,5 +1,6 @@
 import json
-
+import choose_api
+from get_codelist import get_codelist
 
 def average_growth(fund_data_list, real=False):
     """
@@ -22,10 +23,7 @@ def average_growth(fund_data_list, real=False):
 
 
 if __name__ == '__main__':
-    import choose_api
-    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
-        json_data = json.load(f)
-        code_list = list(json_data['product'].keys())
+    code_list = get_codelist('product')
     data = choose_api.choose_api(code_list)
     detail = data['detail']
     board = data['board']
