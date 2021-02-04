@@ -1,5 +1,3 @@
-import fund_base
-import fund_howbuy
 import json
 
 
@@ -24,24 +22,15 @@ def average_growth(fund_data_list, real=False):
 
 
 if __name__ == '__main__':
+    import choose_api
     with open('file/code_list.json', 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
         code_list = list(json_data['product'].keys())
-    detail = fund_base.BaseInfo(code_list)
-    board = fund_base.stock_board()
-    if not detail:
-        detail = fund_howbuy.asyncio_(code_list)
-    # 手动添加摩根太平洋科技
-    import mogen
-    mogen_pro = mogen.get_mogent()
-    mogen_fund = fund_howbuy.asyncio_(['968061'])
-    mogen_fund[0]['dayGrowth'] = mogen_pro['dayGrowth']
-    mogen_fund[0]['expectGrowth'] = mogen_pro['expectGrowth']
-    detail.insert(0, mogen_fund[0])
-
+    data = choose_api.choose_api(code_list)
+    detail = data['detail']
+    board = data['board']
     average = average_growth(detail)
-    if not board:
-        board = fund_howbuy.stock()
+
     for i in detail:
         print(f"{i['name']} {i['code']} 实时估值：{i['expectGrowth']}%")
     print('---------------')

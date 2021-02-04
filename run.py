@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request
-import fund_base
 from api import API
-import fund_howbuy
 import average_growth
 import json
+import choose_api
 
 app = Flask(__name__)
 
@@ -28,40 +27,16 @@ def haoym_detail(post_id):
 
 @app.route('/')
 def fund():
-    # 直接通过JavaScript获取btc的值
-    # try:
-    #     btc_value = btc.btc()
-    # except Exception as e:
-    #     print(e)
-    #     btc_value = None
     with open('file/code_list.json', 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
         code_list = list(json_data['product'].keys()) + list(json_data['others'].keys())
-    board = ''
-    try:
-        detail = fund_base.BaseInfo(code_list)
-        board = fund_base.stock_board()
-        if not detail:
-            app.logger.warning("howbuy接口取基金详情")
-            detail = fund_howbuy.asyncio_(code_list)
-    except:
-        detail = fund_howbuy.asyncio_(code_list)
-
-    # 手动添加摩根太平洋科技
-    import mogen
-    mogen_pro = mogen.get_mogent()
-    mogen_fund = fund_howbuy.asyncio_(['968061'])
-    mogen_fund[0]['dayGrowth'] = mogen_pro['dayGrowth']
-    mogen_fund[0]['expectGrowth'] = mogen_pro['expectGrowth']
-    detail.insert(0, mogen_fund[0])
-
+    data = choose_api.choose_api(code_list)
+    detail = data['detail']
+    board = data['board']
     average = average_growth.average_growth(detail)
-    app.logger.info(f'--average--:{average}')
-    if not board:
-        app.logger.warning("howbuy接口取大盘详情")
-        board = fund_howbuy.stock()
     app.logger.info(f'--board--:{board}')
     app.logger.info(f'--detail--:{detail}')
+    app.logger.info(f'--average--:{average}')
     context = {
         'board': board,
         'detail': detail,
