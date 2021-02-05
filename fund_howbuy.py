@@ -99,7 +99,7 @@ def asyncio_(code_list):
                     i['expectGrowth'] = mogen_pro['expectGrowth']
                     i['dayGrowth'] = mogen_pro['dayGrowth']
         except:
-            print('摩根高精度预估出错，切换为howbuy普通预估值')
+            print('***摩根高精度估值请求超时，切换为普通估值***')
     return return_data
 
 

@@ -27,8 +27,7 @@ def average_growth(fund_data_list, real=False):
 if __name__ == '__main__':
     code_list = get_codelist('product')
     data = choose_api.choose_api(code_list)
-    detail = data['detail']
-    board = data['board']
+    detail, board = data['detail'], data['board']
     average = average_growth(detail)
 
     print('-' * 50)
