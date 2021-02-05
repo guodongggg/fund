@@ -3,6 +3,7 @@ from api import API
 import average_growth
 from common import get_codelist
 import choose_api
+import json
 
 app = Flask(__name__)
 

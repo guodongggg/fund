@@ -87,18 +87,19 @@ def asyncio_(code_list):
     for i in tasks:
         return_data.append(i.result())
     loop.close()
-    try:
-        # 特殊处理摩根基金
-        import mogen
-        mogen_code = '968061'
-        mogen_pro = mogen.get_mogen()
-        if isinstance(mogen_pro, dict) and mogen_code in code_list:
+
+    # 特殊处理摩根基金
+    mogen_code = '968061'
+    if mogen_code in code_list:
+        try:
+            import mogen
+            mogen_pro = mogen.get_mogen()
             for i in return_data:
                 if i['code'] == mogen_code:
                     i['expectGrowth'] = mogen_pro['expectGrowth']
                     i['dayGrowth'] = mogen_pro['dayGrowth']
-    except:
-        print('摩根高精度预估出错，切换为howbuy普通预估值')
+        except:
+            print('摩根高精度预估出错，切换为howbuy普通预估值')
     return return_data
 
 

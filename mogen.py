@@ -9,13 +9,15 @@ def get_mogen():
     """
     url = 'https://fund.laykefu.com/?chInfo=ch_share__chsub_CopyLink'
     try:
-        r = requests.get(url)
+        r = requests.get(url, timeout=5)
         html = etree.HTML(r.text)
         expectGrowth = html.xpath('//*[@id="updown"]/text()')[0].replace('%', '')[:4]
         dayGrowth = html.xpath('/html/body/section/section/div[1]/a[1]/h2/text()')[0].replace('%', '')[:4]
-        return {'expectGrowth': expectGrowth, 'dayGrowth': dayGrowth}
+        mogen_dict = {'expectGrowth': expectGrowth, 'dayGrowth': dayGrowth}
+        print(f'get mogen_pro success')
+        return mogen_dict
     except Exception:
-        raise Exception('摩根高精度预估出错')
+        raise Exception('get mogen_pro failed')
 
 
 if __name__ == '__main__':

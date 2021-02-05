@@ -19,7 +19,7 @@ class FundGrapper:
         t = (datetime.datetime.now() - datetime.timedelta(days))
         threeMonthAgo = t.strftime("%Y-%m-%d")
         data = {"todayTime": todayTime, "threeMonthAgo": threeMonthAgo}
-        print(data)
+        # print(data)
         return data
 
     def grabHistoryData(self, code, gui):

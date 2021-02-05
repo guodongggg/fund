@@ -31,11 +31,12 @@ if __name__ == '__main__':
     board = data['board']
     average = average_growth(detail)
 
+    print('-' * 50)
     for i in detail:
         print(f"{aligns(i['name'],18)} {i['code']}  估值：{i['expectGrowth']}%")
-    print('-'*20)
+    print('-'*50)
     for i in board:
         if i['name'] == '上证指数' or i['name'] == '沪深300':
             print(f"{i['name']}: {i['changePercent']}%")
-    print('-'*20)
+    print('-'*50)
     print('平均涨幅:', average, '%')
