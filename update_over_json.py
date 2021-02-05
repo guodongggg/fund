@@ -67,7 +67,6 @@ def over_time(code_list):
 
 
 if __name__ == '__main__':
-    with open('file/code_list.json', 'r') as f:
-        json_data = json.load(f)
-        code_list = json_data['product']
+    from common import get_codelist
+    code_list = get_codelist('product')
     over_time(code_list)

@@ -1,6 +1,8 @@
 import json
 import choose_api
 from common import get_codelist
+from common import aligns
+
 
 def average_growth(fund_data_list, real=False):
     """
@@ -30,10 +32,10 @@ if __name__ == '__main__':
     average = average_growth(detail)
 
     for i in detail:
-        print(f"{i['name']} {i['code']} 实时估值：{i['expectGrowth']}%")
-    print('---------------')
+        print(f"{aligns(i['name'],18)} {i['code']}  估值：{i['expectGrowth']}%")
+    print('-'*20)
     for i in board:
         if i['name'] == '上证指数' or i['name'] == '沪深300':
             print(f"{i['name']}: {i['changePercent']}%")
-    print('---------------')
-    print('平均涨幅', average, '%')
+    print('-'*20)
+    print('平均涨幅:', average, '%')
