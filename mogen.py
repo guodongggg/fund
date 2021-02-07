@@ -14,10 +14,10 @@ def get_mogen(timeout=5):
         expectGrowth = html.xpath('//*[@id="updown"]/text()')[0].replace('%', '')[:4]
         dayGrowth = html.xpath('/html/body/section/section/div[1]/a[1]/h2/text()')[0].replace('%', '')[:4]
         mogen_dict = {'expectGrowth': expectGrowth, 'dayGrowth': dayGrowth}
-        print(f'get mogen_pro success')
+        print(f'摩根高精度估值：获取成功')
         return mogen_dict
     except Exception:
-        raise Exception('get mogen_pro failed')
+        raise Exception('摩根高精度估值：获取超时')
 
 
 if __name__ == '__main__':

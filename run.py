@@ -29,6 +29,7 @@ def haoym_detail(post_id):
 @app.route('/')
 def fund():
     code_list = get_codelist('product')
+    # code_list_more = get_codelist('others')
     data = choose_api.choose_api(code_list)
     detail = data['detail']
     board = data['board']

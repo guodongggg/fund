@@ -20,7 +20,7 @@ async def ratio(code):
             try:
                 expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
             except AttributeError as e:
-                print(f'当前值无估值:{e}')
+                print(f'{code}的估值为空:设置为0.00')
                 expect_growth = '0.00'
             # print(expect_growth)
             ratio_data = {'expectGrowth': expect_growth.replace('%', '')}
