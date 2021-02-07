@@ -4,6 +4,7 @@ import average_growth
 from common import get_codelist
 import choose_api
 import json
+from btc import btcfans
 
 app = Flask(__name__)
 
@@ -44,8 +45,8 @@ def fund():
         'board': board,
         'detail': detail,
         'average_expect': average_expect,
-        'average_dayGrowth': average_dayGrowth
-        # 'btc_value': btc_value
+        'average_dayGrowth': average_dayGrowth,
+        'btc': btcfans()
     }
     return render_template('index.html', **context)
 

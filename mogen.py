@@ -1,5 +1,6 @@
 import requests
 from lxml import etree
+from common import isTradingDay
 
 
 def get_mogen(timeout=5):
@@ -13,7 +14,10 @@ def get_mogen(timeout=5):
         html = etree.HTML(r.text)
         expectGrowth = html.xpath('//*[@id="updown"]/text()')[0].replace('%', '')[:4]
         dayGrowth = html.xpath('/html/body/section/section/div[1]/a[1]/h2/text()')[0].replace('%', '')[:4]
-        mogen_dict = {'expectGrowth': expectGrowth, 'dayGrowth': dayGrowth}
+        if isTradingDay():
+            mogen_dict = {'expectGrowth': expectGrowth, 'dayGrowth': dayGrowth}
+        else:
+            mogen_dict = {'expectGrowth': expectGrowth, 'dayGrowth': expectGrowth}
         print(f'摩根高精度估值：获取成功')
         return mogen_dict
     except Exception:
