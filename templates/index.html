@@ -44,17 +44,6 @@
 			{% endif %}
 		</tr>
 	{% endfor %}
-		<tr>
-			<td>总持仓</td>
-			<td>-</td>
-			<td>
-				<a href="/xalpha_all_td"  style='color: #666;text-decoration: none;' target="_blank">整体持仓表格</a>
-			</td>
-			<td class="num">{{average}}%</td>
-			<td>
-				<a href="/xalpha_all"  style='color: #666;text-decoration: none;' target="_blank">整体持仓概览</a>
-			</td>
-		</tr>
 	</tbody>
 </table>
 
@@ -64,20 +53,38 @@
 		<tr>
 			<th>名称</th>
 			<th>代码</th>
-			<th>实时涨幅</th>
-			<th>周涨幅</th>
-			<th>最近一月涨幅</th>
-			<th>最近三月涨幅</th>
+			<th>预估</th>
+			<th>昨日</th>
+			<th>最近一周</th>
+			<th>最近一月</th>
+			<th>最近三月</th>
 			<th>持仓成本</th>
 			<th>线性回归</th>
 			<th>天天基金</th>
 		</tr>
 	</thead>
+		<tr>
+			<td>总持仓合计</td>
+			<td></td>
+			<td class="num">{{average_expect}}%</td>
+			<td class="num">{{average_dayGrowth}}%</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>
+				<a href="/xalpha_all_td"  style='color: #666;text-decoration: none;' target="_blank">持仓分布</a>
+			</td>
+			<td>
+				<a href="/xalpha_all"  style='color: #666;text-decoration: none;' target="_blank">持仓概览</a>
+			</td>
+			<td></td>
+		</tr>
 	{% for i in detail %}
 		<tr>
 			<td>{{i.name}}</td>
 			<td>{{i.code}}</td>
 			<td class="num">{{i.expectGrowth}}%</td>
+			<td class="num">{{i.dayGrowth}}%</td>
 			<td class="num">{{i.lastWeekGrowth|float|round(2)}}%</td>
 			<td class="num">{{i.lastMonthGrowth}}%</td>
 			<td class="num">{{i.lastThreeMonthsGrowth}}%</td>

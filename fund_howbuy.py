@@ -20,7 +20,7 @@ async def ratio(code):
             try:
                 expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
             except AttributeError as e:
-                print(f'{code}的估值为空:设置为0.00')
+                print(f'爬取howbuy估值,{code}为空:设置为0.00')
                 expect_growth = '0.00'
             # print(expect_growth)
             ratio_data = {'expectGrowth': expect_growth.replace('%', '')}
@@ -88,7 +88,7 @@ def asyncio_(code_list):
         return_data.append(i.result())
     loop.close()
 
-    # 特殊处理摩根基金
+    # 特殊处理摩跟太平洋科技基金
     mogen_code = '968061'
     if mogen_code in code_list:
         try:

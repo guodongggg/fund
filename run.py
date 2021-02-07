@@ -34,13 +34,17 @@ def fund():
     detail = data['detail']
     board = data['board']
     average = average_growth.average_growth(detail)
+    average_expect = average['average_expectGrowth']
+    average_dayGrowth = average['average_dayGrowth']
     app.logger.debug(f'--board--:{board}')
     app.logger.debug(f'--detail--:{detail}')
-    app.logger.debug(f'--average--:{average}')
+    app.logger.debug(f'--average_expect--:{average_expect}')
+    app.logger.debug(f'--average_dayGrowth--:{average_dayGrowth}')
     context = {
         'board': board,
         'detail': detail,
-        'average': average,
+        'average_expect': average_expect,
+        'average_dayGrowth': average_dayGrowth
         # 'btc_value': btc_value
     }
     return render_template('index.html', **context)
