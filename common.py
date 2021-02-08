@@ -52,8 +52,10 @@ def isTradingDay():
         resp = requests.get(url)
         r = resp.json()
         if r['data']['list']:
+            print(f'{today}:交易日')
             return True
         else:
+            print(f'{today}:非交易日')
             return False
     except:
         raise Exception(f'{url}接口调用失败')

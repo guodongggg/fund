@@ -1,7 +1,6 @@
 import json
 import choose_api
-from common import get_codelist
-from common import aligns
+import common
 
 
 def average_growth(fund_data_list):
@@ -23,7 +22,7 @@ def average_growth(fund_data_list):
 
 
 if __name__ == '__main__':
-    code_list = get_codelist('product')
+    code_list = common.get_codelist('product')
     data = choose_api.choose_api(code_list)
     detail, board = data['detail'], data['board']
     average = average_growth(detail)
@@ -31,7 +30,7 @@ if __name__ == '__main__':
     average_dayGrowth = average['average_dayGrowth']
     print('-' * 50)
     for i in detail:
-        print(f"{aligns(i['name'],18)} {i['code']}  估值：{i['expectGrowth']}%")
+        print(f"{common.aligns(i['name'],18)} {i['code']}  估值：{i['expectGrowth']}%")
     print('-'*50)
     for i in board:
         if i['name'] == '上证指数' or i['name'] == '沪深300':

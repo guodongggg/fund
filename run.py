@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from api import API
 import average_growth
-from common import get_codelist
+import common
 import choose_api
 import json
 from btc import btcfans
@@ -29,8 +29,7 @@ def haoym_detail(post_id):
 
 @app.route('/')
 def fund():
-    code_list = get_codelist('product')
-    # code_list_more = get_codelist('others')
+    code_list = common.get_codelist('product')
     data = choose_api.choose_api(code_list)
     detail = data['detail']
     board = data['board']

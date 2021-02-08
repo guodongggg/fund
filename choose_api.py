@@ -1,8 +1,10 @@
 import fund_base
 import fund_howbuy
-from common import get_codelist
+import common
+import decorate
 
 
+@decorate.timer
 def choose_api(code_list):
     board = ''
     try:
@@ -25,6 +27,6 @@ def choose_api(code_list):
 
 
 if __name__ == '__main__':
-    code_list = get_codelist('test')
+    code_list = common.get_codelist('test')
     for i in choose_api(code_list)['detail']:
         print(i)

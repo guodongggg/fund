@@ -1,7 +1,7 @@
 from lxml import etree
 import asyncio
 import aiohttp
-from common import get_codelist
+import common
 
 
 async def ratio(code):
@@ -20,7 +20,7 @@ async def ratio(code):
             try:
                 expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
             except AttributeError as e:
-                print(f'爬取howbuy估值,{code}为空:设置为0.00')
+                print(f'howbuy->{code}估值为空:设置为0.00')
                 expect_growth = '0.00'
             # print(expect_growth)
             ratio_data = {'expectGrowth': expect_growth.replace('%', '')}
@@ -106,7 +106,7 @@ def asyncio_(code_list):
 if __name__ == '__main__':
     import time
     s_time = time.time()
-    code_list = get_codelist('test')
+    code_list = common.get_codelist('test')
     data = asyncio_(code_list)
     for i in data:
         print(i)
