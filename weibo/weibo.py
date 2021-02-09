@@ -825,7 +825,7 @@ class Weibo(object):
             logger.info(u'%d条微博写入csv文件完毕,保存路径:', self.got_count)
         else:
             logger.info(u'%s 信息写入csv文件完毕，保存路径:', self.user['screen_name'])
-        logger.info(file_path)
+        #logger.info(file_path)
 
     def update_json_data(self, data, weibo_info):
         """更新要写入json结果文件中的数据，已经存在于json中的信息更新为最新值，不存在的信息添加到data中"""
@@ -863,8 +863,8 @@ class Weibo(object):
         data = self.update_json_data(data, weibo_info)
         with codecs.open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
-        logger.info(u'%d条微博写入json文件完毕,保存路径:', self.got_count)
-        logger.info(path)
+        #logger.info(u'%d条微博写入json文件完毕,保存路径:', self.got_count)
+        #logger.info(path)
 
     def info_to_mongodb(self, collection, info_list):
         """将爬取的信息写入MongoDB数据库"""
