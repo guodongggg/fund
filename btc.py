@@ -18,4 +18,4 @@ def btcfans():
 
 
 if __name__ == '__main__':
-    print('BTC: ', btcfans())
+    print('BTC:', btcfans())
