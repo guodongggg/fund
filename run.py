@@ -29,6 +29,8 @@ def haoym_detail(post_id):
 
 @app.route('/')
 def fund():
+    ua = request.headers.get('User-Agent')
+    mobile = common.judge_pc_or_mobile(ua)
     code_list = common.get_codelist('product')
     data = choose_api.choose_api(code_list)
     detail = data['detail']
@@ -45,8 +47,10 @@ def fund():
         'detail': detail,
         'average_expect': average_expect,
         'average_dayGrowth': average_dayGrowth,
-        'btc': btcfans()
+        'btc': btcfans() if mobile else None
     }
+    if mobile:
+        return render_template('index_mobile.html', **context)
     return render_template('index.html', **context)
 
 
@@ -159,7 +163,7 @@ if __name__ == '__main__':
     import platform
     if platform.system() == 'Windows':
         print('*Windows测试环境*')
-        app.run(debug=False, host='127.0.0.1', port='80')
+        app.run(debug=False, host='127.0.0.1', port='8090')
     elif platform.system() == 'Linux':
         print('*Linux生产环境*')
         app.run(debug=True, host='0.0.0.0', port='80')
