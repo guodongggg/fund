@@ -4,7 +4,7 @@ import average_growth
 import common
 import choose_api
 import json
-from btc import btcfans
+import btc
 
 app = Flask(__name__)
 
@@ -47,7 +47,7 @@ def fund():
         'detail': detail,
         'average_expect': average_expect,
         'average_dayGrowth': average_dayGrowth,
-        'btc': btcfans() if mobile else None
+        'btc': btc.btc() if not mobile else None
     }
     if mobile:
         return render_template('index_mobile.html', **context)
@@ -162,6 +162,8 @@ def zuanbuwan(showall=False):
 if __name__ == '__main__':
     import platform
     if platform.system() == 'Windows':
+        import webbrowser
+        webbrowser.open('http://127.0.0.1:8090')
         print('*Windows测试环境*')
         app.run(debug=False, host='127.0.0.1', port='8090')
     elif platform.system() == 'Linux':
