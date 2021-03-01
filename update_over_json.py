@@ -43,7 +43,7 @@ def over_time(code_list):
     file.touch(exist_ok=True)
 
     # 此时更新的准确净值涨幅的平均值
-    avg = average_growth.average_growth(detail, real=True)
+    avg = average_growth.average_growth(detail)
 
     # 写入文件
     with open("file/bj.json", 'r+') as f:
