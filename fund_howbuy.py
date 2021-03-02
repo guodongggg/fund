@@ -112,5 +112,5 @@ if __name__ == '__main__':
         print(i)
     # for i in stock():
     #     print(i)
-    print('用时：', time.time()-s_time)
+    print('用时：{:.2f}'.format(time.time()-s_time))
 

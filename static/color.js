@@ -1,4 +1,4 @@
-function redorgreen(){
+function color(){
     var num = $('.num');
     num.map(function(){
         var value = this.textContent.replace('%','');;
@@ -37,4 +37,4 @@ function redorgreen(){
 //            item.style.color = '#666';
 //        }
 //    })}
-redorgreen();
+color();

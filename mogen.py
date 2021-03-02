@@ -8,6 +8,7 @@ import common
 def get_mogen():
     """
     高精度预估(摩根太平洋科技人民币对冲968061)净值涨幅
+    天天基金：http://overseas.1234567.com.cn/968061
     :rtype: dict
     """
     url = 'https://fund.laykefu.com/?chInfo=ch_share__chsub_CopyLink'
