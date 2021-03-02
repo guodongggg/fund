@@ -30,7 +30,7 @@ if __name__ == '__main__':
     average_dayGrowth = average['average_dayGrowth']
     print('-' * 50)
     for i in detail:
-        print(f"{common.aligns(i['name'],18)} {i['code']}  估值：{i['expectGrowth']}%")
+        print(f"{common.aligns(i['name'],18)} {i['code']}  估值：{' '+i['expectGrowth'] if float(i['expectGrowth'])>0 else i['expectGrowth']}%")
     print('-'*50)
     for i in board:
         if i['name'] == '上证指数' or i['name'] == '沪深300':
