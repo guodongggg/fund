@@ -30,3 +30,5 @@ if __name__ == '__main__':
     code_list = common.get_codelist('test')
     for i in choose_api(code_list)['detail']:
         print(i)
+    for i in choose_api(code_list)['board']:
+        print(i)

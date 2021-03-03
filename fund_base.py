@@ -59,6 +59,6 @@ if __name__ == '__main__':
     board = stock_board()
     for i in board:
         print(i)
-    print('---')
+    print('-'*50)
     for i in fundDetail:
         print(i)

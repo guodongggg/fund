@@ -36,7 +36,7 @@ def aligns(string, length=20):
     return new_string + space * (difference)  # 返回补齐空格后的字符串
 
 
-def isTradingDay():
+def isTradingDay(date=None):
     """
     判断指定日期是否为交易日
     http://www.apihubs.cn/#/holiday
@@ -47,18 +47,35 @@ def isTradingDay():
     import requests
     import time
     today = time.strftime('%Y%m%d', time.localtime())
-    url = f'https://api.apihubs.cn/holiday/get?date={today}&workday=1&weekend=2&size=31'
+    if date is None:
+        date = today
+    url = f'https://api.apihubs.cn/holiday/get?date={date}&workday=1&weekend=2&size=31'
     try:
         resp = requests.get(url)
         r = resp.json()
         if r['data']['list']:
-            print(f'{today}:交易日')
+            print(f'{date}:交易日')
             return True
         else:
-            print(f'{today}:非交易日')
+            print(f'{date}:非交易日')
             return False
     except:
         raise Exception(f'{url}接口调用失败')
+
+
+def getdate(beforeOfDay):
+    """
+    返回N天前的日期
+    param beforeOfDay: int 指定N天前
+    return: str
+    """
+    import datetime
+    today = datetime.datetime.now()
+    # 计算偏移量
+    offset = datetime.timedelta(days=-beforeOfDay)
+    # 获取想要的日期的时间
+    re_date = (today + offset).strftime('%Y%m%d')
+    return re_date
 
 
 def judge_pc_or_mobile(ua):

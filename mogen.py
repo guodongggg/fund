@@ -5,13 +5,15 @@ import common
 
 
 @decorate.timer
-def get_mogen():
+def get_mogen(retry=3):
     """
     高精度预估(摩根太平洋科技人民币对冲968061)净值涨幅
     天天基金：http://overseas.1234567.com.cn/968061
+    :param: retry int 重试次数
     :rtype: dict
     """
     url = 'https://fund.laykefu.com/?chInfo=ch_share__chsub_CopyLink'
+    count = 1
     while True:
         try:
             r = requests.get(url, timeout=5)
@@ -26,10 +28,13 @@ def get_mogen():
             return mogen_dict
         except Exception:
             import time
-            print('摩根高精度估值：获取超时,重试...')
+            print(f'摩根高精度估值：获取超时,剩余{retry-count}次,重试...')
             time.sleep(1)
+        count += 1
+        if count == retry:
+            raise Exception('摩根高精度估值：超过请求次数,退出...')
 
 
 if __name__ == '__main__':
-    print(get_mogen())
+    print(get_mogen(3))
 
