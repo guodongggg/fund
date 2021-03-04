@@ -12,13 +12,14 @@ def average_growth(fund_data_list):
     with open('file/code_list.json', 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
         prod_data = json_data['product']
-        list_expectGrowth = [float(x['expectGrowth'])*prod_data[x['code']]['percent'] for x in fund_data_list if x['code'] in list(prod_data.keys())]
-        list_dayGrowth = [float(x['dayGrowth']) * prod_data[x['code']]['percent'] for x in fund_data_list if x['code'] in list(prod_data.keys())]
-    # or list_ = list(map(lambda x: float(x['expectGrowth'])*fund_precentage[x['code']], fund_data_list))
-    # print(list_)
-    average_expectGrowth = round(sum(list_expectGrowth), 2)
-    average_dayGrowth = round(sum(list_dayGrowth), 2)
-    return {'average_expectGrowth': average_expectGrowth, 'average_dayGrowth': average_dayGrowth}
+
+        def growth_list(day):
+            return [float(x[day])*prod_data[x['code']]['percent'] for x in fund_data_list if x['code'] in list(prod_data.keys())]
+
+        list_expectGrowth = growth_list('expectGrowth')
+        list_dayGrowth = growth_list('dayGrowth')
+    average = lambda x: round(sum(x), 2)
+    return {'average_expectGrowth': average(list_expectGrowth), 'average_dayGrowth': average(list_dayGrowth)}
 
 
 if __name__ == '__main__':
