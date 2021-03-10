@@ -13,7 +13,7 @@ def get_mogen(retry=3):
     :rtype: dict
     """
     url = 'https://fund.laykefu.com/?chInfo=ch_share__chsub_CopyLink'
-    count = 1
+    count = 0
     while True:
         try:
             r = requests.get(url, timeout=5)
@@ -28,7 +28,7 @@ def get_mogen(retry=3):
             return mogen_dict
         except Exception:
             import time
-            print(f'摩根高精度估值：获取超时,剩余{retry-count}次,重试...')
+            print(f'摩根高精度估值：获取超时,重试...')
             time.sleep(1)
         count += 1
         if count == retry:
@@ -36,5 +36,5 @@ def get_mogen(retry=3):
 
 
 if __name__ == '__main__':
-    print(get_mogen(3))
+    print(get_mogen(retry=3))
 

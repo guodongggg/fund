@@ -163,8 +163,8 @@ if __name__ == '__main__':
     import platform
     if platform.system() == 'Windows':
         import webbrowser
-        webbrowser.open('http://127.0.0.1:8090')
         print('*Windows测试环境*')
+        webbrowser.open('http://127.0.0.1:8090')
         app.run(debug=False, host='127.0.0.1', port='8090')
     elif platform.system() == 'Linux':
         print('*Linux生产环境*')
