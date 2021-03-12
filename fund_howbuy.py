@@ -2,6 +2,7 @@ from lxml import etree
 import asyncio
 import aiohttp
 import common
+import time
 
 
 async def ratio(code):
@@ -17,12 +18,20 @@ async def ratio(code):
         async with session.request("GET", url=url_ratio) as resp:
             r = await resp.text()
             html = etree.HTML(r)
-            try:
-                expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
-            except AttributeError as e:
-                print(f'howbuy->{code}估值为空:设置为0.00')
-                expect_growth = '0.00'
-            # print(expect_growth)
+            tag = True
+            while tag:
+                try:
+                    # print(html.xpath('//li/span[3]/text()'))
+                    expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
+                    tag = False
+                except AttributeError as e:
+                    print(f'{code}:估值为空:设置为0.00')
+                    expect_growth = '0.00'
+                    tag = False
+                # print(expect_growth)
+                except IndexError as e:
+                    print(f'{code}:估值数据请求异常,重试...')
+                    time.sleep(1)
             ratio_data = {'expectGrowth': expect_growth.replace('%', '')}
             # print(ratio_data)
 
@@ -99,12 +108,11 @@ def asyncio_(code_list):
                     i['expectGrowth'] = mogen_pro['expectGrowth']
                     i['dayGrowth'] = mogen_pro['dayGrowth']
         except:
-            print('***摩根高精度估值请求超时，切换为普通估值***')
+            print('摩根高精度估值：请求超时,切换为普通估值')
     return return_data
 
 
 if __name__ == '__main__':
-    import time
     s_time = time.time()
     code_list = common.get_codelist('test')
     data = asyncio_(code_list)

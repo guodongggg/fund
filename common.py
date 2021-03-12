@@ -47,20 +47,23 @@ def isTradingDay(date=None):
     import requests
     import time
     today = time.strftime('%Y%m%d', time.localtime())
+    formatday = time.strftime('%Y/%m/%d', time.localtime())
     if date is None:
         date = today
     url = f'https://api.apihubs.cn/holiday/get?date={date}&workday=1&weekend=2&size=31'
     try:
-        resp = requests.get(url)
+        resp = requests.get(url, timeout=3)
         r = resp.json()
         if r['data']['list']:
-            print(f'{date}:交易日')
+            print(f'{formatday}:交易日')
             return True
         else:
-            print(f'{date}:非交易日')
+            print(f'{formatday}:非交易日')
             return False
     except:
-        raise Exception(f'{url}接口调用失败')
+        # raise Exception(f'{url}接口调用失败')
+        print(f'接口异常,默认{formatday}为交易日')
+        return True
 
 
 def getdate(beforeOfDay):
@@ -122,4 +125,5 @@ def judge_pc_or_mobile(ua):
 
 
 if __name__ == '__main__':
-    pass
+    while True:
+        print(isTradingDay())
