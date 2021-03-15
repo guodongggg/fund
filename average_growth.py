@@ -29,7 +29,7 @@ if __name__ == '__main__':
     average = average_growth(detail)
     average_expectGrowth = average['average_expectGrowth']
     average_dayGrowth = average['average_dayGrowth']
-    print('-' * 50)
+    print('-'*50)
     for i in detail:
         print(f"{common.aligns(i['name'],18)} {i['code']}  估值：{' '+i['expectGrowth'] if float(i['expectGrowth'])>0 else i['expectGrowth']}%")
     print('-'*50)
@@ -37,4 +37,5 @@ if __name__ == '__main__':
         if i['name'] == '上证指数' or i['name'] == '沪深300':
             print(f"{i['name']}: {i['changePercent']}%")
     print('-'*50)
-    print('平均涨幅:', average_expectGrowth, '%')
+    print(f'估值涨幅: {average_expectGrowth}%    昨日涨幅: {average_dayGrowth}%')
+

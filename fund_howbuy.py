@@ -19,7 +19,10 @@ async def ratio(code):
             r = await resp.text()
             html = etree.HTML(r)
             tag = True
+            n = 1  # 估值循环计数器
             while tag:
+                if n >= 5:
+                    raise Exception(f'{code}:估值数据请求失败,退出！')
                 try:
                     # print(html.xpath('//li/span[3]/text()'))
                     expect_growth = html.xpath('//li/span[3]/text()')[0].strip()
@@ -31,7 +34,8 @@ async def ratio(code):
                 # print(expect_growth)
                 except IndexError as e:
                     print(f'{code}:估值数据请求异常,重试...')
-                    time.sleep(1)
+                    time.sleep(2)
+                    n += 1
             ratio_data = {'expectGrowth': expect_growth.replace('%', '')}
             # print(ratio_data)
 

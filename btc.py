@@ -2,6 +2,10 @@ import requests
 
 
 def btc():
+    """
+    获取btc当前的市值
+    :return: str
+    """
     def usd_cny():
         try:
             url = 'https://www.usd-cny.com/btc/b.js'
