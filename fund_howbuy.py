@@ -113,6 +113,7 @@ def asyncio_(code_list):
                     i['dayGrowth'] = mogen_pro['dayGrowth']
         except:
             print('摩根高精度估值：请求超时,切换为普通估值')
+    print('howbuy接口调用成功！')
     return return_data
 
 
@@ -124,5 +125,5 @@ if __name__ == '__main__':
         print(i)
     # for i in stock():
     #     print(i)
-    print('用时：{:.2f}'.format(time.time()-s_time))
+    print('用时：{:.2f}s'.format(time.time()-s_time))
 

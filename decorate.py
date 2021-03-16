@@ -10,7 +10,7 @@ def timer(func):
         f = func(*args, **kwargs)
         t2 = time.time()
         cost_time = t2-t1
-        print('{:.2f}s -> {}'.format(cost_time, func.__name__))
+        print('{}：{:.2f}s'.format(func.__name__, cost_time))
         return f
     return wrapper
 

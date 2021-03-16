@@ -14,17 +14,18 @@ def XiongAPI(url, code=None):
     }
     try:
         response = requests.get(url, params=params, timeout=3)
+        print('小熊接口：请求成功！')
     except Exception:
-        print("小熊接口请求失败")
+        print("小熊接口：请求失败")
         return {}
     result = response.json()
     try:
         if result['code'] != 200:
-            raise Exception("小熊接口数据异常：" + response.text)
+            raise Exception("小熊接口：数据异常：" + response.text)
         else:
             return result
     except Exception:
-        raise Exception("小熊接口异常")
+        raise Exception("小熊接口：接口异常")
 
 
 def BaseInfo(code):
@@ -38,7 +39,7 @@ def BaseInfo(code):
     try:
         return XiongAPI(url, code).get('data', [])
     except Exception:
-        raise Exception("小熊接口异常,无法调用基金基础信息")
+        raise Exception("小熊接口：接口异常,无法调用基金基础信息")
 
 
 def stock_board():
@@ -50,15 +51,15 @@ def stock_board():
     try:
         return XiongAPI(url).get('data', [])
     except Exception:
-        raise Exception("小熊接口异常，无法调用大盘基础信息")
+        raise Exception("小熊接口：接口异常，无法调用大盘基础信息")
 
 
 if __name__ == '__main__':
     code_list = get_codelist('test')
     fundDetail = BaseInfo(code_list)
-    board = stock_board()
-    for i in board:
-        print(i)
+    # board = stock_board()
+    # for i in board:
+    #     print(i)
     print('-'*50)
     for i in fundDetail:
         print(i)
