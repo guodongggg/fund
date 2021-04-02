@@ -5,6 +5,7 @@ import common
 import choose_api
 import json
 import btc
+import miner_pool
 
 app = Flask(__name__)
 
@@ -47,7 +48,8 @@ def fund():
         'detail': detail,
         'average_expect': average_expect,
         'average_dayGrowth': average_dayGrowth,
-        'btc': btc.btc() if not mobile else None
+        'btc': btc.btc() if not mobile else None,
+        'xmr': miner_pool.c3pool()
     }
     if mobile:
         return render_template('index_mobile.html', **context)
