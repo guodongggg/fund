@@ -149,7 +149,13 @@ def zuanbuwan(showall=False):
     # print(f'json data:{sort_list}')
     if not showall:
         sort_list = sort_list[:10]
-    return render_template('zuanbuwan.html', weibo_data=sort_list)
+    return render_template('weibo.html', weibo_data=sort_list, user='赚不完亏得完Ryu')
+
+
+@app.route('/qunweiwei')
+def qunweiwei(showall=False):
+    data = None
+    return render_template('weibo.html', weibo_data=data, user='群伟伟')
 
 
 # @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
