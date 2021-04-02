@@ -13,8 +13,7 @@ def XiongAPI(url, code=None):
         'code': code
     }
     try:
-        response = requests.get(url, params=params, timeout=3)
-        print('小熊接口：请求成功！')
+        response = requests.get(url, params=params, timeout=5)
     except Exception:
         print("小熊接口：请求失败")
         return {}
@@ -57,9 +56,9 @@ def stock_board():
 if __name__ == '__main__':
     code_list = get_codelist('test')
     fundDetail = BaseInfo(code_list)
-    # board = stock_board()
-    # for i in board:
-    #     print(i)
+    board = stock_board()
+    for i in board:
+        print(i)
     print('-'*50)
     for i in fundDetail:
         print(i)

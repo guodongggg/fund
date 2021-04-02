@@ -16,7 +16,7 @@ def choose_api(code_list):
         detail = fund_base.BaseInfo(code_list)
         board = fund_base.stock_board()
         if not detail:
-            print("小熊接口无返回值,调用备用接口...")
+            print("小熊获取基金异常,调用备用接口...")
             detail = fund_howbuy.asyncio_(code_list)
         else:
             if '968061' in code_list:
@@ -33,7 +33,9 @@ def choose_api(code_list):
 
 if __name__ == '__main__':
     code_list = common.get_codelist('test')
-    for i in choose_api(code_list)['detail']:
+    info = choose_api(code_list)
+    for i in info['detail']:
         print(i)
-    for i in choose_api(code_list)['board']:
+    print('-' * 50)
+    for i in info['board']:
         print(i)
