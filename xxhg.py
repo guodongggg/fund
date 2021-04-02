@@ -24,8 +24,9 @@ class FundGrapper:
 
     def grabHistoryData(self, code, gui):
         if gui:
-            startDate = "2020-9-10"
-            endDate = "2020-12-25"
+            date = self.threeMonth()
+            startDate = date['threeMonthAgo']
+            endDate = date['todayTime']
         else:
             date = self.threeMonth()
             startDate = date['threeMonthAgo']
@@ -120,4 +121,4 @@ class FundGrapper:
 
 if __name__ == '__main__':
     fundGrapper = FundGrapper()
-    data = fundGrapper.run('005827', gui=True)
+    data = fundGrapper.run('005733', gui=True)
