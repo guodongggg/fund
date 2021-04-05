@@ -1,7 +1,7 @@
 {
     "user_id_list": ["6367430139","7169812253"],
     "filter": 1,
-    "since_date": 1,
+    "since_date": 3,
     "write_mode": ["json"],
     "original_pic_download": 0,
     "retweet_pic_download": 0,
