@@ -134,14 +134,23 @@ def xalpha_all_td():  # 持仓股票份额
     return html.format(html_data=html_data, stock_data=stock_data)
 
 
-@app.route('/zuanbuwan')
-def zuanbuwan(showall=False):
+@app.route('/weibo/<user>')
+def weibo(user, showall=False):
     from weibo import weibo
     import os
-    print('---开始爬取数据---')
+    username = ''
+    userid = ''
+    if user == "zuanbuwan":
+        username = "赚不完亏得完Ryu"
+        userid = "6367430139"
+    elif user == "qunweiwei":
+        username = "群伟伟"
+        userid = "7169812253"
+    print(f'当前用户：{username}')
+    print('---开始爬取---')
     weibo.main()
     print('---爬取完毕---')
-    json_path = os.path.join('weibo', 'weibo', '赚不完亏得完Ryu', '6367430139.json')
+    json_path = os.path.join('weibo', 'weibo', username, '{}.json'.format(userid))
     with open(json_path, 'r', encoding='UTF-8') as f:
         data = json.load(f)
         weibo_data = data['weibo']
@@ -149,26 +158,7 @@ def zuanbuwan(showall=False):
     # print(f'json data:{sort_list}')
     if not showall:
         sort_list = sort_list[:10]
-    return render_template('weibo.html', weibo_data=sort_list, user='赚不完亏得完Ryu')
-
-
-@app.route('/qunweiwei')
-def qunweiwei(showall=False):
-    from weibo import weibo
-    import os
-    print('---开始爬取数据---')
-    weibo.main()
-    print('---爬取完毕---')
-    json_path = os.path.join('weibo', 'weibo', '群伟伟', '7169812253.json')
-    with open(json_path, 'r', encoding='UTF-8') as f:
-        data = json.load(f)
-        weibo_data = data['weibo']
-    sort_list = sorted(weibo_data, key=lambda x: x['created_at'], reverse=True)  # 根据创建日期排序
-    # print(f'json data:{sort_list}')
-    if not showall:
-        sort_list = sort_list[:10]
-    return render_template('weibo.html', weibo_data=sort_list, user='群伟伟')
-
+    return render_template('weibo.html', weibo_data=sort_list, user=username)
 
 # @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
 # def test_post():
