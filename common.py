@@ -124,6 +124,13 @@ def judge_pc_or_mobile(ua):
     return is_mobile
 
 
+def timeTips():
+    from datetime import datetime
+    now = datetime.now()
+    strtime = now.strftime("%Y-%m-%d %H:%M:%S")
+    return strtime
+
+
 if __name__ == '__main__':
     while True:
         print(isTradingDay())

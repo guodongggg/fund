@@ -20,7 +20,8 @@ def get_mogen(retry=3):
             html = etree.HTML(r.text)
             expectGrowth = html.xpath('//*[@id="updown"]/text()')[0].replace('%', '')[:4]
             dayGrowth = html.xpath('/html/body/section/section/div[1]/a[1]/h2/text()')[0].replace('%', '')[:4]
-            print(f'摩根高精度估值：获取成功')
+            now = common.timeTips()
+            print(f'[{now}]摩根高精度估值：获取成功')
             if common.isTradingDay():
                 mogen_dict = {'expectGrowth': expectGrowth, 'dayGrowth': dayGrowth}
             else:
