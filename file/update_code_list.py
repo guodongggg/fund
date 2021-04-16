@@ -8,7 +8,7 @@ with open('code_list.json', 'r+', encoding='UTF-8') as f:
         count += value['count']
     print(f'总持仓:￥{count}')
     for key, value in prd.items():
-        value['percent'] = "{:.2f}".format(value['count']/count)
+        value['percent'] = float("{:.2f}".format(value['count']/count))
     f.seek(0, 0)
     f.truncate()
     f.write(json.dumps(data, sort_keys=True, ensure_ascii=False, indent=4, separators=(',', ': ')))
