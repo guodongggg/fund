@@ -158,7 +158,7 @@ def weibo(user, showall=False):
     # print(f'json data:{sort_list}')
     if not showall:
         sort_list = sort_list[:10]
-    return render_template('weibo.html', weibo_data=sort_list, user=username)
+    return render_template('weibo.html', weibo_data=sort_list, user=username, length=len(sort_list))
 
 # @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
 # def test_post():
@@ -174,7 +174,7 @@ if __name__ == '__main__':
     if platform.system() == 'Windows':
         import webbrowser
         print('*Windows测试环境*')
-        webbrowser.open('http://127.0.0.1:8090')
+        #webbrowser.open('http://127.0.0.1:8090')
         app.run(debug=False, host='127.0.0.1', port='8090')
     elif platform.system() == 'Linux':
         print('*Linux生产环境*')
