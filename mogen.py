@@ -4,7 +4,7 @@ import decorate
 import common
 
 
-@decorate.timer
+#@decorate.timer
 def get_mogen(retry=3):
     """
     高精度预估(摩根太平洋科技人民币对冲968061)净值涨幅

@@ -4,7 +4,7 @@ import common
 import decorate
 
 
-@decorate.timer
+#@decorate.timer
 def choose_api(code_list):
     """
     自动选择可用的API

@@ -23,6 +23,7 @@ def average_growth(fund_data_list):
 
 
 if __name__ == '__main__':
+    print('查询当前预估收益...')
     code_list = common.get_codelist('product')
     data = choose_api.choose_api(code_list)
     detail, board = data['detail'], data['board']
