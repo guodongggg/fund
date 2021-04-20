@@ -57,7 +57,7 @@ li {
     line-height: 24px;
     font-size: 16px;
     vertical-align: middle;
-    color: #4d4d4d;
+    color: #565656;
     text-decoration: none;
     text-overflow: ellipsis;
 
@@ -72,11 +72,11 @@ li {
     display: inline-block;
 }
 .my_fav_list_label span{
-    color: #2d4475;
+    color: #9e9e9e;
     margin-right: 15px;
     vertical-align: middle;
     display: inline-block;
 }
 .my_fav_list_a:hover{
-    color: #a2a1b1;
+    color: #000000;
 }
