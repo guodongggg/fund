@@ -5,7 +5,7 @@
     <title>Title</title>
 
     <script src="{{url_for('static',filename='jquery.min.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='collectList.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='weibolist.css')}}">
 </head>
 <body style="background-color: rgba(204,204,204,0.23)">
 
@@ -28,7 +28,7 @@
                                 {{ i.text }}
                             </a>
                             {% elif user == "赚不完亏得完Ryu" %}
-                            <p  class="my_fav_list_a">
+                            <p  class="my_fav_list_b">
                                 {{ i.text }}
                             </p>
                             {% endif %}
@@ -37,7 +37,7 @@
                             </label>
                         </li>
                     {% endfor %}
-                </ul> <!---->
+                </ul>
             </div>
         </div>
     </div>

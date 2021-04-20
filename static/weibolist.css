@@ -57,10 +57,9 @@ li {
     line-height: 24px;
     font-size: 16px;
     vertical-align: middle;
-    color: #565656;
+    color: #444444;
     text-decoration: none;
     text-overflow: ellipsis;
-
     display: inline-block;
     overflow: hidden;
     cursor: pointer;
@@ -79,4 +78,16 @@ li {
 }
 .my_fav_list_a:hover{
     color: #000000;
+}
+.my_fav_list_b{
+    width: 78%;
+    line-height: 24px;
+    font-size: 16px;
+    vertical-align: middle;
+    color: #444444;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
 }
