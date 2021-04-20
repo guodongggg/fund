@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="{{url_for('static',filename='jquery.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='collectList.css')}}">
+</head>
+<body style="background-color: rgba(204,204,204,0.23)">
+
+
+<div class="fav_list">
+    <div data-v-357a65ed="" class="fav_list_box">
+        <div  class="fav_list_title">
+            <h3 class="fav_list_title_h3">{{user}}</h3>
+            <div class="fav_num">
+                共<span >{{length}}</span>条
+            </div>
+        </div>
+        <div  class="my_fav_con">
+            <div>
+                <ul  class="my_fav_list">
+                    {% for i in weibo_data %}
+                        <li class="my_fav_list_li" id="">
+                            {% if user == "群伟伟" %}
+                            <a  class="my_fav_list_a" style="white-space: nowrap;" href="{{i.article_url}}" title="{{ i.text }}" target="_blank">
+                                {{ i.text }}
+                            </a>
+                            {% elif user == "赚不完亏得完Ryu" %}
+                            <a  class="my_fav_list_a" href="">
+                                {{ i.text }}
+                            </a>
+                            {% endif %}
+                            <label class="my_fav_list_label">
+                                <span >{{ i.created_at }}</span>
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul> <!---->
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
