@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            ls,
-            pwd,
+            ls
+            pwd
             uname -a
         
