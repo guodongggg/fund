@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: DEPLOY
+name: deploy_fund
 
 # Controls when the action will run. 
 on:
@@ -35,7 +35,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script:
-            cd /root/fund_flask/
-            git pull
+          script: |
+            cd /root/fund_flask/ && git pull
         
