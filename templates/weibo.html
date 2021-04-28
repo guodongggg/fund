@@ -24,7 +24,8 @@
                     {% for i in weibo_data %}
                         <li class="my_fav_list_li" id="">
                             {% if user == "群伟伟" %}
-                            <a  class="my_fav_list_a" style="white-space: nowrap;" href="{{i.article_url}}" title="{{ i.text }}" target="_blank">
+<!--                            <a  class="my_fav_list_a" style="white-space: nowrap;" href="{{i.article_url}}" title="{{ i.text }}" target="_blank">-->
+                            <a  class="my_fav_list_a" style="white-space: nowrap;" href="/weibo/qunweiwei/article/?url={{i.article_url}}" title="{{ i.text }}" target="_blank">
                                 {{ i.text }}
                             </a>
                             {% elif user == "赚不完亏得完Ryu" %}

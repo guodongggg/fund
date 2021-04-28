@@ -49,7 +49,7 @@ def fund():
         'average_expect': average_expect,
         'average_dayGrowth': average_dayGrowth,
         'btc': btc.btc() if not mobile else None,
-        'xmr': miner_pool.c3pool()
+        # 'xmr': miner_pool.c3pool()
     }
     if mobile:
         return render_template('index_mobile.html', **context)
@@ -134,7 +134,7 @@ def xalpha_all_td():  # 持仓股票份额
     return html.format(html_data=html_data, stock_data=stock_data)
 
 
-@app.route('/weibo/<user>')
+@app.route('/weibo/<user>/')
 def weibo(user, showall=False):
     from weibo import weibo
     import os
@@ -159,6 +159,16 @@ def weibo(user, showall=False):
     if not showall:
         sort_list = sort_list[:10]
     return render_template('weibo.html', weibo_data=sort_list, user=username, length=len(sort_list))
+
+
+@app.route('/weibo/qunweiwei/article/', methods=['post', 'get'])
+def wb_article():
+    from spider_wb_article import article
+    article_url = request.args.get('url')
+    app.logger.debug(f'article url:{article_url}')
+    article_info = article(article_url)
+    app.logger.debug(f'article info:{article_info}')
+    return render_template('wb_article.html', article_info=article_info)
 
 # @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
 # def test_post():

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>群伟伟</title>
+    <meta name="referrer" content="no-referrer">
+</head>
+<body>
+<div>
+    {% for i in article_info.msg %}
+        <p>{{i}}</p>
+    {% endfor %}
+    {% for i in article_info.pic %}
+        <img src="{{i}}" alt="图片" />
+    {% endfor %}
+</div>
+</body>
+</html>
