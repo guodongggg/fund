@@ -10,9 +10,9 @@ import decorate
 def article(url):
     global chrome_driver
     if platform.system() == 'Windows':
-        chrome_driver = 'more/chromedriver'
+        chrome_driver = 'more\\chromedriver.exe'
     elif platform.system() == 'Linux':
-        chrome_driver = '\\more\\chromedriver.exe'
+        chrome_driver = 'more/chromedriver'
     else:
         assert '不支持该系统'
     from selenium.webdriver.chrome.options import Options
