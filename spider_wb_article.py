@@ -1,20 +1,25 @@
+# chrome driver url: http://npm.taobao.org/mirrors/chromedriver/
 from selenium import webdriver
 from lxml import etree
 import platform
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import os
+import time
 import decorate
 
 #@decorate.timer
-def article(url):
+def article(url, retry=3):
     global chrome_driver
+    currentdir = os.getcwd()
     if platform.system() == 'Windows':
-        chrome_driver = 'more\\chromedriver.exe'
+        chrome_driver = 'driver\\chromedriver.exe'
     elif platform.system() == 'Linux':
-        chrome_driver = 'more/chromedriver'
+        chrome_driver = 'driver/chromedriver'
     else:
         assert '不支持该系统'
+
     from selenium.webdriver.chrome.options import Options
     options = Options()
     options.add_argument('--no-sandbox')
@@ -25,11 +30,20 @@ def article(url):
     browser = webdriver.Chrome(executable_path=chrome_driver, options=options)
     browser.get(url)
     locator = (By.XPATH, "//p[@align='justify']")
-    try:
-        WebDriverWait(browser, 10).until(EC.presence_of_all_elements_located(locator))
-    except:
-        print("ele can't find")
-    #time.sleep(5)
+
+    tag = True
+    count = 0
+    while tag:
+        try:
+            WebDriverWait(browser, 10).until(EC.presence_of_all_elements_located(locator))
+            tag = False
+        except Exception as e:
+            count += 1
+            if count == retry:
+                raise Exception('无法获取内容，退出')
+            time.sleep(1)
+            print('retry...')
+
     source_page = browser.page_source
     html = etree.HTML(source_page)
     data = dict()
@@ -39,6 +53,6 @@ def article(url):
 
 
 if __name__ == '__main__':
-    url = 'http://t.cn/A6cQXzQ0'
+    url = 'http://t.cn/A6cD3tR5'
     print(article(url))
 

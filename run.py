@@ -5,7 +5,6 @@ import common
 import choose_api
 import json
 import btc
-import miner_pool
 
 app = Flask(__name__)
 
@@ -136,38 +135,54 @@ def xalpha_all_td():  # 持仓股票份额
 
 @app.route('/weibo/<user>/')
 def weibo(user, showall=False):
+    global sort_list
     from weibo import weibo
     import os
     username = ''
     userid = ''
+
+    def getinfo(username, userid, spider=True):
+        print(f'当前用户：{username}')
+        if spider:
+            print('---开始爬取---')
+            weibo.main()
+            print('---爬取完毕---')
+        json_path = os.path.join('weibo', 'weibo', username, '{}.json'.format(userid))
+        with open(json_path, 'r', encoding='UTF-8') as f:
+            data = json.load(f)
+            weibo_data = data['weibo']
+        sort_list = sorted(weibo_data, key=lambda x: x['created_at'], reverse=True)  # 根据创建日期排序
+        # print(f'json data:{sort_list}')
+        if not showall:
+            sort_list = sort_list[:10]
+        return sort_list
+    if user == "all":
+        data = {}
+        data['zuanbuwan'] = getinfo("赚不完亏得完Ryu", "6367430139", spider=True)
+        data['qunweiwei'] = getinfo("群伟伟", "7169812253", spider=False)
+        return render_template('weibo_all.html', weibo_data=data)
+
     if user == "zuanbuwan":
         username = "赚不完亏得完Ryu"
         userid = "6367430139"
+        sort_list = getinfo(username, userid)
     elif user == "qunweiwei":
         username = "群伟伟"
         userid = "7169812253"
-    print(f'当前用户：{username}')
-    print('---开始爬取---')
-    weibo.main()
-    print('---爬取完毕---')
-    json_path = os.path.join('weibo', 'weibo', username, '{}.json'.format(userid))
-    with open(json_path, 'r', encoding='UTF-8') as f:
-        data = json.load(f)
-        weibo_data = data['weibo']
-    sort_list = sorted(weibo_data, key=lambda x: x['created_at'], reverse=True)  # 根据创建日期排序
-    # print(f'json data:{sort_list}')
-    if not showall:
-        sort_list = sort_list[:10]
+        sort_list = getinfo(username, userid)
     return render_template('weibo.html', weibo_data=sort_list, user=username, length=len(sort_list))
 
 
 @app.route('/weibo/qunweiwei/article/', methods=['post', 'get'])
 def wb_article():
-    from spider_wb_article import article
+    import spider_wb_article
     article_url = request.args.get('url')
     app.logger.debug(f'article url:{article_url}')
-    article_info = article(article_url)
-    app.logger.debug(f'article info:{article_info}')
+    try:
+        article_info = spider_wb_article.article(article_url)
+    except:
+        return f'获取{article_url}内容失败，请检查！'
+    # app.logger.debug(f'article info:{article_info}')
     return render_template('wb_article.html', article_info=article_info)
 
 # @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
@@ -182,10 +197,9 @@ def wb_article():
 if __name__ == '__main__':
     import platform
     if platform.system() == 'Windows':
-        import webbrowser
         print('*Windows测试环境*')
         #webbrowser.open('http://127.0.0.1:8090')
-        app.run(debug=False, host='127.0.0.1', port='8090')
+        app.run(debug=True, host='127.0.0.1', port='8090')
     elif platform.system() == 'Linux':
         print('*Linux生产环境*')
         app.run(debug=True, host='0.0.0.0', port='80')

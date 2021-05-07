@@ -1,4 +1,4 @@
-li {
+.fav_list li {
     text-align: -webkit-match-parent;
     display: list-item;
 }
