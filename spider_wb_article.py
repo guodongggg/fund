@@ -41,8 +41,8 @@ def article(url, retry=3):
             count += 1
             if count == retry:
                 raise Exception('无法获取内容，退出')
-            time.sleep(1)
             print('retry...')
+            time.sleep(3)
 
     source_page = browser.page_source
     html = etree.HTML(source_page)
@@ -53,6 +53,6 @@ def article(url, retry=3):
 
 
 if __name__ == '__main__':
-    url = 'http://t.cn/A6cD3tR5'
+    url = 'http://t.cn/A6ckJYjm'
     print(article(url))
 
