@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title> 大V观点</title>
+<!--    <link rel="stylesheet" type="text/css" href="../static/weibolist.css">-->
+    <script src="../static/jquery.min.js"></script>
+    <style type="text/css">
+     /* CSS样式制作 */
+     *{padding:0px; margin:0px;}
+      a{ text-decoration:none; color:black;}  //消除链接的下划线
+      a:hover{text-decoration:none; color:#336699;}
+       #tab{width:auto; padding:5px;height:1000px;margin:20px;}
+       #tab ul{list-style:none; display:;height:30px;line-height:30px; border-bottom:2px #C88 solid;}
+       #tab ul li{background:#FFF;cursor:pointer;float:left;list-style:none; height:29px; line-height:29px;padding:0px 10px; margin:0px 10px; border:1px solid #BBB; border-bottom:2px solid #C88;}
+       #tab ul li.on{border-top:2px solid Saddlebrown; border-bottom:2px solid #FFF;}
+       #tab div{height:auto;width:auto; line-height:24px;border-top:none;  padding:1px; border:1px solid #336699;padding:10px;}
+       #firstPage,#secondPage li{list-style:none}
+       .hide{display:none;}
+    </style>
+
+    <script type="text/javascript">
+    // JS实现选项卡切换
+    window.onload = function(){
+    var myTab = document.getElementById("tab");    //整个div
+    var myUl = myTab.getElementsByTagName("ul")[0];//一个节点
+    var myLi = myUl.getElementsByTagName("li");    //数组
+    var myDiv = myTab.getElementsByTagName("div"); //数组
+
+    for(var i = 0; i<myLi.length;i++){
+        myLi[i].index = i;
+        myLi[i].onclick = function(){
+            for(var j = 0; j < myLi.length; j++){
+                myLi[j].className="off";
+                myDiv[j].className = "hide";
+            }
+            this.className = "on";
+            myDiv[this.index].className = "show";
+        }
+      }
+    }
+    </script>
+
+</head>
+<body>
+<!-- HTML页面布局 -->
+<div id = "tab">
+        <ul>
+        <li class="off">赚不完</li>
+        <li class="on">群伟伟</li>
+        </ul>
+    <div id="firstPage" class="hide">
+        {% for i in weibo_data.zuanbuwan %}
+            <span >{{ i.created_at }}</span>
+            <li>
+                <p style="color: #3a3a3a">{{ i.text }}</p>
+            </li>
+            </br>
+        {% endfor %}
+    </div>
+    <div id="secondPage" class="show">
+        {% for i in weibo_data.qunweiwei %}
+            <span >{{ i.created_at }}</span>
+            <li>
+                <a style="white-space: nowrap;color: #3a3a3a" href="{{ url_for('wb_article', url=i.article_url) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>
+            </li>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
