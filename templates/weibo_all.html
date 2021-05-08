@@ -16,6 +16,9 @@
        #tab ul li.on{border-top:2px solid Saddlebrown; border-bottom:2px solid #FFF;}
        #tab div{height:auto;width:auto; line-height:24px;border-top:none;  padding:1px; border:1px solid #336699;padding:10px;}
        #firstPage,#secondPage li{list-style:none}
+       #firstPage li p{color: #3a3a3a}
+       #secondPage li a{color: #3a3a3a;white-space: nowrap;}
+       #secondPage li a:hover{color: gray}
        .hide{display:none;}
     </style>
 
@@ -53,7 +56,7 @@
         {% for i in weibo_data.zuanbuwan %}
             <span >{{ i.created_at }}</span>
             <li>
-                <p style="color: #3a3a3a">{{ i.text }}</p>
+                <p>{{ i.text }}</p>
             </li>
             </br>
         {% endfor %}
@@ -62,7 +65,7 @@
         {% for i in weibo_data.qunweiwei %}
             <span >{{ i.created_at }}</span>
             <li>
-                <a style="white-space: nowrap;color: #3a3a3a" href="{{ url_for('wb_article', url=i.article_url) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>
+                <a href="{{ url_for('wb_article', url=i.article_url) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>
             </li>
         {% endfor %}
     </div>
