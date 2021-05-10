@@ -34,33 +34,33 @@
             "count": 0,
             "name": "诺德价值精选",
             "percent": 0.0
+        },
+        "968061": {
+            "count": 0,
+            "name": "摩根太平洋科技人民币对冲",
+            "percent": 0.0
         }
     },
     "product": {
         "002984": {
-            "count": 1470,
+            "count": 0,
             "name": "广发中证环保ETF联接C",
-            "percent": 0.04
+            "percent": 0.0
         },
         "004070": {
             "count": 3715,
             "name": "南方中证全指证券公司ETF联结C",
-            "percent": 0.1
+            "percent": 0.71
         },
         "005827": {
-            "count": 3300,
+            "count": 0,
             "name": "易方达蓝筹精选混合",
-            "percent": 0.09
+            "percent": 0.0
         },
         "161725": {
             "count": 1533,
             "name": "招商中证白酒指数(LOF)",
-            "percent": 0.04
-        },
-        "968061": {
-            "count": 27827,
-            "name": "摩根太平洋科技人民币对冲",
-            "percent": 0.74
+            "percent": 0.29
         }
     },
     "test": {

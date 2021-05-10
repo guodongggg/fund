@@ -139,7 +139,6 @@ def weibo(user, showall=False):
     from weibo import weibo
     import os
     username = ''
-    userid = ''
 
     def getinfo(username, userid, spider=True):
         print(f'当前用户：{username}')
@@ -163,13 +162,9 @@ def weibo(user, showall=False):
         return render_template('weibo_all.html', weibo_data=data)
 
     if user == "zuanbuwan":
-        username = "赚不完亏得完Ryu"
-        userid = "6367430139"
-        sort_list = getinfo(username, userid)
+        sort_list = getinfo("赚不完亏得完Ryu", "6367430139")
     elif user == "qunweiwei":
-        username = "群伟伟"
-        userid = "7169812253"
-        sort_list = getinfo(username, userid)
+        sort_list = getinfo("群伟伟", "7169812253")
     return render_template('weibo.html', weibo_data=sort_list, user=username, length=len(sort_list))
 
 
