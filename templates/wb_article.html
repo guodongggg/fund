@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>群伟伟</title>
-    <meta name="referrer" content="no-referrer">
+  <meta name="referrer" content="no-referrer" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="https://fat.github.io/zoom.js/js/zoom.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fat.github.io/zoom.js/css/zoom.css">
+  <style>
+    body {
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .container {
+      margin: 50px;
+      max-width: 750px;
+    }
+    .container img {
+      width: 100%;
+    }
+    .container .pull-left {
+      width: 30%;
+      float: left;
+    }
+    @media (min-width: 750px) {
+      body {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .container {
+        margin: 50px auto;
+      }
+    }
+  </style>
 </head>
 <body>
-<div>
-    {% for i in article_info.msg %}
+  <div class="container">
+    <h1>文章</h1>
+	{% for i in article_info.msg %}
         <p>{{i}}</p>
     {% endfor %}
-    {% for i in article_info.pic %}
-        <img src="{{i}}" alt="图片" />
+	{% for i in article_info.pic %}
+        <img src="{{i}}" data-action="zoom" class="pull-left" />
     {% endfor %}
-</div>
+  </div>
 </body>
 </html>
