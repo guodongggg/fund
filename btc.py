@@ -1,5 +1,5 @@
 import requests
-
+import common
 
 def btcfans(coinname):
     """
@@ -18,8 +18,12 @@ def btcfans(coinname):
         raise Exception(f'btcfans获取{coinname}失败')
 
 
-if __name__ == '__main__':
+def all():
     coinname_list = {'bitcoin', 'ethereum', 'shiba'}
     for i in coinname_list:
         coin = btcfans(i)
-        print(i, coin['price'], coin['growth'])
+        print(common.aligns(i.upper(), 10), common.aligns(coin['growth'], 8), coin['price'])
+
+
+if __name__ == '__main__':
+    all()
