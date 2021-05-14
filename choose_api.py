@@ -32,7 +32,7 @@ def choose_api(code_list):
 
 
 if __name__ == '__main__':
-    code_list = common.get_codelist('test')
+    code_list = common.get_codelist('others')
     info = choose_api(code_list)
     for i in info['detail']:
         print(i)
