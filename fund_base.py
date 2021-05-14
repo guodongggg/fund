@@ -36,7 +36,11 @@ def BaseInfo(code):
     code = ','.join(code)
     url = 'https://api.doctorxiong.club/v1/fund'
     try:
-        return XiongAPI(url, code).get('data', [])
+        info = XiongAPI(url, code).get('data', [])
+        for fund in info:
+            if 'expectGrowth' not in fund:
+                raise Exception("json返回值中无'expectGrowth':", fund)
+        return info
     except Exception:
         raise Exception("小熊接口：接口异常,无法调用基金基础信息")
 
@@ -54,7 +58,7 @@ def stock_board():
 
 
 if __name__ == '__main__':
-    code_list = get_codelist('test')
+    code_list = get_codelist('product')
     fundDetail = BaseInfo(code_list)
     board = stock_board()
     for i in board:
