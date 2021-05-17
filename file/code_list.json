@@ -55,17 +55,17 @@
         "000971": {
             "count": 2000,
             "name": "诺安新经济",
-            "percent": 0.3
+            "percent": 0.29
         },
         "004070": {
-            "count": 3915,
+            "count": 4200,
             "name": "南方中证全指证券公司ETF联结C",
-            "percent": 0.59
+            "percent": 0.61
         },
         "008087": {
-            "count": 700,
+            "count": 720,
             "name": "华夏中证5G通信主题ETF联接C",
-            "percent": 0.11
+            "percent": 0.1
         }
     },
     "test": {
