@@ -2,6 +2,7 @@ import json
 import choose_api
 import common
 import countMoney
+import os
 
 
 def average_growth(fund_data_list):
@@ -10,7 +11,8 @@ def average_growth(fund_data_list):
     :param fund_data_list: list 通过接口标准返回值
     :return: dict 预估/昨日总收益百分比，不含百分号
     """
-    with open('file/code_list.json', 'r', encoding='UTF-8') as f:
+
+    with open(os.path.join('file', 'code_list.json'), 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
         prod_data = json_data['product']
 
