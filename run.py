@@ -172,13 +172,14 @@ def weibo(user, showall=False):
 def wb_article():
     import spider_wb_article
     article_url = request.args.get('url')
+    article_title = request.args.get('title')[8:]
     app.logger.debug(f'article url:{article_url}')
     try:
         article_info = spider_wb_article.article(article_url)
     except:
         return f'获取{article_url}内容失败，请检查！'
     # app.logger.debug(f'article info:{article_info}')
-    return render_template('wb_article.html', article_info=article_info)
+    return render_template('wb_article.html', article_info=article_info, article_title=article_title)
 
 # @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
 # def test_post():

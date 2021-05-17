@@ -66,7 +66,7 @@
         {% for i in weibo_data.qunweiwei %}
             <span >{{ i.created_at }}</span>
             <li>
-                <a href="{{ url_for('wb_article', url=i.article_url) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>
+                <a href="{{ url_for('wb_article', url=i.article_url, title=i.text) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>
             </li>
         {% endfor %}
     </div>
