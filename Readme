@@ -9,7 +9,9 @@ deactivate
 对于 HTTP 形式的仓库地址，可以在终端里输入以下两行命令，为 Git 设置全局的 HTTP 代理，从而提高 git clone/pull 的速度。
 git config --global http.proxy "http://127.0.0.1:1080"
 git config --global https.proxy "http://127.0.0.1:1080"
-
+or
+git config --global http.proxy 'socks5://127.0.0.1:1080'
+git config --global https.proxy 'socks5://127.0.0.1:1080'
 
 对于SSH这种仓库，我们可以在 ~/.ssh/config 设置代理，提高 git pull/push 的速度。
 Host github.com

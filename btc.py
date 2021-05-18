@@ -1,9 +1,11 @@
 import requests
 import common
+import traceback
+
 
 def btcfans(coinname):
     """
-    获取btc当前的市值
+    获取虚拟币当前的市值
     :return: str
     """
     try:
@@ -12,17 +14,17 @@ def btcfans(coinname):
         r = requests.get(url).text
         html = etree.HTML(r)
         price = html.xpath('/html/body/div[1]/div[3]/div/div[1]/div[2]/div[1]/div[1]/div[1]/span[2]/text()')[0]
-        growth = html.xpath('/html/body/div[1]/div[3]/div/div[1]/div[2]/div[1]/div[2]/div[2]/text()')[0]
-        return {'price': price, 'growth': growth}
+        percent = html.xpath('/html/body/div[1]/div[3]/div/div[1]/div[2]/div[1]/div[2]/div[2]/text()')[0]
+        return {'price': price, 'percent': percent}
     except:
-        raise Exception(f'btcfans获取{coinname}失败')
+        traceback.print_exc()
 
 
 def all():
-    coinname_list = {'bitcoin', 'ethereum', 'shiba'}
+    coinname_list = {'bitcoin', 'ethereum', 'shiba', 'monero'}
     for i in coinname_list:
         coin = btcfans(i)
-        print(common.aligns(i.upper(), 10), common.aligns(coin['growth'], 8), coin['price'])
+        print(common.aligns(i.upper(), 10), common.aligns(coin['percent'], 8), coin['price'])
 
 
 if __name__ == '__main__':
