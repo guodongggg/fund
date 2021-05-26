@@ -35,7 +35,7 @@ if __name__ == '__main__':
     code_list = common.get_codelist('others')
     info = choose_api(code_list)
     for i in info['detail']:
-        print(i)
+        print(i["name"], i["expectGrowth"])
     print('-' * 50)
     for i in info['board']:
-        print(i)
+        print(i['name'], i['changePercent'])

@@ -21,7 +21,7 @@ def btcfans(coinname):
 
 
 def all():
-    coinname_list = {'bitcoin', 'ethereum', 'shiba', 'monero'}
+    coinname_list = {'bitcoin', 'ethereum', 'monero'}
     for i in coinname_list:
         coin = btcfans(i)
         print(common.aligns(i.upper(), 10), common.aligns(coin['percent'], 8), coin['price'])
