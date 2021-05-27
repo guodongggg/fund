@@ -48,7 +48,8 @@ def fund():
         'average_expect': average_expect,
         'average_dayGrowth': average_dayGrowth,
         'btc': btc.btcfans('bitcoin') if not mobile else None,
-        # 'xmr': miner_pool.c3pool()
+        'eth': btc.btcfans('ethereum') if not mobile else None,
+        'xmr': btc.btcfans('monero') if not mobile else None,
     }
     if mobile:
         return render_template('index_mobile.html', **context)

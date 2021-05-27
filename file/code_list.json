@@ -55,32 +55,37 @@
         "000971": {
             "count": 2000,
             "name": "诺安新经济",
-            "percent": 0.21
+            "percent": 0.18
         },
         "004070": {
             "count": 4200,
             "name": "南方中证全指证券公司ETF联结C",
-            "percent": 0.45
+            "percent": 0.37
         },
         "004813": {
             "count": 500,
             "name": "中欧先进制造C",
-            "percent": 0.05
+            "percent": 0.04
         },
         "008087": {
             "count": 720,
             "name": "华夏中证5G通信主题ETF联接C",
-            "percent": 0.08
+            "percent": 0.06
+        },
+        "011068": {
+            "count": 2000,
+            "name": "华宝资源优选混合C",
+            "percent": 0.18
         },
         "161725": {
             "count": 500,
             "name": "招商白酒",
-            "percent": 0.05
+            "percent": 0.04
         },
         "570001": {
             "count": 1500,
             "name": "诺德价值混合",
-            "percent": 0.16
+            "percent": 0.13
         }
     },
     "test": {
