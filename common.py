@@ -89,6 +89,7 @@ def judge_pc_or_mobile(ua):
     :return:
     """
     factor = ua
+    print(f'ua:{factor}')
     is_mobile = False
     _long_matches = r'googlebot-mobile|android|avantgo|blackberry|blazer|elaine|hiptop|ip(hone|od)|kindle|midp|mmp' \
                     r'|mobile|o2|opera mini|palm( os)?|pda|plucker|pocket|psp|smartphone|symbian|treo|up\.(browser|link)' \
