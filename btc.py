@@ -11,13 +11,13 @@ def btcfans(coinname):
     try:
         from lxml import etree
         url = f'https://price.btcfans.com/coin/{coinname}'
-        r = requests.get(url).text
+        r = requests.get(url, timeout=3).text
         html = etree.HTML(r)
         price = html.xpath('/html/body/div[1]/div[3]/div/div[1]/div[2]/div[1]/div[1]/div[1]/span[2]/text()')[0]
         percent = html.xpath('/html/body/div[1]/div[3]/div/div[1]/div[2]/div[1]/div[2]/div[2]/text()')[0]
         return {'price': price, 'percent': percent}
     except:
-        traceback.print_exc()
+        return {'price': "0", 'percent': "0"}
 
 
 def all():
