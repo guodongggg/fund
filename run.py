@@ -174,6 +174,7 @@ def wb_article():
     import spider_wb_article
     article_url = request.args.get('url')
     article_title = request.args.get('title')[8:]
+    app.logger.debug(f'article title:{article_title}')
     app.logger.debug(f'article url:{article_url}')
     try:
         article_info = spider_wb_article.article(article_url)
