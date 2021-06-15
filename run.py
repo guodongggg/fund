@@ -194,9 +194,14 @@ def test():
 @app.route('/test_post/', methods=['POST'])  # 路由
 @cross_origin()
 def test_post():
-    d = request.values
-    print(request.values)
-    return {"status": "success"}
+    data = request.get_data()
+    print(data)
+    json_data = json.loads(data.decode('utf-8'))
+    print(json_data)
+    print(json_data['name'])
+    print(json_data['age'])
+    print(type(json_data))
+    return {"successful": True, "reason": "test"}
 
 
 if __name__ == '__main__':
