@@ -5,6 +5,8 @@ import common
 import choose_api
 import json
 import btc
+from flask import jsonify
+from flask_cors import cross_origin
 
 app = Flask(__name__)
 
@@ -183,13 +185,23 @@ def wb_article():
     # app.logger.debug(f'article info:{article_info}')
     return render_template('wb_article.html', article_info=article_info, article_title=article_title)
 
-# @app.route('/test_post/', methods=['GET', 'POST'])  # 路由
-# def test_post():
-#     # print('method'+request.values['method']+'text:'+request.values['text'])
-#     d1 = request.args.get('method')
-#     d2 = request.args.get('text')
-#     d = d1+"AND"+d2
-#     return "success!:"+d
+@app.route('/api/', methods=['post', 'get'])
+@cross_origin()
+def test():
+    data = [{"name": "name1", "code": "code1"}, {"name": "name2", "code": "code2"}]
+    return jsonify(data)
+
+@app.route('/test_post/', methods=['POST'])  # 路由
+@cross_origin()
+def test_post():
+    data = request.get_data()
+    print(data)
+    json_data = json.loads(data.decode('utf-8'))
+    print(json_data)
+    print(json_data['name'])
+    print(json_data['age'])
+    print(type(json_data))
+    return {"successful": True, "reason": "test"}
 
 
 if __name__ == '__main__':
