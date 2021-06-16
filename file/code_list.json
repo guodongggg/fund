@@ -1,15 +1,5 @@
 {
     "others": {
-        "001714": {
-            "count": 0,
-            "name": "工银文体产业股票A",
-            "percent": 0.0
-        },
-        "002984": {
-            "count": 0,
-            "name": "广发中证环保ETF联接C",
-            "percent": 0.0
-        },
         "003096": {
             "count": 0,
             "name": "中欧医疗健康混合C",
@@ -35,16 +25,6 @@
             "name": "兴全合润混合(LOF)",
             "percent": 0.0
         },
-        "320007": {
-            "count": 0,
-            "name": "诺安成长混合",
-            "percent": 0.0
-        },
-        "570001": {
-            "count": 0,
-            "name": "诺德价值精选",
-            "percent": 0.0
-        },
         "968061": {
             "count": 0,
             "name": "摩根太平洋科技人民币对冲",
@@ -55,12 +35,12 @@
         "000971": {
             "count": 1067,
             "name": "诺安新经济",
-            "percent": 0.11
+            "percent": 0.07
         },
         "004070": {
             "count": 4521,
             "name": "南方中证全指证券公司ETF联结C",
-            "percent": 0.46
+            "percent": 0.3
         },
         "004813": {
             "count": 0,
@@ -68,35 +48,35 @@
             "percent": 0.0
         },
         "008087": {
-            "count": 956,
+            "count": 6500,
             "name": "华夏中证5G通信主题ETF联接C",
-            "percent": 0.1
+            "percent": 0.42
         },
         "011068": {
             "count": 1546,
             "name": "华宝资源优选混合C",
-            "percent": 0.16
+            "percent": 0.1
         },
         "161725": {
             "count": 168,
             "name": "招商白酒",
-            "percent": 0.02
+            "percent": 0.01
         },
         "570001": {
             "count": 1501,
             "name": "诺德价值混合",
-            "percent": 0.15
+            "percent": 0.1
         }
     },
     "test": {
         "005827": {
             "count": 0,
-            "name": "",
+            "name": "测试1",
             "percent": 0.4
         },
         "570001": {
             "count": 0,
-            "name": "",
+            "name": "测试2",
             "percent": 0.6
         }
     }
