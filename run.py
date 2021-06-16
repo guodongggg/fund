@@ -158,12 +158,12 @@ def weibo(user, showall=False):
         return sort_list
     if user == "all":
         data = {}
-        data['zuanbuwan'] = getinfo("赚不完亏得完Ryu", "6367430139", spider=True)
+        data['zuanbuwan'] = getinfo("賺不完亏得完Ryu", "6367430139", spider=True)
         data['qunweiwei'] = getinfo("群伟伟", "7169812253", spider=False)
         return render_template('weibo_all.html', weibo_data=data)
 
     if user == "zuanbuwan":
-        sort_list = getinfo("赚不完亏得完Ryu", "6367430139")
+        sort_list = getinfo("賺不完亏得完Ryu", "6367430139")
     elif user == "qunweiwei":
         sort_list = getinfo("群伟伟", "7169812253")
     return render_template('weibo.html', weibo_data=sort_list, user=username, length=len(sort_list))
