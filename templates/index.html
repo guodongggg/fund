@@ -52,7 +52,7 @@
 	</tbody>
 </table>
 
-<table>
+<table id="FundDetail">
 	<caption> </caption>
 	<thead>
 		<tr>
@@ -66,6 +66,7 @@
 			<th>持仓成本</th>
 			<th>线性回归</th>
 			<th>天天基金</th>
+			<th>编辑</th>
 		</tr>
 	</thead>
 		<tr>
@@ -82,12 +83,18 @@
 			<td>
 				<a href="{{ url_for('xalpha_all') }}"  style='color: #666;text-decoration: none;' target="_blank">持仓概览</a>
 			</td>
-			<td></td>
+			<td>
+			</td>
+			<td>
+				<input id="create_code" type="number" placeholder="代码" style="width:70px">
+				<input id="create_money" type="number" placeholder="持仓(￥)" style="width:70px">
+				<button id="create_btn">新增</button>
+			</td>
 		</tr>
 	{% for i in detail %}
 		<tr>
 			<td>{{i.name}}</td>
-			<td>{{i.code}}</td>
+			<td class="code">{{i.code}}</td>
 			<td class="num">{{i.expectGrowth}}%</td>
 			<td class="num">{{i.dayGrowth}}%</td>
 			<td class="num">{{i.lastWeekGrowth|float|round(2)}}%</td>
@@ -102,6 +109,11 @@
 			<td>
 				<a href='http://fund.eastmoney.com/{{i.code}}.html' style='color: #666;text-decoration: none;' target='_blank'>链接</a>
 			</td>
+			<td>
+				<input class="value" type="number" placeholder="最新持仓(￥)" style="width:106px">
+				<button class="update" >更新</button>
+				<button class="delete" >删除</button>
+			</td>
 		</tr>
 	{% endfor %}
 </table>
@@ -111,6 +123,7 @@
 	<script src="{{url_for('static',filename='time.js')}}"></script>
 	<script src="{{url_for('static',filename='color.js')}}"></script>
 	<script src="{{url_for('static',filename='mail.js')}}"></script>
+	<script src="{{url_for('static',filename='codelist.js')}}"></script>
 <!--	<script src="{{url_for('static',filename='btc.js')}}"></script>-->
 <!-- 	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>-->
 <!--    <script>-->

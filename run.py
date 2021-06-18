@@ -7,7 +7,7 @@ import json
 import btc
 from flask import jsonify
 from flask_cors import cross_origin
-import CodeListApi
+
 
 app = Flask(__name__)
 
@@ -186,11 +186,32 @@ def wb_article():
     # app.logger.debug(f'article info:{article_info}')
     return render_template('wb_article.html', article_info=article_info, article_title=article_title)
 
-@app.route('/api/', methods=['post', 'get'])
+
+@app.route('/api/fund/<command>', methods=['post', 'get'])
 @cross_origin()
-def test():
-    data = [{"name": "name1", "code": "code1"}, {"name": "name2", "code": "code2"}]
-    return jsonify(data)
+def test(command):
+    from CodeListApi import CodeListApi
+    f = CodeListApi()
+    if command == 'update':
+        code = request.args.get('code')
+        money = request.args.get('money')
+        res = f.update(code, money)
+        return json.dumps(res)
+
+    elif command == 'delete':
+        code = request.args.get('code')
+        res = f.delete(code)
+        return json.dumps(res)
+
+    elif command == 'create':
+        code = request.args.get('code')
+        money = request.args.get('money')
+        res = f.create(code, money)
+        return json.dumps(res)
+
+    elif command == 'read':
+        pass
+
 
 @app.route('/test_post/', methods=['POST'])  # 路由
 @cross_origin()

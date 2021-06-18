@@ -12,7 +12,7 @@ class CodeListApi:
         if code not in data:
             fund_info = BaseInfo([code])
             name = fund_info[0]['name']
-            data[code] = {"name": name, "count": money, "percent": ""}
+            data[code] = {"name": name, "count": int(money), "percent": ""}
             self._reloadfile(data, self.source)
             print(f"{code}新增完成!")
             return {"result": True}
@@ -32,7 +32,7 @@ class CodeListApi:
     def update(self, code, money, fund_type="product"):
         data = self.source[fund_type]
         if code in data:
-            data[code]['count'] = money
+            data[code]['count'] = int(money)
             self._reloadfile(data, self.source)
             print(f"{code}更新完成！")
             return {"result": True}
@@ -51,6 +51,7 @@ class CodeListApi:
             print(f"{code}不存在，无法删除")
             return {"result": False}
 
+    # 更新持仓百分比
     def _reloadfile(self, data, source):
         count = 0
         for key, value in data.items():
@@ -65,7 +66,7 @@ class CodeListApi:
 
 if __name__ == "__main__":
     f = CodeListApi()
-    # f.update("008087", 6500)
+    f.update("004070", 6500)
     # f.create('163406', 5000)
     # print(f.read('163406'))
     # f.delete("163406")

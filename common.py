@@ -8,7 +8,7 @@ def get_codelist(env):
     file_url = './file/code_list.json'
     with open(file_url, 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
-        code_list = list(json_data[env].keys())
+        code_list = list(i for i in json_data[env].keys() if json_data[env][i]['count'] != 0)  # 持仓若为0，则剔除代码
     return code_list
 
 
@@ -133,5 +133,4 @@ def timeTips():
 
 
 if __name__ == '__main__':
-    while True:
-        print(isTradingDay())
+    print(get_codelist('product'))
