@@ -58,6 +58,7 @@ $(document).ready(function(){
                     console.log('data：',data);
                 }
             })
+            window.location.reload();
         }else{
             alert("更新持仓为空！")
         }
