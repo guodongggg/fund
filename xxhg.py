@@ -49,6 +49,8 @@ class FundGrapper:
             return ''
 
     def run(self, code, gui):
+        import common
+        common.timeTips()
         if not gui:
             import matplotlib
             matplotlib.use('Agg')
