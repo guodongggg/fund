@@ -28,14 +28,14 @@
     },
     "product": {
         "000971": {
-            "count": 0,
+            "count": 1000,
             "name": "诺安新经济",
-            "percent": 0.0
+            "percent": 0.19
         },
         "004070": {
             "count": 1500,
             "name": "南方中证全指证券公司ETF联结C",
-            "percent": 0.46
+            "percent": 0.29
         },
         "004813": {
             "count": 0,
@@ -45,7 +45,7 @@
         "008087": {
             "count": 97,
             "name": "华夏中证5G通信主题ETF联接C",
-            "percent": 0.03
+            "percent": 0.02
         },
         "011068": {
             "count": 0,
@@ -55,12 +55,12 @@
         "161725": {
             "count": 200,
             "name": "招商白酒",
-            "percent": 0.06
+            "percent": 0.04
         },
         "570001": {
-            "count": 1440,
+            "count": 2440,
             "name": "诺德价值混合",
-            "percent": 0.44
+            "percent": 0.47
         }
     },
     "test": {
