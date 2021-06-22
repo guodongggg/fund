@@ -11,7 +11,8 @@ $(document).ready(function(){
             dataType: "json",
             success: function(data){
                 delete_btn.parent().parent().remove();
-                console.log('data：',data);
+                console.log('data：',data['data']);
+                updateMoney(data);
             }
         })
     });
@@ -21,7 +22,7 @@ $(document).ready(function(){
         var code = update_btn.parent().siblings(".code").text();
         console.log('update code：',code);
         var money = update_btn.siblings(".value").val();
-        if (money != ""){
+        if (money != "" && money > 0){
             $.ajax({
                 url: "/api/fund/update",
                 type: "get",
@@ -31,7 +32,9 @@ $(document).ready(function(){
                 },
                 dataType: "json",
                 success: function(data){
-                    console.log('data：',data);
+                    update_btn.siblings(".value").val("")
+                    console.log('data：',data['data']);
+                    updateMoney(data);
                 }
             })
         }else{
@@ -45,7 +48,7 @@ $(document).ready(function(){
         var money = $("#create_money").val();
         console.log('create code：',code);
         console.log('create money：',money);
-        if (money != "" && code != ""){
+        if (money != "" && money >0 && code != ""){
             $.ajax({
                 url: "/api/fund/create",
                 type: "get",
@@ -55,14 +58,32 @@ $(document).ready(function(){
                 },
                 dataType: "json",
                 success: function(data){
-                    console.log('data：',data);
+                    create_btn.siblings().val("")
+                    console.log('data：',data['data']);
+                    updateMoney(data);
+                    setTimeout(function flash(){window.location.reload();},1000);
                 }
             })
-            window.location.reload();
         }else{
-            alert("更新持仓为空！")
+            alert("新增持仓为空！")
         }
     })
 
+    function updateMoney(data){
+        if (data['result']){
+            var codelist = Object.keys(data['data'])
+            console.log(codelist)
+            codelist.forEach(function(i){
+                var money = data['data'][i]['percent'] * 100
+                var count = data['data'][i]['count']
+                $(`#${i}`).find(".value").attr("placeholder", `${money}% ￥${count}`);
+                console.log(i,' finish')
+            })
+        }else{
+            alert('执行异常，请检查！')
+        }
+    }
+
     console.log('完毕.')
+
 })

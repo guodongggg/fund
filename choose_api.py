@@ -32,10 +32,20 @@ def choose_api(code_list):
 
 
 if __name__ == '__main__':
-    code_list = common.get_codelist('others')
+    code_list = common.get_codelist('product')
     info = choose_api(code_list)
+
+    import CodeListApi
+    f = CodeListApi.CodeListApi()
     for i in info['detail']:
-        print(i["name"], i["expectGrowth"])
+        res = f.read(i['code'])
+        print(res)
+        if res['result']:
+            i['count'] = res['message']['count']
+            i['percent'] = res['message']['percent']
+
+    for i in info['detail']:
+        print(i)
     print('-' * 50)
     for i in info['board']:
-        print(i['name'], i['changePercent'])
+        print(i)

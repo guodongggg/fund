@@ -13,9 +13,9 @@ class CodeListApi:
             fund_info = BaseInfo([code])
             name = fund_info[0]['name']
             data[code] = {"name": name, "count": int(money), "percent": ""}
-            self._reloadfile(data, self.source)
+            _data = self._reloadfile(data, self.source)
             print(f"{code}新增完成!")
-            return {"result": True}
+            return {"result": True, "data": _data[fund_type]}
         else:
             print(f"{code}已存在，无法新增")
             return {"result": False}
@@ -33,23 +33,23 @@ class CodeListApi:
         data = self.source[fund_type]
         if code in data:
             data[code]['count'] = int(money)
-            self._reloadfile(data, self.source)
+            _data = self._reloadfile(data, self.source)
             print(f"{code}更新完成！")
-            return {"result": True}
+            return {"result": True, "data": _data[fund_type]}
         else:
             print(f"{code}不存在，无法更新")
-            return {"result": False}
+            return {"result": True, "data": data[fund_type]}
 
     def delete(self, code, fund_type="product"):
         data = self.source[fund_type]
         try:
             data.pop(code)
-            self._reloadfile(data, self.source)
+            _data = self._reloadfile(data, self.source)
             print(f"{code}删除完成！")
-            return {"result": True}
+            return {"result": True, "data": _data[fund_type]}
         except:
             print(f"{code}不存在，无法删除")
-            return {"result": False}
+            return {"result": True, "data": data[fund_type]}
 
     # 更新持仓百分比
     def _reloadfile(self, data, source):
@@ -62,11 +62,12 @@ class CodeListApi:
         self.f.seek(0, 0)
         self.f.truncate()
         self.f.write(json.dumps(source, sort_keys=True, ensure_ascii=False, indent=4, separators=(',', ': ')))
+        return self.source
 
 
 if __name__ == "__main__":
     f = CodeListApi()
-    f.update("004070", 6500)
-    # f.create('163406', 5000)
-    # print(f.read('163406'))
-    # f.delete("163406")
+    print(f.update("000971", 0))
+    # print(f.create('000008', 5000))
+    # print(f.read('000971'))
+    # print(f.delete("000008"))

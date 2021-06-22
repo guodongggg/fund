@@ -36,15 +36,24 @@ def fund():
     mobile = common.judge_pc_or_mobile(ua)
     code_list = common.get_codelist('product')
     data = choose_api.choose_api(code_list)
+
+    # 添加本地持仓数据
+    import CodeListApi
+    f = CodeListApi.CodeListApi()
+    print("添加本地持仓数据...")
+    for i in data['detail']:
+        res = f.read(i['code'])
+        print(res)
+        if res['result']:
+            i['count'] = res['message']['count']
+            i['percent'] = res['message']['percent']
+
     detail = data['detail']
     board = data['board']
     average = average_growth.average_growth(detail)
     average_expect = average['average_expectGrowth']
     average_dayGrowth = average['average_dayGrowth']
-    app.logger.debug(f'--board--:{board}')
-    app.logger.debug(f'--detail--:{detail}')
-    app.logger.debug(f'--average_expect--:{average_expect}')
-    app.logger.debug(f'--average_dayGrowth--:{average_dayGrowth}')
+    app.logger.debug(f'board:{board},detail:{detail},average_expect:{average_expect},average_dayGrowth:{average_dayGrowth}')
     context = {
         'board': board,
         'detail': detail,
@@ -189,7 +198,7 @@ def wb_article():
 
 @app.route('/api/fund/<command>', methods=['post', 'get'])
 @cross_origin()
-def test(command):
+def fundApi(command):
     from CodeListApi import CodeListApi
     f = CodeListApi()
     if command == 'update':

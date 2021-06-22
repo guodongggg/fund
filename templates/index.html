@@ -15,15 +15,11 @@
   	<li><a href="https://www.doctorxiong.club/api/" target='_blank'>关于接口</a></li>
   	<li><a href="https://www.toutiao.com/c/user/52223465634/#mid=0" target='_blank'>鬼才</a></li>
   	<li><a href="{{ url_for('weibo', user='all') }}" target="_blank">微博</a></li>
-<!--  	<li><a href="/weibo/zuanbuwan" target='_blank'>赚不完</a></li>-->
-<!--  	<li><a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAA_eKXcFBnBfBXH4SYEC8tLkQFgjgCycyYcNQxOa74Kf0/" target='_blank'>赚不完(tt)</a></li>-->
-<!--  	<li><a href="/weibo/qunweiwei" target='_blank'>群伟伟</a></li>-->
 <!--  	<li><a href="https://www.toutiao.com/c/user/token/MS4wLjABAAAAJvmsqH2zTvKzjTFv_xp_Wj38S6gPDBSenHR8HxtMaFE/" target='_blank'>一哥</a></li>-->
 <!--  	<li><a href="https://c3pool.com/#/dashboard?addr=42cCoxX7bQbLoBnsNwQ8htCHxW91R9MacTmu96mAjCZBfbG1oHGXZwk1EJsnnkSXfg7VEL4Fmo4Qaf4AatALq1zp5B86B3W" target='_blank'>猫池：{{xmr}}</a></li>-->
-	<li><a href="https://price.btcfans.com/price/bitcoin" target="_blank">BTC：{{btc.price}}</a></li>
-	<li><a href="https://price.btcfans.com/price/ethereum" target="_blank">ETH：{{eth.price}}</a></li>
-	<li><a href="https://price.btcfans.com/price/monero" target="_blank">XMR：{{xmr.price}}</a></li>
-<!--	<li ><a id="btc" href="https://price.btcfans.com/price/bitcoin" target="_blank"></a></li>-->
+<!--	<li><a href="https://price.btcfans.com/price/bitcoin" target="_blank">BTC：{{btc.price}}</a></li>-->
+<!--	<li><a href="https://price.btcfans.com/price/ethereum" target="_blank">ETH：{{eth.price}}</a></li>-->
+<!--	<li><a href="https://price.btcfans.com/price/monero" target="_blank">XMR：{{xmr.price}}</a></li>-->
   	<li style="float:right" id="time"></li>
 </ul>
 <table>
@@ -87,12 +83,12 @@
 			</td>
 			<td>
 				<input id="create_code" type="number" placeholder="代码" style="width:70px">
-				<input id="create_money" type="number" placeholder="持仓(￥)" style="width:70px">
+				<input id="create_money" type="number" placeholder="持仓:(￥)" style="width:70px">
 				<button id="create_btn">新增</button>
 			</td>
 		</tr>
 	{% for i in detail %}
-		<tr>
+		<tr id="{{i.code}}">
 			<td>{{i.name}}</td>
 			<td class="code">{{i.code}}</td>
 			<td class="num">{{i.expectGrowth}}%</td>
@@ -109,38 +105,18 @@
 			<td>
 				<a href='http://fund.eastmoney.com/{{i.code}}.html' style='color: #666;text-decoration: none;' target='_blank'>链接</a>
 			</td>
-			<td>
-				<input class="value" type="number" placeholder="最新持仓(￥)" style="width:106px">
+			<td class="btn">
+				<input class="value" type="number" placeholder="{{i.percent*100|float|round(1)}}% ￥{{i.count}}" style="width:106px">
 				<button class="update" >更新</button>
 				<button class="delete" >删除</button>
 			</td>
 		</tr>
 	{% endfor %}
 </table>
-<!--<p id="ttt">12345</p>-->
-<!--<button type="button" onclick="test()">click</button>-->
-<!--	<script src="https://www.usd-cny.com/btc/b.js"></script>-->
 	<script src="{{url_for('static',filename='time.js')}}"></script>
 	<script src="{{url_for('static',filename='color.js')}}"></script>
 	<script src="{{url_for('static',filename='mail.js')}}"></script>
 	<script src="{{url_for('static',filename='codelist.js')}}"></script>
-<!--	<script src="{{url_for('static',filename='btc.js')}}"></script>-->
-<!-- 	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>-->
-<!--    <script>-->
-<!--	function test(){-->
-<!--		var word = $('#ttt')-->
-<!--		console.log(word)-->
-<!--		$.get('/test_post/',{-->
-<!--			'method': 'GET',-->
-<!--			'text': word.text()-->
-<!--		},-->
-<!--		function(data){-->
-<!--			console.log(data)-->
-<!--			alert(data)-->
-<!--			word.text(data)-->
-<!--		})-->
-<!--	}-->
-<!--    </script>-->
 </body>
 </html>
 
