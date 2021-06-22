@@ -59,9 +59,9 @@ def fund():
         'detail': detail,
         'average_expect': average_expect,
         'average_dayGrowth': average_dayGrowth,
-        'btc': btc.btcfans('bitcoin') if not mobile else None,
-        'eth': btc.btcfans('ethereum') if not mobile else None,
-        'xmr': btc.btcfans('monero') if not mobile else None,
+        # 'btc': btc.btcfans('bitcoin') if not mobile else None,
+        # 'eth': btc.btcfans('ethereum') if not mobile else None,
+        # 'xmr': btc.btcfans('monero') if not mobile else None,
     }
     if mobile:
         return render_template('index_mobile.html', **context)
