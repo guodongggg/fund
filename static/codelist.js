@@ -75,6 +75,7 @@ $(document).ready(function(){
             console.log(codelist)
             codelist.forEach(function(i){
                 var money = parseInt(data['data'][i]['percent'] * 100)
+                console.log(money)
                 var count = data['data'][i]['count']
                 $(`#${i}`).find(".value").attr("placeholder", `${money}% ￥${count}`);
                 console.log(i,' finish')

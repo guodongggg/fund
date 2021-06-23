@@ -46,7 +46,7 @@ def fund():
         print(res)
         if res['result']:
             i['count'] = res['message']['count']
-            i['percent'] = res['message']['percent']
+            i['percent'] = int(res['message']['percent'] * 100)
 
     detail = data['detail']
     board = data['board']
