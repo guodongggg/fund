@@ -8,6 +8,13 @@
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='input.css')}}">
 	<link rel="icon" href="{{url_for('static', filename='title.ico')}}">
 	<script src="{{url_for('static',filename='jquery.min.js')}}"></script>
+	<style>
+	   /*取消input箭头 谷歌*/
+	   input::-webkit-outer-spin-button,
+	   input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+	   }
+	</style>
 </head>
 <body>
 <ul>
