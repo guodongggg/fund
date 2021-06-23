@@ -5,6 +5,7 @@
     <title>Jelly</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='table.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='banner.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='input.css')}}">
 	<link rel="icon" href="{{url_for('static', filename='title.ico')}}">
 	<script src="{{url_for('static',filename='jquery.min.js')}}"></script>
 </head>
@@ -77,9 +78,9 @@
 			<td>
 			</td>
 			<td>
-				<input id="create_code" type="number" placeholder="代码" style="width:70px">
-				<input id="create_money" type="number" placeholder="持仓:(￥)" style="width:70px">
-				<button id="create_btn">新增</button>
+				<input id="create_code" class="input" type="number" placeholder="代码" style="width:70px">
+				<input id="create_money" class="input" type="number" placeholder="持仓(￥)" style="width:70px">
+				<button id="create_btn" class="input-button">新增</button>
 			</td>
 		</tr>
 	{% for i in detail %}
@@ -101,9 +102,9 @@
 				<a href='http://fund.eastmoney.com/{{i.code}}.html' style='color: #666;text-decoration: none;' target='_blank'>链接</a>
 			</td>
 			<td class="btn">
-				<input class="value" type="number" placeholder="{{i.percent}}% ￥{{i.count}}" style="width:106px">
-				<button class="update" >更新</button>
-				<button class="delete" >删除</button>
+				<input class="value input" type="number" placeholder="{{i.percent}}% ￥{{i.count}}" style="width:106px">
+				<button class="update input-button" >更新</button>
+				<button class="delete input-button" >删除</button>
 			</td>
 		</tr>
 	{% endfor %}
