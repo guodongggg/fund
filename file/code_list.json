@@ -1,41 +1,15 @@
 {
-    "others": {
-        "003096": {
-            "count": 0,
-            "name": "中欧医疗健康混合C",
-            "percent": 0.0
-        },
-        "005827": {
-            "count": 0,
-            "name": "易方达蓝筹精选混合",
-            "percent": 0.0
-        },
-        "006021": {
-            "count": 0,
-            "name": "广发沪深300指数增强C",
-            "percent": 0.0
-        },
-        "110011": {
-            "count": 0,
-            "name": "易方达中小盘混合",
-            "percent": 0.0
-        },
-        "163406": {
-            "count": 0,
-            "name": "兴全合润混合(LOF)",
-            "percent": 0.0
-        }
-    },
+    "others": {},
     "product": {
         "000971": {
-            "count": 1000,
+            "count": 1700,
             "name": "诺安新经济",
-            "percent": 0.19
+            "percent": 0.23
         },
         "004070": {
-            "count": 1500,
+            "count": 790,
             "name": "南方中证全指证券公司ETF联结C",
-            "percent": 0.29
+            "percent": 0.11
         },
         "004813": {
             "count": 0,
@@ -45,7 +19,7 @@
         "008087": {
             "count": 97,
             "name": "华夏中证5G通信主题ETF联接C",
-            "percent": 0.02
+            "percent": 0.01
         },
         "011068": {
             "count": 0,
@@ -55,12 +29,12 @@
         "161725": {
             "count": 200,
             "name": "招商白酒",
-            "percent": 0.04
+            "percent": 0.03
         },
         "570001": {
-            "count": 2440,
+            "count": 4496,
             "name": "诺德价值混合",
-            "percent": 0.47
+            "percent": 0.62
         }
     },
     "test": {
