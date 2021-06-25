@@ -1,3 +1,17 @@
+def count(env='product'):
+    import os
+    import json
+    path = os.sep.join(['file', 'code_list.json'])
+    with open(path, 'r+', encoding='UTF-8') as f:
+        data = json.load(f)
+        prd = data[env]
+        count = 0
+        for key, value in prd.items():
+            count += value['count']
+        print(f'总持仓:￥{count}')
+        return count
+
+
 def get_codelist(env):
     """
     读取指定json文件，返回代码列表

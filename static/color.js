@@ -1,7 +1,7 @@
 function color(){
     var num = $('.num');
     num.map(function(){
-        var value = this.textContent.replace('%','');;
+        var value = this.textContent.replace('%','').replace('￥','');
         if (value){
             if (value > 0){
                 this.style.color = 'red';

@@ -48,7 +48,7 @@ $(document).ready(function(){
         var money = $("#create_money").val();
         console.log('create code：',code);
         console.log('create money：',money);
-        if (money != "" && money >0 && code != ""){
+        if (money != "" && money > 0 && code.toString().length == 6 && code > 0){
             $.ajax({
                 url: "/api/fund/create",
                 type: "get",
@@ -65,7 +65,7 @@ $(document).ready(function(){
                 }
             })
         }else{
-            alert("新增持仓为空！")
+            alert("新增失败,请检查输入是否合规！")
         }
     })
 
@@ -75,10 +75,9 @@ $(document).ready(function(){
             console.log(codelist)
             codelist.forEach(function(i){
                 var money = parseInt(data['data'][i]['percent'] * 100)
-                console.log(money)
                 var count = data['data'][i]['count']
                 $(`#${i}`).find(".value").attr("placeholder", `${money}% ￥${count}`);
-                console.log(i,' finish')
+                console.log(i,' percent:', money, '%')
             })
         }else{
             alert('执行异常，请检查！')

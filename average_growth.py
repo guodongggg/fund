@@ -1,7 +1,6 @@
 import json
 import choose_api
 import common
-import countMoney
 import os
 
 
@@ -41,6 +40,6 @@ if __name__ == '__main__':
         if i['name'] == '上证指数' or i['name'] == '沪深300':
             print(f"{i['name']}: {i['changePercent']}%")
     print('-'*50)
-    except_Money = "{:.2f}".format(countMoney.c('product') * average_expectGrowth * 0.01)
+    except_Money = "{:.2f}".format(common.count('product') * average_expectGrowth * 0.01)
     print(f'估值涨幅: {average_expectGrowth}%  ￥:{except_Money}  昨日涨幅: {average_dayGrowth}%')
 

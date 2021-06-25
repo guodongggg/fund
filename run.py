@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from api import API
-import average_growth
 import common
 import choose_api
 import json
@@ -50,18 +49,20 @@ def fund():
 
     detail = data['detail']
     board = data['board']
-    average = average_growth.average_growth(detail)
-    average_expect = average['average_expectGrowth']
-    average_dayGrowth = average['average_dayGrowth']
-    app.logger.debug(f'board:{board},detail:{detail},average_expect:{average_expect},average_dayGrowth:{average_dayGrowth}')
+
+    # 求平均值
+    average_expect = 0
+    average_dayGrowth = 0
+    for c in detail:
+        average_expect += float(c['expectGrowth']) * float(c['percent']) / 100
+        average_dayGrowth += float(c['dayGrowth']) * float(c['percent']) / 100
+
     context = {
         'board': board,
         'detail': detail,
-        'average_expect': average_expect,
-        'average_dayGrowth': average_dayGrowth,
-        # 'btc': btc.btcfans('bitcoin') if not mobile else None,
-        # 'eth': btc.btcfans('ethereum') if not mobile else None,
-        # 'xmr': btc.btcfans('monero') if not mobile else None,
+        'average_expect': round(average_expect, 2),
+        'average_dayGrowth': round(average_dayGrowth, 2),
+        'average_count': round(common.count() * average_expect / 100, 2)
     }
     if mobile:
         return render_template('index_mobile.html', **context)

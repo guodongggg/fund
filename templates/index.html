@@ -9,7 +9,7 @@
 	<link rel="icon" href="{{url_for('static', filename='title.ico')}}">
 	<script src="{{url_for('static',filename='jquery.min.js')}}"></script>
 	<style>
-	   /*取消input箭头 谷歌*/
+	   /*取消input框箭头 谷歌*/
 	   input::-webkit-outer-spin-button,
 	   input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
@@ -70,7 +70,7 @@
 	</thead>
 		<tr>
 			<td>总持仓合计</td>
-			<td></td>
+			<td class="num">￥{{average_count}}</td>
 			<td class="num">{{average_expect}}%</td>
 			<td class="num">{{average_dayGrowth}}%</td>
 			<td></td>
