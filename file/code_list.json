@@ -2,39 +2,39 @@
     "others": {},
     "product": {
         "570001": {
-            "count": 4496,
+            "count": 4615,
             "name": "诺德价值混合",
-            "percent": 0.51
+            "percent": 0.43
         },
         "000971": {
-            "count": 1700,
+            "count": 2273,
             "name": "诺安新经济",
-            "percent": 0.19
-        },
-        "161725": {
-            "count": 1200,
-            "name": "招商白酒",
-            "percent": 0.13
+            "percent": 0.21
         },
         "002079": {
-            "count": 1000,
+            "count": 1528,
             "name": "前海开源中国稀缺资产混合C",
+            "percent": 0.14
+        },
+        "161725": {
+            "count": 1212,
+            "name": "招商白酒",
             "percent": 0.11
         },
         "004070": {
-            "count": 400,
+            "count": 409,
             "name": "南方中证全指证券公司ETF联结C",
             "percent": 0.04
         },
-        "008087": {
-            "count": 98,
-            "name": "华夏中证5G通信主题ETF联接C",
-            "percent": 0.01
-        },
         "004813": {
-            "count": 0,
             "name": "中欧先进制造股票C",
-            "percent": 0.0
+            "count": 400,
+            "percent": 0.04
+        },
+        "008087": {
+            "count": 201,
+            "name": "华夏中证5G通信主题ETF联接C",
+            "percent": 0.02
         },
         "011068": {
             "count": 0,
