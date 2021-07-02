@@ -71,10 +71,14 @@ def fund():
 
 @app.route('/<code>/xxhg')
 def xxhg(code):  # 线性回归
+    print(common.timeTips())
     import xxhg
-    fund_grapper = xxhg.FundGrapper()
-    data = fund_grapper.run(code, gui=False)
-    return render_template('xxhg_pic.html', data=data, code=code)
+    try:
+        fund_grapper = xxhg.FundGrapper()
+        data = fund_grapper.run(code, gui=False)
+        return render_template('xxhg_pic.html', data=data, code=code)
+    except:
+        return "获取图像异常"
 
 
 @app.route('/<code>/xalpha_cccb')
