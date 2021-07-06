@@ -66,11 +66,12 @@
         {% for i in weibo_data.qunweiwei %}
             <span >{{ i.created_at }}</span>
             <li>
-                {% if "头条文章" in i.text %}
-                    <a href="{{ url_for('wb_article', url=i.article_url, title=i.text) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>
-                {% else %}
-                    <p>{{ i.text }}</p>
-                {% endif %}
+<!--                {% if "头条文章" in i.text %}-->
+<!--                    <a href="{{ url_for('wb_article', url=i.article_url, title=i.text) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>-->
+<!--                {% else %}-->
+<!--                    <p>{{ i.text }}</p>-->
+<!--                {% endif %}-->
+                   <a href="{{ url_for('wb_article', url=i.article_url, title=i.text) }}" title="{{ i.text }}" target="_blank">{{ i.text }}</a>
             </li>
         {% endfor %}
     </div>
