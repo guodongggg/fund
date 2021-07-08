@@ -13,19 +13,15 @@ app = Flask(__name__)
 
 @app.route('/hao')
 def haoym_index():
-    data = API.hao()
-    print(data)
-    return render_template('haoym_index.html', data=data)
+    return render_template('haoym_index.html', data=API.hao())
 
 
 @app.route('/hao/<post_id>')
 def haoym_detail(post_id):
-    data = API.hao()
     info = ''
-    for i in data:
+    for i in API.hao():
         if i['postID'] == int(post_id):
             info = i
-    print(info)
     return render_template('haoym_detail.html', info=info)
 
 
@@ -66,7 +62,8 @@ def fund():
     }
     if mobile:
         return render_template('index_mobile.html', **context)
-    return render_template('index.html', **context)
+    else:
+        return render_template('index.html', **context)
 
 
 @app.route('/<code>/xxhg')

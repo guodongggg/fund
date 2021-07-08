@@ -32,12 +32,12 @@ class CodeListApi:
             print(f"{code}不存在")
             return {"result": False}
 
-    def update(self, code, money):
+    def update(self, code, money, date=''):
         list_type = self.list_type
         data = self.source[list_type]
         if code in data:
             data[code]['count'] = int(money)
-            _data = self._reloadfile(data)
+            _data = self._reloadfile(data, date=date)
             print(f"{code}更新完成！")
             return {"result": True, "data": _data[list_type]}
         else:
@@ -57,7 +57,7 @@ class CodeListApi:
             return {"result": True, "data": data[list_type]}
 
     # 更新持仓百分比
-    def _reloadfile(self, data):
+    def _reloadfile(self, data, date=''):
         count = 0
         for key, value in data.items():
             count += value['count']
@@ -65,6 +65,7 @@ class CodeListApi:
         for key, value in data.items():
             value['percent'] = float("{:.2f}".format(value['count'] / count))
         self.source[self.list_type] = dict(sorted(data.items(), key=lambda x: x[1]['count'], reverse=True))
+        self.source['UpdateDate'] = date
         self.f.seek(0, 0)
         self.f.truncate()
         self.f.write(json.dumps(self.source, ensure_ascii=False, indent=4, separators=(',', ': ')))
