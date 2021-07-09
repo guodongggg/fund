@@ -1,7 +1,9 @@
 def count(env='product'):
     import os
     import json
-    path = os.sep.join(['file', 'code_list.json'])
+    dir = os.getcwd()
+    path = os.sep.join([dir, 'file', 'code_list.json'])
+    print('path:',path)
     with open(path, 'r+', encoding='UTF-8') as f:
         data = json.load(f)
         prd = data[env]
@@ -19,8 +21,10 @@ def get_codelist(env):
     :return: list
     """
     import json
-    file_url = './file/code_list.json'
-    with open(file_url, 'r', encoding='UTF-8') as f:
+    import os
+    dir = os.getcwd()
+    path = os.sep.join([dir, 'file', 'code_list.json'])
+    with open(path, 'r', encoding='UTF-8') as f:
         json_data = json.load(f)
         code_list = list(i for i in json_data[env].keys() if json_data[env][i]['count'] != 0)  # 持仓若为0，则剔除代码
     return code_list
