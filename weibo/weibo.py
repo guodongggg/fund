@@ -474,10 +474,14 @@ class Weibo(object):
         """获取微博中头条文章的url"""
         article_url = ''
         text = selector.xpath('string(.)')
-        if text.startswith(u'发布了头条文章'):
-            url = selector.xpath('//a/@data-url')
-            if url and url[0].startswith('http://t.cn'):
-                article_url = url[0]
+        # 发布文章标题不再有关键字，暂时取消判断
+        # if text.startswith(u'发布了头条文章'):
+        #     url = selector.xpath('//a/@data-url')
+        #     if url and url[0].startswith('http://t.cn'):
+        #         article_url = url[0]
+        url = selector.xpath('//a/@data-url')
+        if url and url[0].startswith('http://t.cn'):
+            article_url = url[0]
         return article_url
 
     def get_topics(self, selector):
