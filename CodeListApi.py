@@ -62,6 +62,7 @@ class CodeListApi:
         for key, value in data.items():
             count += value['count']
         print(f'总持仓:￥{count}')
+        self.source['Total'] = count
         for key, value in data.items():
             value['percent'] = float("{:.2f}".format(value['count'] / count))
         self.source[self.list_type] = dict(sorted(data.items(), key=lambda x: x[1]['count'], reverse=True))
