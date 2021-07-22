@@ -1,36 +1,36 @@
 {
-    "UpdateDate": "2021-07-14 23:00:09",
-    "Total": 0,
+    "UpdateDate": "2021-07-21 23:00:07",
+    "Total": 28725,
     "product": {
         "570001": {
-            "count": 6814,
+            "count": 7006,
             "name": "诺德价值优势混合",
-            "percent": 0.3
-        },
-        "002079": {
-            "count": 5267,
-            "name": "前海开源中国稀缺资产混合C",
             "percent": 0.24
         },
         "000971": {
-            "count": 4372,
+            "count": 6044,
             "name": "诺安新经济股票",
-            "percent": 0.2
+            "percent": 0.21
         },
         "161725": {
-            "count": 3302,
+            "count": 5639,
             "name": "招商中证白酒指数(LOF)A",
-            "percent": 0.15
+            "percent": 0.2
+        },
+        "002079": {
+            "count": 5568,
+            "name": "前海开源中国稀缺资产混合C",
+            "percent": 0.19
         },
         "003096": {
             "name": "中欧医疗健康混合C",
-            "count": 1388,
-            "percent": 0.06
+            "count": 2837,
+            "percent": 0.1
         },
         "004813": {
             "name": "中欧先进制造股票C",
-            "count": 1226,
-            "percent": 0.05
+            "count": 1631,
+            "percent": 0.06
         },
         "011068": {
             "count": 0,

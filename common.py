@@ -133,12 +133,14 @@ def judge_pc_or_mobile(ua):
                      r'|wi(g |nc|nw)|wmlb|wonu|x700|xda(\-|2|g)|yas\-|your|zeto|zte\-'
 
     _short_matches = re.compile(_short_matches, re.IGNORECASE)
-
-    if _long_matches.search(factor) != None:
+    try:
+      if _long_matches.search(factor) != None:
+          is_mobile = True
+      user_agent = factor[0:4]
+      if _short_matches.search(user_agent) != None:
         is_mobile = True
-    user_agent = factor[0:4]
-    if _short_matches.search(user_agent) != None:
-        is_mobile = True
+    except:
+        pass
 
     return is_mobile
 
