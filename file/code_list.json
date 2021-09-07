@@ -2,39 +2,44 @@
     "UpdateDate": "2021-07-21 23:00:07",
     "Total": 28725,
     "product": {
+        "005224": {
+            "count": 16800,
+            "name": "建材ETF",
+            "percent": 0.69
+        },
+        "004857": {
+            "count": 7700,
+            "name": "基建ETF",
+            "percent": 0.31
+        },
         "570001": {
-            "count": 7006,
+            "count": 1,
             "name": "诺德价值优势混合",
-            "percent": 0.24
+            "percent": 0.0
         },
         "000971": {
-            "count": 6044,
+            "count": 1,
             "name": "诺安新经济股票",
-            "percent": 0.21
+            "percent": 0.0
         },
         "161725": {
-            "count": 5639,
+            "count": 1,
             "name": "招商中证白酒指数(LOF)A",
-            "percent": 0.2
+            "percent": 0.0
         },
         "002079": {
-            "count": 5568,
+            "count": 1,
             "name": "前海开源中国稀缺资产混合C",
-            "percent": 0.19
+            "percent": 0.0
         },
         "003096": {
             "name": "中欧医疗健康混合C",
-            "count": 2837,
-            "percent": 0.1
+            "count": 1,
+            "percent": 0.0
         },
         "004813": {
             "name": "中欧先进制造股票C",
-            "count": 1631,
-            "percent": 0.06
-        },
-        "011068": {
-            "count": 0,
-            "name": "华宝资源优选混合C",
+            "count": 1,
             "percent": 0.0
         }
     }
