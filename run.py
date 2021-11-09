@@ -6,6 +6,7 @@ import json
 import btc
 from flask import jsonify
 from flask_cors import cross_origin
+import stock
 
 
 app = Flask(__name__)
@@ -58,7 +59,8 @@ def fund():
         'detail': detail,
         'average_expect': round(average_expect, 2),
         'average_dayGrowth': round(average_dayGrowth, 2),
-        'average_count': round(common.count() * average_expect / 100, 2)
+        'average_count': round(common.count() * average_expect / 100, 2),
+	'stock': stock.stock()
     }
     if mobile:
         return render_template('index_mobile.html', **context)
@@ -245,4 +247,4 @@ if __name__ == '__main__':
         app.run(debug=True, host='127.0.0.1', port='8090')
     elif platform.system() == 'Linux':
         print('*Linux生产环境*')
-        app.run(debug=True, host='0.0.0.0', port='9999')
+        app.run(debug=True, host='0.0.0.0', port='8888')
